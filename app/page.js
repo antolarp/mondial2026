@@ -116,10 +116,8 @@ export default function Home() {
                     </td>
                     <td className="px-5 py-4 text-right">
                       <Link href={`/joueur/${encodeURIComponent(joueur.nom.toLowerCase())}`}
-                        className="text-xs tracking-wide transition-colors duration-150"
-                        style={{ color: '#3a3a52' }}
-                        onMouseOver={e => e.target.style.color = '#e2e2ee'}
-                        onMouseOut={e => e.target.style.color = '#3a3a52'}>
+                        className="text-xs tracking-wide transition-colors duration-150 hover:text-white"
+                        style={{ color: '#3a3a52' }}>
                         Détail →
                       </Link>
                     </td>
