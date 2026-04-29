@@ -1,0 +1,29 @@
+[
+  { "id": "G001", "phase": "Groupe A", "date": "2026-06-11T21:00:00", "domicile": "Mexico", "exterieur": "Équateur" },
+  { "id": "G002", "phase": "Groupe A", "date": "2026-06-12T00:00:00", "domicile": "États-Unis", "exterieur": "Arabie Saoudite" },
+  { "id": "G003", "phase": "Groupe A", "date": "2026-06-15T21:00:00", "domicile": "Mexico", "exterieur": "États-Unis" },
+  { "id": "G004", "phase": "Groupe A", "date": "2026-06-16T00:00:00", "domicile": "Équateur", "exterieur": "Arabie Saoudite" },
+  { "id": "G005", "phase": "Groupe A", "date": "2026-06-19T21:00:00", "domicile": "Arabie Saoudite", "exterieur": "Mexico" },
+  { "id": "G006", "phase": "Groupe A", "date": "2026-06-19T21:00:00", "domicile": "États-Unis", "exterieur": "Équateur" },
+
+  { "id": "G007", "phase": "Groupe B", "date": "2026-06-12T18:00:00", "domicile": "Canada", "exterieur": "Maroc" },
+  { "id": "G008", "phase": "Groupe B", "date": "2026-06-12T21:00:00", "domicile": "Portugal", "exterieur": "Tchéquie" },
+  { "id": "G009", "phase": "Groupe B", "date": "2026-06-16T18:00:00", "domicile": "Canada", "exterieur": "Portugal" },
+  { "id": "G010", "phase": "Groupe B", "date": "2026-06-16T21:00:00", "domicile": "Maroc", "exterieur": "Tchéquie" },
+  { "id": "G011", "phase": "Groupe B", "date": "2026-06-20T21:00:00", "domicile": "Portugal", "exterieur": "Maroc" },
+  { "id": "G012", "phase": "Groupe B", "date": "2026-06-20T21:00:00", "domicile": "Tchéquie", "exterieur": "Canada" },
+
+  { "id": "G013", "phase": "Groupe C", "date": "2026-06-13T18:00:00", "domicile": "Argentine", "exterieur": "Albanie" },
+  { "id": "G014", "phase": "Groupe C", "date": "2026-06-13T21:00:00", "domicile": "Espagne", "exterieur": "Cameroun" },
+  { "id": "G015", "phase": "Groupe C", "date": "2026-06-17T18:00:00", "domicile": "Argentine", "exterieur": "Espagne" },
+  { "id": "G016", "phase": "Groupe C", "date": "2026-06-17T21:00:00", "domicile": "Albanie", "exterieur": "Cameroun" },
+  { "id": "G017", "phase": "Groupe C", "date": "2026-06-21T21:00:00", "domicile": "Espagne", "exterieur": "Albanie" },
+  { "id": "G018", "phase": "Groupe C", "date": "2026-06-21T21:00:00", "domicile": "Cameroun", "exterieur": "Argentine" },
+
+  { "id": "G019", "phase": "Groupe D", "date": "2026-06-13T00:00:00", "domicile": "France", "exterieur": "Mexique" },
+  { "id": "G020", "phase": "Groupe D", "date": "2026-06-14T18:00:00", "domicile": "Angleterre", "exterieur": "Algérie" },
+  { "id": "G021", "phase": "Groupe D", "date": "2026-06-18T18:00:00", "domicile": "France", "exterieur": "Angleterre" },
+  { "id": "G022", "phase": "Groupe D", "date": "2026-06-18T21:00:00", "domicile": "Mexique", "exterieur": "Algérie" },
+  { "id": "G023", "phase": "Groupe D", "date": "2026-06-22T21:00:00", "domicile": "Angleterre", "exterieur": "Mexique" },
+  { "id": "G024", "phase": "Groupe D", "date": "2026-06-22T21:00:00", "domicile": "Algérie", "exterieur": "France" }
+]
