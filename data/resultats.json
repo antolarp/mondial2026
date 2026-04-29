@@ -1,4 +1,8 @@
 {
   "G001": { "domicile": 2, "exterieur": 0 },
-  "G002": { "domicile": 1, "exterieur": 1 }
+  "G002": { "domicile": 1, "exterieur": 1 },
+  "G003": { "domicile": 1, "exterieur": 1 },
+  "G007": { "domicile": 0, "exterieur": 2 },
+  "G013": { "domicile": 3, "exterieur": 0 },
+  "G019": { "domicile": 2, "exterieur": 1 }
 }

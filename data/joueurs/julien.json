@@ -1,0 +1,13 @@
+{
+  "nom": "Julien",
+  "pronos": {
+    "G001": { "domicile": 2, "exterieur": 0 },
+    "G002": { "domicile": 3, "exterieur": 0 },
+    "G003": { "domicile": 2, "exterieur": 1 },
+    "G007": { "domicile": 0, "exterieur": 3 },
+    "G013": { "domicile": 4, "exterieur": 0 },
+    "G019": { "domicile": 3, "exterieur": 1 },
+    "G004": { "domicile": 0, "exterieur": 2 },
+    "G008": { "domicile": 3, "exterieur": 0 }
+  }
+}
