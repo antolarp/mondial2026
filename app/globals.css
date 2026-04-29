@@ -4,17 +4,7 @@
 
 @layer base {
   body {
-    background-color: #0b0b12;
-    color: #e2e2ee;
-    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+    background-color: #f4f4f8;
+    color: #111118;
   }
-}
-
-@layer utilities {
-  .text-muted { color: #52526e; }
-  .text-secondary { color: #8888a8; }
-  .border-subtle { border-color: #1c1c2e; }
-  .bg-card { background-color: #11111a; }
-  .bg-card-hover { background-color: #16162200; }
-  .gold { color: #c8a84b; }
 }

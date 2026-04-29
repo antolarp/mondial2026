@@ -6,21 +6,26 @@ const PHASES_ORDER = [
   'Huitièmes','Quarts','Demi-finales','Finale',
 ]
 
-const CARD = { background: '#11111a', border: '1px solid #1c1c2e', borderRadius: 12 }
+const CARD = {
+  background: '#ffffff',
+  border: '1px solid #e4e4ec',
+  borderRadius: 10,
+  boxShadow: '0 1px 3px rgba(0,0,0,0.04)',
+}
 
 function SectionLabel({ children }) {
   return (
     <div className="flex items-center gap-3 mb-4">
-      <span className="text-xs uppercase tracking-[0.2em] font-medium" style={{ color: '#52526e' }}>{children}</span>
-      <div className="flex-1 h-px" style={{ background: '#1c1c2e' }} />
+      <span className="text-xs uppercase tracking-[0.2em] font-semibold" style={{ color: '#aaaabc' }}>{children}</span>
+      <div className="flex-1 h-px" style={{ background: '#e4e4ec' }} />
     </div>
   )
 }
 
 function PtsBadge({ pts }) {
-  if (pts === 3) return <span className="text-xs font-bold tabular-nums" style={{ color: '#4ade80' }}>+3</span>
-  if (pts === 2) return <span className="text-xs font-bold tabular-nums" style={{ color: '#c8a84b' }}>+2</span>
-  if (pts === 0) return <span className="text-xs font-bold tabular-nums" style={{ color: '#3a3a52' }}>0</span>
+  if (pts === 3) return <span className="text-xs font-bold tabular-nums" style={{ color: '#16a34a' }}>+3</span>
+  if (pts === 2) return <span className="text-xs font-bold tabular-nums" style={{ color: '#b8922a' }}>+2</span>
+  if (pts === 0) return <span className="text-xs font-bold tabular-nums" style={{ color: '#ccccda' }}>0</span>
   return null
 }
 
@@ -37,7 +42,7 @@ export default function Matchs() {
 
   return (
     <div className="space-y-12">
-      <h1 className="text-2xl font-bold text-white tracking-tight">Matchs</h1>
+      <h1 className="text-2xl font-bold tracking-tight" style={{ color: '#111118' }}>Matchs</h1>
 
       {phases.map(phase => (
         <section key={phase}>
@@ -47,46 +52,47 @@ export default function Matchs() {
               const res = resultats[match.id]
               const date = new Date(match.date)
               return (
-                <div key={match.id} style={CARD} className="px-5 py-4">
+                <div key={match.id} style={CARD} className="px-5 py-3.5 hover:bg-gray-50 transition-colors">
                   <div className="flex items-center gap-6">
-                    <span className="text-xs tabular-nums w-24 shrink-0" style={{ color: '#3a3a52' }}>
+                    <span className="text-xs tabular-nums w-24 shrink-0" style={{ color: '#ccccda' }}>
                       {date.toLocaleDateString('fr-FR', { day: 'numeric', month: 'short' })}
                       {' · '}
                       {date.toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' })}
                     </span>
 
                     <div className="flex items-center gap-4 flex-1 min-w-0">
-                      <span className="font-medium text-sm text-white text-right flex-1 truncate">{match.domicile}</span>
-
+                      <span className="font-semibold text-sm text-right flex-1 truncate" style={{ color: '#111118' }}>
+                        {match.domicile}
+                      </span>
                       {res ? (
-                        <span className="shrink-0 tabular-nums font-bold text-base px-3 py-0.5 rounded"
-                          style={{ background: '#1c1c2e', color: '#e2e2ee', minWidth: 56, textAlign: 'center' }}>
+                        <span className="shrink-0 tabular-nums font-bold text-sm px-3 py-1 rounded-lg"
+                          style={{ background: '#f0f0f6', color: '#111118', minWidth: 60, textAlign: 'center' }}>
                           {res.domicile} — {res.exterieur}
                         </span>
                       ) : (
-                        <span className="shrink-0 text-xs px-3 py-0.5 rounded"
-                          style={{ background: '#1c1c2e', color: '#3a3a52', minWidth: 56, textAlign: 'center' }}>
+                        <span className="shrink-0 text-xs px-3 py-1 rounded-lg"
+                          style={{ background: '#f4f4f8', color: '#ccccda', minWidth: 60, textAlign: 'center' }}>
                           à venir
                         </span>
                       )}
-
-                      <span className="font-medium text-sm text-white flex-1 truncate">{match.exterieur}</span>
+                      <span className="font-semibold text-sm flex-1 truncate" style={{ color: '#111118' }}>
+                        {match.exterieur}
+                      </span>
                     </div>
 
-                    {/* Pronos */}
-                    <div className="hidden sm:flex items-center gap-3 shrink-0">
+                    <div className="hidden sm:flex items-center gap-4 shrink-0">
                       {joueurs.map(joueur => {
                         const prono = joueur.pronos[match.id]
                         const pts = prono && res ? calculerPoints(prono, res) : null
                         return (
                           <div key={joueur.nom} className="text-center" style={{ minWidth: 44 }}>
-                            <p className="text-xs mb-0.5" style={{ color: '#3a3a52' }}>{joueur.nom.slice(0, 3)}</p>
+                            <p className="text-xs mb-0.5" style={{ color: '#ccccda' }}>{joueur.nom.slice(0, 3)}</p>
                             {prono ? (
-                              <p className="text-xs tabular-nums" style={{ color: '#8888a8' }}>
+                              <p className="text-xs tabular-nums font-medium" style={{ color: '#6666888' }}>
                                 {prono.domicile}-{prono.exterieur}
                               </p>
                             ) : (
-                              <p className="text-xs" style={{ color: '#1c1c2e' }}>—</p>
+                              <p className="text-xs" style={{ color: '#e4e4ec' }}>—</p>
                             )}
                             {pts !== null && <PtsBadge pts={pts} />}
                           </div>
