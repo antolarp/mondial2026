@@ -6,18 +6,19 @@ import {
 import { PLAYER_COLORS } from '../lib/colors'
 
 const CHART_STYLE = {
-  contentStyle: { background: '#18181b', border: '1px solid #3f3f46', borderRadius: 10, fontSize: 13 },
-  labelStyle: { color: '#a1a1aa' },
-  itemStyle: { color: '#e4e4e7' },
+  contentStyle: { background: '#11111a', border: '1px solid #1c1c2e', borderRadius: 10, fontSize: 12, color: '#e2e2ee' },
+  labelStyle: { color: '#52526e', fontSize: 11 },
+  itemStyle: { color: '#e2e2ee' },
+  cursor: { fill: 'rgba(255,255,255,0.02)' },
 }
 
 export function EvolutionChart({ data, joueurs }) {
   return (
     <ResponsiveContainer width="100%" height={320}>
       <LineChart data={data} margin={{ top: 5, right: 20, left: -10, bottom: 5 }}>
-        <CartesianGrid strokeDasharray="3 3" stroke="#27272a" />
-        <XAxis dataKey="match" stroke="#52525b" tick={{ fill: '#71717a', fontSize: 12 }} />
-        <YAxis stroke="#52525b" tick={{ fill: '#71717a', fontSize: 12 }} />
+        <CartesianGrid strokeDasharray="3 3" stroke="#1c1c2e" />
+        <XAxis dataKey="match" stroke="#1c1c2e" tick={{ fill: '#52526e', fontSize: 11 }} axisLine={false} />
+        <YAxis stroke="#1c1c2e" tick={{ fill: '#52526e', fontSize: 11 }} axisLine={false} />
         <Tooltip {...CHART_STYLE} />
         <Legend wrapperStyle={{ fontSize: 12, paddingTop: 16 }} />
         {joueurs.map((nom, i) => (
@@ -41,9 +42,9 @@ export function ExactsChart({ data }) {
   return (
     <ResponsiveContainer width="100%" height={280}>
       <BarChart data={sorted} layout="vertical" margin={{ top: 5, right: 20, left: 10, bottom: 5 }}>
-        <CartesianGrid strokeDasharray="3 3" stroke="#27272a" horizontal={false} />
-        <XAxis type="number" stroke="#52525b" tick={{ fill: '#71717a', fontSize: 12 }} allowDecimals={false} />
-        <YAxis dataKey="nom" type="category" stroke="#52525b" tick={{ fill: '#e4e4e7', fontSize: 13 }} width={65} />
+        <CartesianGrid strokeDasharray="3 3" stroke="#1c1c2e" horizontal={false} />
+        <XAxis type="number" stroke="#1c1c2e" tick={{ fill: '#52526e', fontSize: 11 }} axisLine={false} allowDecimals={false} />
+        <YAxis dataKey="nom" type="category" stroke="#52525b" tick={{ fill: '#e2e2ee', fontSize: 12 }} width={65} />
         <Tooltip {...CHART_STYLE} formatter={v => [`${v} score(s) exact(s)`, '']} />
         <Bar dataKey="exacts" name="Scores exacts" radius={[0, 6, 6, 0]}>
           {sorted.map((_, i) => (
@@ -60,9 +61,9 @@ export function PourcentagesChart({ data }) {
   return (
     <ResponsiveContainer width="100%" height={280}>
       <BarChart data={sorted} layout="vertical" margin={{ top: 5, right: 30, left: 10, bottom: 5 }}>
-        <CartesianGrid strokeDasharray="3 3" stroke="#27272a" horizontal={false} />
-        <XAxis type="number" domain={[0, 100]} tickFormatter={v => `${v}%`} stroke="#52525b" tick={{ fill: '#71717a', fontSize: 12 }} />
-        <YAxis dataKey="nom" type="category" stroke="#52525b" tick={{ fill: '#e4e4e7', fontSize: 13 }} width={65} />
+        <CartesianGrid strokeDasharray="3 3" stroke="#1c1c2e" horizontal={false} />
+        <XAxis type="number" domain={[0, 100]} tickFormatter={v => `${v}%`} stroke="#1c1c2e" tick={{ fill: '#52526e', fontSize: 11 }} axisLine={false} />
+        <YAxis dataKey="nom" type="category" stroke="#52525b" tick={{ fill: '#e2e2ee', fontSize: 12 }} width={65} />
         <Tooltip {...CHART_STYLE} formatter={v => [`${v}%`, 'Pronos corrects']} />
         <Bar dataKey="pourcentage" name="% corrects" fill="#3b82f6" radius={[0, 6, 6, 0]} />
       </BarChart>
@@ -80,9 +81,9 @@ export function PlacesChart({ premiere, derniere, joueurs }) {
   return (
     <ResponsiveContainer width="100%" height={280}>
       <BarChart data={data} margin={{ top: 5, right: 20, left: -10, bottom: 5 }}>
-        <CartesianGrid strokeDasharray="3 3" stroke="#27272a" />
+        <CartesianGrid strokeDasharray="3 3" stroke="#1c1c2e" />
         <XAxis dataKey="nom" stroke="#52525b" tick={{ fill: '#e4e4e7', fontSize: 12 }} />
-        <YAxis stroke="#52525b" tick={{ fill: '#71717a', fontSize: 12 }} allowDecimals={false} />
+        <YAxis stroke="#1c1c2e" tick={{ fill: '#52526e', fontSize: 11 }} axisLine={false} allowDecimals={false} />
         <Tooltip {...CHART_STYLE} />
         <Legend wrapperStyle={{ fontSize: 12, paddingTop: 8 }} />
         <Bar dataKey="1ère place" fill="#eab308" radius={[4, 4, 0, 0]} />
