@@ -1,730 +1,730 @@
 [
   {
-    "id": "GA01",
+    "id": "M01",
     "phase": "Groupe A",
-    "date": "2026-06-12T18:00:00",
-    "domicile": "USA",
-    "exterieur": "Albania"
+    "date": "2026-06-11T15:00:00",
+    "domicile": "Mexique",
+    "exterieur": "Afrique du Sud"
   },
   {
-    "id": "GA02",
+    "id": "M02",
     "phase": "Groupe A",
+    "date": "2026-06-11T22:00:00",
+    "domicile": "République de Corée",
+    "exterieur": "Tchéquie"
+  },
+  {
+    "id": "M03",
+    "phase": "Groupe B",
+    "date": "2026-06-12T15:00:00",
+    "domicile": "Canada",
+    "exterieur": "Bosnie-et-Herzégovine"
+  },
+  {
+    "id": "M04",
+    "phase": "Groupe D",
     "date": "2026-06-12T21:00:00",
-    "domicile": "Ukraine",
-    "exterieur": "Panama"
+    "domicile": "États-Unis",
+    "exterieur": "Paraguay"
   },
   {
-    "id": "GA03",
-    "phase": "Groupe A",
-    "date": "2026-06-17T18:00:00",
-    "domicile": "USA",
-    "exterieur": "Panama"
-  },
-  {
-    "id": "GA04",
-    "phase": "Groupe A",
-    "date": "2026-06-17T21:00:00",
-    "domicile": "Ukraine",
-    "exterieur": "Albania"
-  },
-  {
-    "id": "GA05",
-    "phase": "Groupe A",
-    "date": "2026-06-22T21:00:00",
-    "domicile": "USA",
-    "exterieur": "Ukraine"
-  },
-  {
-    "id": "GA06",
-    "phase": "Groupe A",
-    "date": "2026-06-22T21:00:00",
-    "domicile": "Albania",
-    "exterieur": "Panama"
-  },
-  {
-    "id": "GB01",
+    "id": "M05",
     "phase": "Groupe B",
-    "date": "2026-06-13T00:00:00",
-    "domicile": "Mexico",
-    "exterieur": "Ecuador"
+    "date": "2026-06-13T15:00:00",
+    "domicile": "Qatar",
+    "exterieur": "Suisse"
   },
   {
-    "id": "GB02",
-    "phase": "Groupe B",
-    "date": "2026-06-13T03:00:00",
-    "domicile": "Senegal",
-    "exterieur": "Poland"
-  },
-  {
-    "id": "GB03",
-    "phase": "Groupe B",
-    "date": "2026-06-18T18:00:00",
-    "domicile": "Mexico",
-    "exterieur": "Poland"
-  },
-  {
-    "id": "GB04",
-    "phase": "Groupe B",
-    "date": "2026-06-18T21:00:00",
-    "domicile": "Senegal",
-    "exterieur": "Ecuador"
-  },
-  {
-    "id": "GB05",
-    "phase": "Groupe B",
-    "date": "2026-06-23T21:00:00",
-    "domicile": "Mexico",
-    "exterieur": "Senegal"
-  },
-  {
-    "id": "GB06",
-    "phase": "Groupe B",
-    "date": "2026-06-23T21:00:00",
-    "domicile": "Ecuador",
-    "exterieur": "Poland"
-  },
-  {
-    "id": "GC01",
+    "id": "M06",
     "phase": "Groupe C",
     "date": "2026-06-13T18:00:00",
-    "domicile": "Canada",
-    "exterieur": "Czech Republic"
+    "domicile": "Brésil",
+    "exterieur": "Maroc"
   },
   {
-    "id": "GC02",
+    "id": "M07",
     "phase": "Groupe C",
     "date": "2026-06-13T21:00:00",
-    "domicile": "Morocco",
-    "exterieur": "Peru"
+    "domicile": "Haïti",
+    "exterieur": "Écosse"
   },
   {
-    "id": "GC03",
-    "phase": "Groupe C",
-    "date": "2026-06-19T00:00:00",
-    "domicile": "Canada",
-    "exterieur": "Peru"
-  },
-  {
-    "id": "GC04",
-    "phase": "Groupe C",
-    "date": "2026-06-19T03:00:00",
-    "domicile": "Morocco",
-    "exterieur": "Czech Republic"
-  },
-  {
-    "id": "GC05",
-    "phase": "Groupe C",
-    "date": "2026-06-24T21:00:00",
-    "domicile": "Canada",
-    "exterieur": "Morocco"
-  },
-  {
-    "id": "GC06",
-    "phase": "Groupe C",
-    "date": "2026-06-24T21:00:00",
-    "domicile": "Czech Republic",
-    "exterieur": "Peru"
-  },
-  {
-    "id": "GD01",
+    "id": "M08",
     "phase": "Groupe D",
     "date": "2026-06-14T00:00:00",
-    "domicile": "Argentina",
-    "exterieur": "Nigeria"
+    "domicile": "Australie",
+    "exterieur": "Turquie"
   },
   {
-    "id": "GD02",
-    "phase": "Groupe D",
-    "date": "2026-06-14T03:00:00",
-    "domicile": "Japan",
-    "exterieur": "Chile"
-  },
-  {
-    "id": "GD03",
-    "phase": "Groupe D",
-    "date": "2026-06-19T18:00:00",
-    "domicile": "Argentina",
-    "exterieur": "Chile"
-  },
-  {
-    "id": "GD04",
-    "phase": "Groupe D",
-    "date": "2026-06-19T21:00:00",
-    "domicile": "Japan",
-    "exterieur": "Nigeria"
-  },
-  {
-    "id": "GD05",
-    "phase": "Groupe D",
-    "date": "2026-06-24T24:00:00",
-    "domicile": "Argentina",
-    "exterieur": "Japan"
-  },
-  {
-    "id": "GD06",
-    "phase": "Groupe D",
-    "date": "2026-06-24T24:00:00",
-    "domicile": "Nigeria",
-    "exterieur": "Chile"
-  },
-  {
-    "id": "GE01",
+    "id": "M09",
     "phase": "Groupe E",
-    "date": "2026-06-14T18:00:00",
-    "domicile": "France",
-    "exterieur": "Saudi Arabia"
+    "date": "2026-06-14T13:00:00",
+    "domicile": "Allemagne",
+    "exterieur": "Curaçao"
   },
   {
-    "id": "GE02",
+    "id": "M10",
+    "phase": "Groupe F",
+    "date": "2026-06-14T16:00:00",
+    "domicile": "Pays-Bas",
+    "exterieur": "Japon"
+  },
+  {
+    "id": "M11",
     "phase": "Groupe E",
-    "date": "2026-06-14T21:00:00",
-    "domicile": "Australia",
-    "exterieur": "Paraguay"
+    "date": "2026-06-14T19:00:00",
+    "domicile": "Côte d'Ivoire",
+    "exterieur": "Équateur"
   },
   {
-    "id": "GE03",
-    "phase": "Groupe E",
-    "date": "2026-06-20T00:00:00",
-    "domicile": "France",
-    "exterieur": "Paraguay"
-  },
-  {
-    "id": "GE04",
-    "phase": "Groupe E",
-    "date": "2026-06-20T03:00:00",
-    "domicile": "Australia",
-    "exterieur": "Saudi Arabia"
-  },
-  {
-    "id": "GE05",
-    "phase": "Groupe E",
-    "date": "2026-06-25T21:00:00",
-    "domicile": "France",
-    "exterieur": "Australia"
-  },
-  {
-    "id": "GE06",
-    "phase": "Groupe E",
-    "date": "2026-06-25T21:00:00",
-    "domicile": "Saudi Arabia",
-    "exterieur": "Paraguay"
-  },
-  {
-    "id": "GF01",
+    "id": "M12",
     "phase": "Groupe F",
-    "date": "2026-06-15T00:00:00",
-    "domicile": "Spain",
-    "exterieur": "Tunisia"
+    "date": "2026-06-14T22:00:00",
+    "domicile": "Suède",
+    "exterieur": "Tunisie"
   },
   {
-    "id": "GF02",
-    "phase": "Groupe F",
-    "date": "2026-06-15T03:00:00",
-    "domicile": "South Korea",
-    "exterieur": "Honduras"
+    "id": "M13",
+    "phase": "Groupe H",
+    "date": "2026-06-15T12:00:00",
+    "domicile": "Espagne",
+    "exterieur": "Cap-Vert"
   },
   {
-    "id": "GF03",
-    "phase": "Groupe F",
-    "date": "2026-06-20T18:00:00",
-    "domicile": "Spain",
-    "exterieur": "Honduras"
-  },
-  {
-    "id": "GF04",
-    "phase": "Groupe F",
-    "date": "2026-06-20T21:00:00",
-    "domicile": "South Korea",
-    "exterieur": "Tunisia"
-  },
-  {
-    "id": "GF05",
-    "phase": "Groupe F",
-    "date": "2026-06-25T24:00:00",
-    "domicile": "Spain",
-    "exterieur": "South Korea"
-  },
-  {
-    "id": "GF06",
-    "phase": "Groupe F",
-    "date": "2026-06-25T24:00:00",
-    "domicile": "Tunisia",
-    "exterieur": "Honduras"
-  },
-  {
-    "id": "GG01",
+    "id": "M14",
     "phase": "Groupe G",
+    "date": "2026-06-15T15:00:00",
+    "domicile": "Belgique",
+    "exterieur": "Égypte"
+  },
+  {
+    "id": "M15",
+    "phase": "Groupe H",
     "date": "2026-06-15T18:00:00",
-    "domicile": "England",
-    "exterieur": "Cameroon"
-  },
-  {
-    "id": "GG02",
-    "phase": "Groupe G",
-    "date": "2026-06-15T21:00:00",
-    "domicile": "Colombia",
-    "exterieur": "Jamaica"
-  },
-  {
-    "id": "GG03",
-    "phase": "Groupe G",
-    "date": "2026-06-21T00:00:00",
-    "domicile": "England",
-    "exterieur": "Jamaica"
-  },
-  {
-    "id": "GG04",
-    "phase": "Groupe G",
-    "date": "2026-06-21T03:00:00",
-    "domicile": "Colombia",
-    "exterieur": "Cameroon"
-  },
-  {
-    "id": "GG05",
-    "phase": "Groupe G",
-    "date": "2026-06-26T21:00:00",
-    "domicile": "England",
-    "exterieur": "Colombia"
-  },
-  {
-    "id": "GG06",
-    "phase": "Groupe G",
-    "date": "2026-06-26T21:00:00",
-    "domicile": "Cameroon",
-    "exterieur": "Jamaica"
-  },
-  {
-    "id": "GH01",
-    "phase": "Groupe H",
-    "date": "2026-06-16T00:00:00",
-    "domicile": "Portugal",
-    "exterieur": "Ivory Coast"
-  },
-  {
-    "id": "GH02",
-    "phase": "Groupe H",
-    "date": "2026-06-16T03:00:00",
-    "domicile": "Turkey",
-    "exterieur": "Costa Rica"
-  },
-  {
-    "id": "GH03",
-    "phase": "Groupe H",
-    "date": "2026-06-21T18:00:00",
-    "domicile": "Portugal",
-    "exterieur": "Costa Rica"
-  },
-  {
-    "id": "GH04",
-    "phase": "Groupe H",
-    "date": "2026-06-21T21:00:00",
-    "domicile": "Turkey",
-    "exterieur": "Ivory Coast"
-  },
-  {
-    "id": "GH05",
-    "phase": "Groupe H",
-    "date": "2026-06-26T24:00:00",
-    "domicile": "Portugal",
-    "exterieur": "Turkey"
-  },
-  {
-    "id": "GH06",
-    "phase": "Groupe H",
-    "date": "2026-06-26T24:00:00",
-    "domicile": "Ivory Coast",
-    "exterieur": "Costa Rica"
-  },
-  {
-    "id": "GI01",
-    "phase": "Groupe I",
-    "date": "2026-06-16T18:00:00",
-    "domicile": "Brazil",
-    "exterieur": "Venezuela"
-  },
-  {
-    "id": "GI02",
-    "phase": "Groupe I",
-    "date": "2026-06-16T21:00:00",
-    "domicile": "Denmark",
-    "exterieur": "Serbia"
-  },
-  {
-    "id": "GI03",
-    "phase": "Groupe I",
-    "date": "2026-06-22T00:00:00",
-    "domicile": "Brazil",
-    "exterieur": "Serbia"
-  },
-  {
-    "id": "GI04",
-    "phase": "Groupe I",
-    "date": "2026-06-22T03:00:00",
-    "domicile": "Denmark",
-    "exterieur": "Venezuela"
-  },
-  {
-    "id": "GI05",
-    "phase": "Groupe I",
-    "date": "2026-06-27T21:00:00",
-    "domicile": "Brazil",
-    "exterieur": "Denmark"
-  },
-  {
-    "id": "GI06",
-    "phase": "Groupe I",
-    "date": "2026-06-27T21:00:00",
-    "domicile": "Venezuela",
-    "exterieur": "Serbia"
-  },
-  {
-    "id": "GJ01",
-    "phase": "Groupe J",
-    "date": "2026-06-17T00:00:00",
-    "domicile": "Germany",
-    "exterieur": "DR Congo"
-  },
-  {
-    "id": "GJ02",
-    "phase": "Groupe J",
-    "date": "2026-06-17T03:00:00",
-    "domicile": "Romania",
-    "exterieur": "Bolivia"
-  },
-  {
-    "id": "GJ03",
-    "phase": "Groupe J",
-    "date": "2026-06-22T18:00:00",
-    "domicile": "Germany",
-    "exterieur": "Bolivia"
-  },
-  {
-    "id": "GJ04",
-    "phase": "Groupe J",
-    "date": "2026-06-22T21:00:00",
-    "domicile": "Romania",
-    "exterieur": "DR Congo"
-  },
-  {
-    "id": "GJ05",
-    "phase": "Groupe J",
-    "date": "2026-06-27T24:00:00",
-    "domicile": "Germany",
-    "exterieur": "Romania"
-  },
-  {
-    "id": "GJ06",
-    "phase": "Groupe J",
-    "date": "2026-06-27T24:00:00",
-    "domicile": "DR Congo",
-    "exterieur": "Bolivia"
-  },
-  {
-    "id": "GK01",
-    "phase": "Groupe K",
-    "date": "2026-06-11T18:00:00",
-    "domicile": "Belgium",
-    "exterieur": "Iran"
-  },
-  {
-    "id": "GK02",
-    "phase": "Groupe K",
-    "date": "2026-06-11T21:00:00",
-    "domicile": "Uruguay",
-    "exterieur": "Slovenia"
-  },
-  {
-    "id": "GK03",
-    "phase": "Groupe K",
-    "date": "2026-06-16T18:00:00",
-    "domicile": "Belgium",
-    "exterieur": "Slovenia"
-  },
-  {
-    "id": "GK04",
-    "phase": "Groupe K",
-    "date": "2026-06-16T21:00:00",
-    "domicile": "Uruguay",
-    "exterieur": "Iran"
-  },
-  {
-    "id": "GK05",
-    "phase": "Groupe K",
-    "date": "2026-06-21T21:00:00",
-    "domicile": "Belgium",
+    "domicile": "Arabie saoudite",
     "exterieur": "Uruguay"
   },
   {
-    "id": "GK06",
-    "phase": "Groupe K",
-    "date": "2026-06-21T21:00:00",
-    "domicile": "Iran",
-    "exterieur": "Slovenia"
+    "id": "M16",
+    "phase": "Groupe G",
+    "date": "2026-06-15T21:00:00",
+    "domicile": "RI Iran",
+    "exterieur": "Nouvelle-Zélande"
   },
   {
-    "id": "GL01",
-    "phase": "Groupe L",
-    "date": "2026-06-12T00:00:00",
-    "domicile": "Netherlands",
-    "exterieur": "Qatar"
-  },
-  {
-    "id": "GL02",
-    "phase": "Groupe L",
-    "date": "2026-06-12T03:00:00",
-    "domicile": "South Africa",
-    "exterieur": "Guatemala"
-  },
-  {
-    "id": "GL03",
-    "phase": "Groupe L",
-    "date": "2026-06-17T00:00:00",
-    "domicile": "Netherlands",
-    "exterieur": "Guatemala"
-  },
-  {
-    "id": "GL04",
-    "phase": "Groupe L",
-    "date": "2026-06-17T03:00:00",
-    "domicile": "South Africa",
-    "exterieur": "Qatar"
-  },
-  {
-    "id": "GL05",
-    "phase": "Groupe L",
-    "date": "2026-06-22T24:00:00",
-    "domicile": "Netherlands",
-    "exterieur": "South Africa"
-  },
-  {
-    "id": "GL06",
-    "phase": "Groupe L",
-    "date": "2026-06-22T24:00:00",
-    "domicile": "Qatar",
-    "exterieur": "Guatemala"
-  },
-  {
-    "id": "R32_01",
-    "phase": "Huitièmes de finale",
-    "date": "2026-06-29T21:00:00",
-    "domicile": "USA",
-    "exterieur": "Ecuador"
-  },
-  {
-    "id": "R32_02",
-    "phase": "Huitièmes de finale",
-    "date": "2026-06-30T18:00:00",
-    "domicile": "Morocco",
-    "exterieur": "Japan"
-  },
-  {
-    "id": "R32_03",
-    "phase": "Huitièmes de finale",
-    "date": "2026-06-30T21:00:00",
+    "id": "M17",
+    "phase": "Groupe I",
+    "date": "2026-06-16T15:00:00",
     "domicile": "France",
-    "exterieur": "South Korea"
+    "exterieur": "Sénégal"
   },
   {
-    "id": "R32_04",
-    "phase": "Huitièmes de finale",
-    "date": "2026-07-01T18:00:00",
-    "domicile": "Colombia",
-    "exterieur": "Turkey"
+    "id": "M18",
+    "phase": "Groupe I",
+    "date": "2026-06-16T18:00:00",
+    "domicile": "Irak",
+    "exterieur": "Norvège"
   },
   {
-    "id": "R32_05",
-    "phase": "Huitièmes de finale",
-    "date": "2026-07-01T21:00:00",
-    "domicile": "Denmark",
-    "exterieur": "Romania"
+    "id": "M19",
+    "phase": "Groupe J",
+    "date": "2026-06-16T21:00:00",
+    "domicile": "Argentine",
+    "exterieur": "Algérie"
   },
   {
-    "id": "R32_06",
-    "phase": "Huitièmes de finale",
-    "date": "2026-07-02T18:00:00",
-    "domicile": "Iran",
+    "id": "M20",
+    "phase": "Groupe J",
+    "date": "2026-06-17T00:00:00",
+    "domicile": "Autriche",
+    "exterieur": "Jordanie"
+  },
+  {
+    "id": "M21",
+    "phase": "Groupe K",
+    "date": "2026-06-17T13:00:00",
+    "domicile": "Portugal",
+    "exterieur": "RD Congo"
+  },
+  {
+    "id": "M22",
+    "phase": "Groupe L",
+    "date": "2026-06-17T16:00:00",
+    "domicile": "Angleterre",
+    "exterieur": "Croatie"
+  },
+  {
+    "id": "M23",
+    "phase": "Groupe L",
+    "date": "2026-06-17T19:00:00",
+    "domicile": "Ghana",
+    "exterieur": "Panamá"
+  },
+  {
+    "id": "M24",
+    "phase": "Groupe K",
+    "date": "2026-06-17T22:00:00",
+    "domicile": "Ouzbékistan",
+    "exterieur": "Colombie"
+  },
+  {
+    "id": "M25",
+    "phase": "Groupe A",
+    "date": "2026-06-18T12:00:00",
+    "domicile": "Tchéquie",
+    "exterieur": "Afrique du Sud"
+  },
+  {
+    "id": "M26",
+    "phase": "Groupe B",
+    "date": "2026-06-18T15:00:00",
+    "domicile": "Suisse",
+    "exterieur": "Bosnie-et-Herzégovine"
+  },
+  {
+    "id": "M27",
+    "phase": "Groupe B",
+    "date": "2026-06-18T18:00:00",
+    "domicile": "Canada",
     "exterieur": "Qatar"
   },
   {
-    "id": "R32_07",
-    "phase": "Huitièmes de finale",
-    "date": "2026-07-02T21:00:00",
-    "domicile": "Panama",
-    "exterieur": "Mexico"
+    "id": "M28",
+    "phase": "Groupe A",
+    "date": "2026-06-18T21:00:00",
+    "domicile": "Mexique",
+    "exterieur": "République de Corée"
   },
   {
-    "id": "R32_08",
-    "phase": "Huitièmes de finale",
-    "date": "2026-07-03T18:00:00",
-    "domicile": "Peru",
-    "exterieur": "Nigeria"
+    "id": "M29",
+    "phase": "Groupe D",
+    "date": "2026-06-19T15:00:00",
+    "domicile": "États-Unis",
+    "exterieur": "Australie"
   },
   {
-    "id": "R32_09",
-    "phase": "Huitièmes de finale",
-    "date": "2026-07-03T21:00:00",
-    "domicile": "Australia",
-    "exterieur": "Spain"
+    "id": "M30",
+    "phase": "Groupe C",
+    "date": "2026-06-19T18:00:00",
+    "domicile": "Écosse",
+    "exterieur": "Maroc"
   },
   {
-    "id": "R32_10",
-    "phase": "Huitièmes de finale",
-    "date": "2026-07-04T18:00:00",
-    "domicile": "Cameroon",
-    "exterieur": "Portugal"
+    "id": "M31",
+    "phase": "Groupe C",
+    "date": "2026-06-19T20:30:00",
+    "domicile": "Brésil",
+    "exterieur": "Haïti"
   },
   {
-    "id": "R32_11",
-    "phase": "Huitièmes de finale",
-    "date": "2026-07-04T21:00:00",
-    "domicile": "Serbia",
-    "exterieur": "Germany"
-  },
-  {
-    "id": "R32_12",
-    "phase": "Huitièmes de finale",
-    "date": "2026-07-05T18:00:00",
-    "domicile": "Belgium",
-    "exterieur": "South Africa"
-  },
-  {
-    "id": "R32_13",
-    "phase": "Huitièmes de finale",
-    "date": "2026-07-05T21:00:00",
-    "domicile": "Uruguay",
+    "id": "M32",
+    "phase": "Groupe D",
+    "date": "2026-06-19T23:00:00",
+    "domicile": "Turquie",
     "exterieur": "Paraguay"
   },
   {
-    "id": "R32_14",
-    "phase": "Huitièmes de finale",
-    "date": "2026-07-06T18:00:00",
-    "domicile": "Poland",
-    "exterieur": "Argentina"
+    "id": "M33",
+    "phase": "Groupe F",
+    "date": "2026-06-20T13:00:00",
+    "domicile": "Pays-Bas",
+    "exterieur": "Suède"
   },
   {
-    "id": "R32_15",
-    "phase": "Huitièmes de finale",
-    "date": "2026-07-06T21:00:00",
-    "domicile": "Tunisia",
-    "exterieur": "Jamaica"
+    "id": "M34",
+    "phase": "Groupe E",
+    "date": "2026-06-20T16:00:00",
+    "domicile": "Allemagne",
+    "exterieur": "Côte d'Ivoire"
   },
   {
-    "id": "R32_16",
-    "phase": "Huitièmes de finale",
-    "date": "2026-07-07T18:00:00",
-    "domicile": "Netherlands",
-    "exterieur": "Costa Rica"
+    "id": "M35",
+    "phase": "Groupe E",
+    "date": "2026-06-20T20:00:00",
+    "domicile": "Équateur",
+    "exterieur": "Curaçao"
   },
   {
-    "id": "R16_01",
-    "phase": "Quarts de finale",
-    "date": "2026-07-08T21:00:00",
-    "domicile": "Ecuador",
-    "exterieur": "Morocco"
+    "id": "M36",
+    "phase": "Groupe F",
+    "date": "2026-06-21T00:00:00",
+    "domicile": "Tunisie",
+    "exterieur": "Japon"
   },
   {
-    "id": "R16_02",
-    "phase": "Quarts de finale",
-    "date": "2026-07-09T18:00:00",
-    "domicile": "South Korea",
-    "exterieur": "Colombia"
+    "id": "M37",
+    "phase": "Groupe H",
+    "date": "2026-06-21T12:00:00",
+    "domicile": "Espagne",
+    "exterieur": "Arabie saoudite"
   },
   {
-    "id": "R16_03",
-    "phase": "Quarts de finale",
-    "date": "2026-07-09T21:00:00",
-    "domicile": "Romania",
+    "id": "M38",
+    "phase": "Groupe G",
+    "date": "2026-06-21T15:00:00",
+    "domicile": "Belgique",
+    "exterieur": "RI Iran"
+  },
+  {
+    "id": "M39",
+    "phase": "Groupe H",
+    "date": "2026-06-21T18:00:00",
+    "domicile": "Uruguay",
+    "exterieur": "Cap-Vert"
+  },
+  {
+    "id": "M40",
+    "phase": "Groupe G",
+    "date": "2026-06-21T21:00:00",
+    "domicile": "Nouvelle-Zélande",
+    "exterieur": "Égypte"
+  },
+  {
+    "id": "M41",
+    "phase": "Groupe J",
+    "date": "2026-06-22T13:00:00",
+    "domicile": "Argentine",
+    "exterieur": "Autriche"
+  },
+  {
+    "id": "M42",
+    "phase": "Groupe I",
+    "date": "2026-06-22T17:00:00",
+    "domicile": "France",
+    "exterieur": "Irak"
+  },
+  {
+    "id": "M43",
+    "phase": "Groupe I",
+    "date": "2026-06-22T20:00:00",
+    "domicile": "Norvège",
+    "exterieur": "Sénégal"
+  },
+  {
+    "id": "M44",
+    "phase": "Groupe J",
+    "date": "2026-06-22T23:00:00",
+    "domicile": "Jordanie",
+    "exterieur": "Algérie"
+  },
+  {
+    "id": "M45",
+    "phase": "Groupe K",
+    "date": "2026-06-23T13:00:00",
+    "domicile": "Portugal",
+    "exterieur": "Ouzbékistan"
+  },
+  {
+    "id": "M46",
+    "phase": "Groupe L",
+    "date": "2026-06-23T16:00:00",
+    "domicile": "Angleterre",
+    "exterieur": "Ghana"
+  },
+  {
+    "id": "M47",
+    "phase": "Groupe L",
+    "date": "2026-06-23T19:00:00",
+    "domicile": "Panamá",
+    "exterieur": "Croatie"
+  },
+  {
+    "id": "M48",
+    "phase": "Groupe K",
+    "date": "2026-06-23T22:00:00",
+    "domicile": "Colombie",
+    "exterieur": "RD Congo"
+  },
+  {
+    "id": "M49",
+    "phase": "Groupe B",
+    "date": "2026-06-24T15:00:00",
+    "domicile": "Suisse",
+    "exterieur": "Canada"
+  },
+  {
+    "id": "M50",
+    "phase": "Groupe B",
+    "date": "2026-06-24T15:00:00",
+    "domicile": "Bosnie-et-Herzégovine",
     "exterieur": "Qatar"
   },
   {
-    "id": "R16_04",
-    "phase": "Quarts de finale",
-    "date": "2026-07-10T18:00:00",
-    "domicile": "Mexico",
-    "exterieur": "Nigeria"
+    "id": "M51",
+    "phase": "Groupe C",
+    "date": "2026-06-24T18:00:00",
+    "domicile": "Écosse",
+    "exterieur": "Brésil"
   },
   {
-    "id": "R16_05",
-    "phase": "Quarts de finale",
-    "date": "2026-07-10T21:00:00",
-    "domicile": "Spain",
+    "id": "M52",
+    "phase": "Groupe C",
+    "date": "2026-06-24T18:00:00",
+    "domicile": "Maroc",
+    "exterieur": "Haïti"
+  },
+  {
+    "id": "M53",
+    "phase": "Groupe A",
+    "date": "2026-06-24T21:00:00",
+    "domicile": "Tchéquie",
+    "exterieur": "Mexique"
+  },
+  {
+    "id": "M54",
+    "phase": "Groupe A",
+    "date": "2026-06-24T21:00:00",
+    "domicile": "Afrique du Sud",
+    "exterieur": "République de Corée"
+  },
+  {
+    "id": "M55",
+    "phase": "Groupe E",
+    "date": "2026-06-25T16:00:00",
+    "domicile": "Équateur",
+    "exterieur": "Allemagne"
+  },
+  {
+    "id": "M56",
+    "phase": "Groupe E",
+    "date": "2026-06-25T16:00:00",
+    "domicile": "Curaçao",
+    "exterieur": "Côte d'Ivoire"
+  },
+  {
+    "id": "M57",
+    "phase": "Groupe F",
+    "date": "2026-06-25T19:00:00",
+    "domicile": "Tunisie",
+    "exterieur": "Pays-Bas"
+  },
+  {
+    "id": "M58",
+    "phase": "Groupe F",
+    "date": "2026-06-25T19:00:00",
+    "domicile": "Japon",
+    "exterieur": "Suède"
+  },
+  {
+    "id": "M59",
+    "phase": "Groupe D",
+    "date": "2026-06-25T22:00:00",
+    "domicile": "Turquie",
+    "exterieur": "États-Unis"
+  },
+  {
+    "id": "M60",
+    "phase": "Groupe D",
+    "date": "2026-06-25T22:00:00",
+    "domicile": "Paraguay",
+    "exterieur": "Australie"
+  },
+  {
+    "id": "M61",
+    "phase": "Groupe I",
+    "date": "2026-06-26T15:00:00",
+    "domicile": "Norvège",
+    "exterieur": "France"
+  },
+  {
+    "id": "M62",
+    "phase": "Groupe I",
+    "date": "2026-06-26T15:00:00",
+    "domicile": "Sénégal",
+    "exterieur": "Irak"
+  },
+  {
+    "id": "M63",
+    "phase": "Groupe H",
+    "date": "2026-06-26T20:00:00",
+    "domicile": "Uruguay",
+    "exterieur": "Espagne"
+  },
+  {
+    "id": "M64",
+    "phase": "Groupe H",
+    "date": "2026-06-26T20:00:00",
+    "domicile": "Cap-Vert",
+    "exterieur": "Arabie saoudite"
+  },
+  {
+    "id": "M65",
+    "phase": "Groupe G",
+    "date": "2026-06-26T23:00:00",
+    "domicile": "Nouvelle-Zélande",
+    "exterieur": "Belgique"
+  },
+  {
+    "id": "M66",
+    "phase": "Groupe G",
+    "date": "2026-06-26T23:00:00",
+    "domicile": "Égypte",
+    "exterieur": "RI Iran"
+  },
+  {
+    "id": "M67",
+    "phase": "Groupe L",
+    "date": "2026-06-27T17:00:00",
+    "domicile": "Panamá",
+    "exterieur": "Angleterre"
+  },
+  {
+    "id": "M68",
+    "phase": "Groupe L",
+    "date": "2026-06-27T17:00:00",
+    "domicile": "Croatie",
+    "exterieur": "Ghana"
+  },
+  {
+    "id": "M69",
+    "phase": "Groupe K",
+    "date": "2026-06-27T19:30:00",
+    "domicile": "Colombie",
     "exterieur": "Portugal"
   },
   {
-    "id": "R16_06",
-    "phase": "Quarts de finale",
-    "date": "2026-07-11T18:00:00",
-    "domicile": "Serbia",
-    "exterieur": "Belgium"
+    "id": "M70",
+    "phase": "Groupe K",
+    "date": "2026-06-27T19:30:00",
+    "domicile": "RD Congo",
+    "exterieur": "Ouzbékistan"
   },
   {
-    "id": "R16_07",
+    "id": "M71",
+    "phase": "Groupe J",
+    "date": "2026-06-27T22:00:00",
+    "domicile": "Jordanie",
+    "exterieur": "Argentine"
+  },
+  {
+    "id": "M72",
+    "phase": "Groupe J",
+    "date": "2026-06-27T22:00:00",
+    "domicile": "Algérie",
+    "exterieur": "Autriche"
+  },
+  {
+    "id": "M73",
+    "phase": "Seizièmes de finale",
+    "date": "2026-06-28T15:00:00",
+    "domicile": "Tchéquie",
+    "exterieur": "Bosnie-et-Herzégovine"
+  },
+  {
+    "id": "M74",
+    "phase": "Seizièmes de finale",
+    "date": "2026-06-29T16:30:00",
+    "domicile": "Côte d'Ivoire",
+    "exterieur": "Espagne"
+  },
+  {
+    "id": "M75",
+    "phase": "Seizièmes de finale",
+    "date": "2026-06-29T21:00:00",
+    "domicile": "Japon",
+    "exterieur": "Brésil"
+  },
+  {
+    "id": "M76",
+    "phase": "Seizièmes de finale",
+    "date": "2026-06-29T13:00:00",
+    "domicile": "Maroc",
+    "exterieur": "Pays-Bas"
+  },
+  {
+    "id": "M77",
+    "phase": "Seizièmes de finale",
+    "date": "2026-06-30T17:00:00",
+    "domicile": "Sénégal",
+    "exterieur": "Égypte"
+  },
+  {
+    "id": "M78",
+    "phase": "Seizièmes de finale",
+    "date": "2026-06-30T13:00:00",
+    "domicile": "Allemagne",
+    "exterieur": "France"
+  },
+  {
+    "id": "M79",
+    "phase": "Seizièmes de finale",
+    "date": "2026-06-30T21:00:00",
+    "domicile": "Mexique",
+    "exterieur": "Afrique du Sud"
+  },
+  {
+    "id": "M80",
+    "phase": "Seizièmes de finale",
+    "date": "2026-07-01T12:00:00",
+    "domicile": "Angleterre",
+    "exterieur": "Canada"
+  },
+  {
+    "id": "M81",
+    "phase": "Seizièmes de finale",
+    "date": "2026-07-01T20:00:00",
+    "domicile": "États-Unis",
+    "exterieur": "Haïti"
+  },
+  {
+    "id": "M82",
+    "phase": "Seizièmes de finale",
+    "date": "2026-07-01T16:00:00",
+    "domicile": "RI Iran",
+    "exterieur": "Curaçao"
+  },
+  {
+    "id": "M83",
+    "phase": "Seizièmes de finale",
+    "date": "2026-07-02T19:00:00",
+    "domicile": "RD Congo",
+    "exterieur": "Panamá"
+  },
+  {
+    "id": "M84",
+    "phase": "Seizièmes de finale",
+    "date": "2026-07-02T15:00:00",
+    "domicile": "Uruguay",
+    "exterieur": "Autriche"
+  },
+  {
+    "id": "M85",
+    "phase": "Seizièmes de finale",
+    "date": "2026-07-02T23:00:00",
+    "domicile": "Suisse",
+    "exterieur": "Jordanie"
+  },
+  {
+    "id": "M86",
+    "phase": "Seizièmes de finale",
+    "date": "2026-07-03T18:00:00",
+    "domicile": "Argentine",
+    "exterieur": "Arabie saoudite"
+  },
+  {
+    "id": "M87",
+    "phase": "Seizièmes de finale",
+    "date": "2026-07-03T21:30:00",
+    "domicile": "Portugal",
+    "exterieur": "Ghana"
+  },
+  {
+    "id": "M88",
+    "phase": "Seizièmes de finale",
+    "date": "2026-07-03T14:00:00",
+    "domicile": "Turquie",
+    "exterieur": "Belgique"
+  },
+  {
+    "id": "M89",
+    "phase": "Huitièmes de finale",
+    "date": "2026-07-04T17:00:00",
+    "domicile": "Côte d'Ivoire",
+    "exterieur": "Maroc"
+  },
+  {
+    "id": "M90",
+    "phase": "Huitièmes de finale",
+    "date": "2026-07-04T13:00:00",
+    "domicile": "Bosnie-et-Herzégovine",
+    "exterieur": "Brésil"
+  },
+  {
+    "id": "M91",
+    "phase": "Huitièmes de finale",
+    "date": "2026-07-05T16:00:00",
+    "domicile": "France",
+    "exterieur": "Égypte"
+  },
+  {
+    "id": "M92",
+    "phase": "Huitièmes de finale",
+    "date": "2026-07-05T20:00:00",
+    "domicile": "Afrique du Sud",
+    "exterieur": "Angleterre"
+  },
+  {
+    "id": "M93",
+    "phase": "Huitièmes de finale",
+    "date": "2026-07-06T15:00:00",
+    "domicile": "RD Congo",
+    "exterieur": "Uruguay"
+  },
+  {
+    "id": "M94",
+    "phase": "Huitièmes de finale",
+    "date": "2026-07-06T20:00:00",
+    "domicile": "Haïti",
+    "exterieur": "Curaçao"
+  },
+  {
+    "id": "M95",
+    "phase": "Huitièmes de finale",
+    "date": "2026-07-07T12:00:00",
+    "domicile": "Argentine",
+    "exterieur": "Belgique"
+  },
+  {
+    "id": "M96",
+    "phase": "Huitièmes de finale",
+    "date": "2026-07-07T16:00:00",
+    "domicile": "Jordanie",
+    "exterieur": "Portugal"
+  },
+  {
+    "id": "M97",
+    "phase": "Quarts de finale",
+    "date": "2026-07-09T16:00:00",
+    "domicile": "Maroc",
+    "exterieur": "Brésil"
+  },
+  {
+    "id": "M98",
+    "phase": "Quarts de finale",
+    "date": "2026-07-10T15:00:00",
+    "domicile": "Uruguay",
+    "exterieur": "Haïti"
+  },
+  {
+    "id": "M99",
+    "phase": "Quarts de finale",
+    "date": "2026-07-11T17:00:00",
+    "domicile": "France",
+    "exterieur": "Angleterre"
+  },
+  {
+    "id": "M100",
     "phase": "Quarts de finale",
     "date": "2026-07-11T21:00:00",
-    "domicile": "Paraguay",
-    "exterieur": "Argentina"
+    "domicile": "Argentine",
+    "exterieur": "Portugal"
   },
   {
-    "id": "R16_08",
-    "phase": "Quarts de finale",
-    "date": "2026-07-12T18:00:00",
-    "domicile": "Tunisia",
-    "exterieur": "Netherlands"
-  },
-  {
-    "id": "QF_01",
+    "id": "M101",
     "phase": "Demi-finales",
-    "date": "2026-07-14T21:00:00",
-    "domicile": "Morocco",
-    "exterieur": "South Korea"
+    "date": "2026-07-14T15:00:00",
+    "domicile": "Brésil",
+    "exterieur": "Uruguay"
   },
   {
-    "id": "QF_02",
+    "id": "M102",
     "phase": "Demi-finales",
-    "date": "2026-07-15T21:00:00",
-    "domicile": "Qatar",
-    "exterieur": "Mexico"
+    "date": "2026-07-15T15:00:00",
+    "domicile": "France",
+    "exterieur": "Argentine"
   },
   {
-    "id": "QF_03",
-    "phase": "Demi-finales",
-    "date": "2026-07-16T21:00:00",
-    "domicile": "Spain",
-    "exterieur": "Serbia"
-  },
-  {
-    "id": "QF_04",
-    "phase": "Demi-finales",
-    "date": "2026-07-17T21:00:00",
-    "domicile": "Argentina",
-    "exterieur": "Netherlands"
-  },
-  {
-    "id": "SF_01",
-    "phase": "Demi-finales",
-    "date": "2026-07-14T21:00:00",
-    "domicile": "Morocco",
-    "exterieur": "Qatar"
-  },
-  {
-    "id": "SF_02",
-    "phase": "Demi-finales",
-    "date": "2026-07-15T21:00:00",
-    "domicile": "Spain",
-    "exterieur": "Argentina"
-  },
-  {
-    "id": "TPL",
+    "id": "M103",
     "phase": "Troisième place",
-    "date": "2026-07-18T21:00:00",
-    "domicile": "Qatar",
-    "exterieur": "Spain"
+    "date": "2026-07-18T17:00:00",
+    "domicile": "Uruguay",
+    "exterieur": "Argentine"
   },
   {
-    "id": "FIN",
+    "id": "M104",
     "phase": "Finale",
-    "date": "2026-07-19T21:00:00",
-    "domicile": "Morocco",
-    "exterieur": "Argentina"
+    "date": "2026-07-19T15:00:00",
+    "domicile": "Brésil",
+    "exterieur": "France"
   }
 ]
