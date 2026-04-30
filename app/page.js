@@ -22,8 +22,15 @@ export default function Home() {
   const evolution = calculerEvolution(joueurs, matchs, resultats)
   const { premiere, derniere } = calculerPlaces(joueurs, matchs, resultats)
   const pourcentages = calculerPourcentages(joueurs, resultats)
-  const exacts = calculerExacts(joueurs, resultats)
   const nomsJoueurs = joueurs.map(j => j.nom)
+  const exacts = calculerExacts(joueurs, resultats).map(item => ({
+    ...item,
+    color: PLAYER_COLORS[nomsJoueurs.indexOf(item.nom) % PLAYER_COLORS.length],
+  }))
+  const pourcentagesColored = pourcentages.map(item => ({
+    ...item,
+    color: PLAYER_COLORS[nomsJoueurs.indexOf(item.nom) % PLAYER_COLORS.length],
+  }))
   const maxPoints = classement[0]?.points || 1
   const meilleurPct = [...pourcentages].sort((a, b) => b.pourcentage - a.pourcentage)[0]
 
@@ -234,7 +241,7 @@ export default function Home() {
               <div style={{ background: '#fff', borderRadius: 20, padding: '28px 24px', boxShadow: '0 1px 4px rgba(0,0,0,0.05)', border: '1px solid #e8eaf2' }}>
                 <p style={{ fontWeight: 700, fontSize: 15, color: '#0f172a', marginBottom: 4 }}>Taux de réussite</p>
                 <p style={{ fontSize: 12, color: '#94a3b8', marginBottom: 20 }}>% pronos à 2 ou 3 pts</p>
-                <PourcentagesChart data={pourcentages} />
+                <PourcentagesChart data={pourcentagesColored} />
               </div>
             </div>
 
