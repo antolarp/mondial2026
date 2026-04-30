@@ -3,8 +3,11 @@
 @tailwind utilities;
 
 @layer base {
+  * { box-sizing: border-box; }
   body {
-    background-color: #f4f4f8;
-    color: #111118;
+    background: #f0f2f8;
+    color: #0f172a;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Inter', sans-serif;
+    -webkit-font-smoothing: antialiased;
   }
 }
