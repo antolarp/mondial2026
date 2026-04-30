@@ -3,7 +3,7 @@ import { chargerMatchs, chargerResultats, chargerJoueurs, calculerPoints } from 
 const PHASES_ORDER = [
   'Groupe A','Groupe B','Groupe C','Groupe D','Groupe E','Groupe F',
   'Groupe G','Groupe H','Groupe I','Groupe J','Groupe K','Groupe L',
-  'Huitièmes','Quarts','Demi-finales','Finale',
+  'Huitièmes de finale','Quarts de finale','Demi-finales','Troisième place','Finale',
 ]
 const WRAP = { maxWidth: 1100, margin: '0 auto', padding: '0 24px' }
 

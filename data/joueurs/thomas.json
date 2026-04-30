@@ -1,13 +1,421 @@
 {
   "nom": "Thomas",
   "pronos": {
-    "G001": { "domicile": 2, "exterieur": 0 },
-    "G002": { "domicile": 0, "exterieur": 1 },
-    "G003": { "domicile": 2, "exterieur": 0 },
-    "G007": { "domicile": 1, "exterieur": 1 },
-    "G013": { "domicile": 2, "exterieur": 1 },
-    "G019": { "domicile": 1, "exterieur": 0 },
-    "G004": { "domicile": 1, "exterieur": 0 },
-    "G008": { "domicile": 1, "exterieur": 1 }
+    "GA01": {
+      "domicile": 2,
+      "exterieur": 2
+    },
+    "GA02": {
+      "domicile": 0,
+      "exterieur": 0
+    },
+    "GA03": {
+      "domicile": 3,
+      "exterieur": 1
+    },
+    "GA04": {
+      "domicile": 2,
+      "exterieur": 2
+    },
+    "GA05": {
+      "domicile": 2,
+      "exterieur": 0
+    },
+    "GA06": {
+      "domicile": 0,
+      "exterieur": 0
+    },
+    "GB01": {
+      "domicile": 2,
+      "exterieur": 1
+    },
+    "GB02": {
+      "domicile": 1,
+      "exterieur": 1
+    },
+    "GB03": {
+      "domicile": 1,
+      "exterieur": 2
+    },
+    "GB04": {
+      "domicile": 1,
+      "exterieur": 2
+    },
+    "GB05": {
+      "domicile": 1,
+      "exterieur": 0
+    },
+    "GB06": {
+      "domicile": 0,
+      "exterieur": 2
+    },
+    "GC01": {
+      "domicile": 2,
+      "exterieur": 1
+    },
+    "GC02": {
+      "domicile": 1,
+      "exterieur": 0
+    },
+    "GC03": {
+      "domicile": 2,
+      "exterieur": 2
+    },
+    "GC04": {
+      "domicile": 0,
+      "exterieur": 0
+    },
+    "GC05": {
+      "domicile": 1,
+      "exterieur": 3
+    },
+    "GC06": {
+      "domicile": 1,
+      "exterieur": 3
+    },
+    "GD01": {
+      "domicile": 0,
+      "exterieur": 2
+    },
+    "GD02": {
+      "domicile": 1,
+      "exterieur": 0
+    },
+    "GD03": {
+      "domicile": 1,
+      "exterieur": 1
+    },
+    "GD04": {
+      "domicile": 1,
+      "exterieur": 0
+    },
+    "GD05": {
+      "domicile": 1,
+      "exterieur": 2
+    },
+    "GD06": {
+      "domicile": 3,
+      "exterieur": 1
+    },
+    "GE01": {
+      "domicile": 3,
+      "exterieur": 0
+    },
+    "GE02": {
+      "domicile": 1,
+      "exterieur": 0
+    },
+    "GE03": {
+      "domicile": 2,
+      "exterieur": 2
+    },
+    "GE04": {
+      "domicile": 1,
+      "exterieur": 0
+    },
+    "GE05": {
+      "domicile": 0,
+      "exterieur": 0
+    },
+    "GE06": {
+      "domicile": 1,
+      "exterieur": 3
+    },
+    "GF01": {
+      "domicile": 2,
+      "exterieur": 1
+    },
+    "GF02": {
+      "domicile": 2,
+      "exterieur": 2
+    },
+    "GF03": {
+      "domicile": 3,
+      "exterieur": 0
+    },
+    "GF04": {
+      "domicile": 0,
+      "exterieur": 3
+    },
+    "GF05": {
+      "domicile": 1,
+      "exterieur": 3
+    },
+    "GF06": {
+      "domicile": 1,
+      "exterieur": 1
+    },
+    "GG01": {
+      "domicile": 1,
+      "exterieur": 3
+    },
+    "GG02": {
+      "domicile": 1,
+      "exterieur": 3
+    },
+    "GG03": {
+      "domicile": 2,
+      "exterieur": 0
+    },
+    "GG04": {
+      "domicile": 2,
+      "exterieur": 1
+    },
+    "GG05": {
+      "domicile": 1,
+      "exterieur": 1
+    },
+    "GG06": {
+      "domicile": 2,
+      "exterieur": 2
+    },
+    "GH01": {
+      "domicile": 1,
+      "exterieur": 0
+    },
+    "GH02": {
+      "domicile": 1,
+      "exterieur": 0
+    },
+    "GH03": {
+      "domicile": 2,
+      "exterieur": 1
+    },
+    "GH04": {
+      "domicile": 4,
+      "exterieur": 1
+    },
+    "GH05": {
+      "domicile": 1,
+      "exterieur": 3
+    },
+    "GH06": {
+      "domicile": 1,
+      "exterieur": 3
+    },
+    "GI01": {
+      "domicile": 3,
+      "exterieur": 1
+    },
+    "GI02": {
+      "domicile": 3,
+      "exterieur": 1
+    },
+    "GI03": {
+      "domicile": 0,
+      "exterieur": 3
+    },
+    "GI04": {
+      "domicile": 2,
+      "exterieur": 0
+    },
+    "GI05": {
+      "domicile": 0,
+      "exterieur": 3
+    },
+    "GI06": {
+      "domicile": 2,
+      "exterieur": 2
+    },
+    "GJ01": {
+      "domicile": 3,
+      "exterieur": 1
+    },
+    "GJ02": {
+      "domicile": 0,
+      "exterieur": 2
+    },
+    "GJ03": {
+      "domicile": 1,
+      "exterieur": 0
+    },
+    "GJ04": {
+      "domicile": 3,
+      "exterieur": 1
+    },
+    "GJ05": {
+      "domicile": 0,
+      "exterieur": 0
+    },
+    "GJ06": {
+      "domicile": 2,
+      "exterieur": 2
+    },
+    "GK01": {
+      "domicile": 1,
+      "exterieur": 2
+    },
+    "GK02": {
+      "domicile": 0,
+      "exterieur": 0
+    },
+    "GK03": {
+      "domicile": 1,
+      "exterieur": 3
+    },
+    "GK04": {
+      "domicile": 0,
+      "exterieur": 1
+    },
+    "GK05": {
+      "domicile": 1,
+      "exterieur": 0
+    },
+    "GK06": {
+      "domicile": 0,
+      "exterieur": 2
+    },
+    "GL01": {
+      "domicile": 2,
+      "exterieur": 1
+    },
+    "GL02": {
+      "domicile": 1,
+      "exterieur": 3
+    },
+    "GL03": {
+      "domicile": 2,
+      "exterieur": 0
+    },
+    "GL04": {
+      "domicile": 3,
+      "exterieur": 1
+    },
+    "GL05": {
+      "domicile": 1,
+      "exterieur": 2
+    },
+    "GL06": {
+      "domicile": 0,
+      "exterieur": 1
+    },
+    "R32_01": {
+      "domicile": 1,
+      "exterieur": 2
+    },
+    "R32_02": {
+      "domicile": 2,
+      "exterieur": 1
+    },
+    "R32_03": {
+      "domicile": 2,
+      "exterieur": 2
+    },
+    "R32_04": {
+      "domicile": 1,
+      "exterieur": 3
+    },
+    "R32_05": {
+      "domicile": 1,
+      "exterieur": 2
+    },
+    "R32_06": {
+      "domicile": 1,
+      "exterieur": 3
+    },
+    "R32_07": {
+      "domicile": 0,
+      "exterieur": 2
+    },
+    "R32_08": {
+      "domicile": 1,
+      "exterieur": 3
+    },
+    "R32_09": {
+      "domicile": 1,
+      "exterieur": 3
+    },
+    "R32_10": {
+      "domicile": 1,
+      "exterieur": 1
+    },
+    "R32_11": {
+      "domicile": 2,
+      "exterieur": 0
+    },
+    "R32_12": {
+      "domicile": 1,
+      "exterieur": 2
+    },
+    "R32_13": {
+      "domicile": 0,
+      "exterieur": 1
+    },
+    "R32_14": {
+      "domicile": 0,
+      "exterieur": 3
+    },
+    "R32_15": {
+      "domicile": 2,
+      "exterieur": 0
+    },
+    "R32_16": {
+      "domicile": 2,
+      "exterieur": 0
+    },
+    "R16_01": {
+      "domicile": 0,
+      "exterieur": 2
+    },
+    "R16_02": {
+      "domicile": 0,
+      "exterieur": 2
+    },
+    "R16_03": {
+      "domicile": 1,
+      "exterieur": 1
+    },
+    "R16_04": {
+      "domicile": 0,
+      "exterieur": 0
+    },
+    "R16_05": {
+      "domicile": 2,
+      "exterieur": 1
+    },
+    "R16_06": {
+      "domicile": 3,
+      "exterieur": 0
+    },
+    "R16_07": {
+      "domicile": 0,
+      "exterieur": 3
+    },
+    "R16_08": {
+      "domicile": 2,
+      "exterieur": 2
+    },
+    "QF_01": {
+      "domicile": 2,
+      "exterieur": 1
+    },
+    "QF_02": {
+      "domicile": 3,
+      "exterieur": 1
+    },
+    "QF_03": {
+      "domicile": 3,
+      "exterieur": 1
+    },
+    "QF_04": {
+      "domicile": 2,
+      "exterieur": 1
+    },
+    "SF_01": {
+      "domicile": 3,
+      "exterieur": 0
+    },
+    "SF_02": {
+      "domicile": 2,
+      "exterieur": 0
+    },
+    "TPL": {
+      "domicile": 2,
+      "exterieur": 1
+    },
+    "FIN": {
+      "domicile": 0,
+      "exterieur": 3
+    }
   }
 }

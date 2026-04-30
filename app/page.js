@@ -4,6 +4,21 @@ import { calculerEvolution, calculerPourcentages } from '../lib/stats'
 import { EvolutionChart } from '../components/Charts'
 import { PLAYER_COLORS } from '../lib/colors'
 
+function calculerChangements(joueurs, matchs, resultats, classementActuel) {
+  const matchsJoues = matchs.filter(m => resultats[m.id]).sort((a, b) => new Date(b.date) - new Date(a.date))
+  if (matchsJoues.length === 0) return {}
+  const dernierMatch = matchsJoues[0]
+  const resultatsAvant = { ...resultats }
+  delete resultatsAvant[dernierMatch.id]
+  const classementAvant = calculerClassement(joueurs, matchs, resultatsAvant)
+  const changes = {}
+  classementActuel.forEach((j, i) => {
+    const ancienRang = classementAvant.findIndex(c => c.nom === j.nom)
+    changes[j.nom] = ancienRang - i // >0 = monté, <0 = descendu, 0 = stable
+  })
+  return changes
+}
+
 const WRAP = { maxWidth: 1100, margin: '0 auto', padding: '0 24px' }
 
 const RANK_STYLES = [
@@ -24,6 +39,7 @@ export default function Home() {
   const nomsJoueurs = joueurs.map(j => j.nom)
   const maxPoints = classement[0]?.points || 1
   const meilleurPct = [...pourcentages].sort((a, b) => b.pourcentage - a.pourcentage)[0]
+  const posChanges = calculerChangements(joueurs, matchs, resultats, classement)
 
   return (
     <>
@@ -110,9 +126,20 @@ export default function Home() {
 
         {/* LEADERBOARD */}
         <div style={{ marginBottom: 12 }}>
-          <p style={{ fontSize: 10, letterSpacing: '0.2em', textTransform: 'uppercase', color: '#94a3b8', fontWeight: 600, marginBottom: 20 }}>
-            Classement général
-          </p>
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 20 }}>
+            <p style={{ fontSize: 10, letterSpacing: '0.2em', textTransform: 'uppercase', color: '#94a3b8', fontWeight: 600 }}>
+              Classement général
+            </p>
+            <Link href="/stats" style={{
+              display: 'inline-flex', alignItems: 'center', gap: 8,
+              background: 'linear-gradient(135deg, #0c1e52, #1a3a7a)',
+              color: '#fff', textDecoration: 'none',
+              fontSize: 12, fontWeight: 700, padding: '8px 18px', borderRadius: 12,
+              letterSpacing: '0.04em', boxShadow: '0 4px 14px rgba(12,30,82,0.25)',
+            }}>
+              <span style={{ fontSize: 14 }}>📊</span> Statistiques détaillées →
+            </Link>
+          </div>
           <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
             {classement.map((joueur, i) => {
               const pct = pourcentages.find(p => p.nom === joueur.nom)?.pourcentage ?? 0
@@ -145,15 +172,26 @@ export default function Home() {
                   </span>
 
                   <div style={{ position: 'relative', display: 'flex', alignItems: 'center', gap: 16 }}>
-                    {/* Avatar */}
-                    <div style={{
-                      width: 46, height: 46, borderRadius: 14, flexShrink: 0,
-                      background: `linear-gradient(135deg, ${color}, ${color}bb)`,
-                      display: 'flex', alignItems: 'center', justifyContent: 'center',
-                      fontSize: 20, fontWeight: 800, color: '#fff',
-                      boxShadow: `0 4px 12px ${color}44`,
-                    }}>
-                      {joueur.nom[0]}
+                    {/* Avatar + flèche évolution */}
+                    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 3, flexShrink: 0 }}>
+                      <div style={{
+                        width: 46, height: 46, borderRadius: 14,
+                        background: `linear-gradient(135deg, ${color}, ${color}bb)`,
+                        display: 'flex', alignItems: 'center', justifyContent: 'center',
+                        fontSize: 20, fontWeight: 800, color: '#fff',
+                        boxShadow: `0 4px 12px ${color}44`,
+                      }}>
+                        {joueur.nom[0]}
+                      </div>
+                      {posChanges[joueur.nom] > 0 && (
+                        <span style={{ fontSize: 11, fontWeight: 800, color: '#16a34a', lineHeight: 1 }}>↑{posChanges[joueur.nom]}</span>
+                      )}
+                      {posChanges[joueur.nom] < 0 && (
+                        <span style={{ fontSize: 11, fontWeight: 800, color: '#ef4444', lineHeight: 1 }}>↓{Math.abs(posChanges[joueur.nom])}</span>
+                      )}
+                      {posChanges[joueur.nom] === 0 && (
+                        <span style={{ fontSize: 11, color: '#cbd5e1', lineHeight: 1 }}>—</span>
+                      )}
                     </div>
 
                     {/* Name + stats */}
