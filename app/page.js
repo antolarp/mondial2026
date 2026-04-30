@@ -105,11 +105,10 @@ export default function Home() {
       <div style={{ ...WRAP, paddingTop: 32, paddingBottom: 60 }}>
 
         {/* STAT CARDS */}
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 12, marginBottom: 40 }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 12, marginBottom: 40 }}>
           {[
             { label: 'Matchs joués', value: matchsJoues, sub: `/ ${matchs.length}` },
             { label: 'Leader actuel', value: classement[0]?.nom, sub: `${classement[0]?.points ?? 0} points` },
-            { label: 'Participants', value: joueurs.length, sub: 'joueurs' },
             { label: 'Meilleur taux', value: `${meilleurPct?.pourcentage ?? 0}%`, sub: meilleurPct?.nom },
           ].map(({ label, value, sub }) => (
             <div key={label} style={{
