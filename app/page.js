@@ -1,7 +1,7 @@
 import Link from 'next/link'
 import { chargerJoueurs, chargerMatchs, chargerResultats, calculerClassement } from '../lib/scoring'
-import { calculerEvolution, calculerPlaces, calculerPourcentages, calculerExacts } from '../lib/stats'
-import { EvolutionChart, ExactsChart, PourcentagesChart, PlacesChart } from '../components/Charts'
+import { calculerEvolution, calculerPourcentages } from '../lib/stats'
+import { EvolutionChart } from '../components/Charts'
 import { PLAYER_COLORS } from '../lib/colors'
 
 const WRAP = { maxWidth: 1100, margin: '0 auto', padding: '0 24px' }
@@ -20,17 +20,8 @@ export default function Home() {
 
   const matchsJoues = matchs.filter(m => resultats[m.id]).length
   const evolution = calculerEvolution(joueurs, matchs, resultats)
-  const { premiere, derniere } = calculerPlaces(joueurs, matchs, resultats)
   const pourcentages = calculerPourcentages(joueurs, resultats)
   const nomsJoueurs = joueurs.map(j => j.nom)
-  const exacts = calculerExacts(joueurs, resultats).map(item => ({
-    ...item,
-    color: PLAYER_COLORS[nomsJoueurs.indexOf(item.nom) % PLAYER_COLORS.length],
-  }))
-  const pourcentagesColored = pourcentages.map(item => ({
-    ...item,
-    color: PLAYER_COLORS[nomsJoueurs.indexOf(item.nom) % PLAYER_COLORS.length],
-  }))
   const maxPoints = classement[0]?.points || 1
   const meilleurPct = [...pourcentages].sort((a, b) => b.pourcentage - a.pourcentage)[0]
 
@@ -219,36 +210,24 @@ export default function Home() {
           </div>
         </div>
 
-        {/* CHARTS */}
+        {/* ÉVOLUTION */}
         {evolution.length > 0 && (
           <div style={{ marginTop: 48 }}>
-            <p style={{ fontSize: 10, letterSpacing: '0.2em', textTransform: 'uppercase', color: '#94a3b8', fontWeight: 600, marginBottom: 20 }}>
-              Statistiques
-            </p>
-
             <div style={{ background: '#fff', borderRadius: 20, padding: '28px 24px', boxShadow: '0 1px 4px rgba(0,0,0,0.05)', border: '1px solid #e8eaf2', marginBottom: 16 }}>
-              <p style={{ fontWeight: 700, fontSize: 15, color: '#0f172a', marginBottom: 4 }}>Évolution des points</p>
-              <p style={{ fontSize: 12, color: '#94a3b8', marginBottom: 20 }}>Points cumulés après chaque match</p>
+              <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', marginBottom: 20 }}>
+                <div>
+                  <p style={{ fontWeight: 800, fontSize: 17, color: '#0f172a', marginBottom: 2 }}>Évolution des points</p>
+                  <p style={{ fontSize: 12, color: '#94a3b8' }}>Points cumulés après chaque match</p>
+                </div>
+                <Link href="/stats" style={{
+                  background: '#0c1e52', color: '#fff', textDecoration: 'none',
+                  fontSize: 12, fontWeight: 700, padding: '8px 16px', borderRadius: 10,
+                  letterSpacing: '0.05em', flexShrink: 0,
+                }}>
+                  Toutes les stats →
+                </Link>
+              </div>
               <EvolutionChart data={evolution} joueurs={nomsJoueurs} />
-            </div>
-
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16, marginBottom: 16 }}>
-              <div style={{ background: '#fff', borderRadius: 20, padding: '28px 24px', boxShadow: '0 1px 4px rgba(0,0,0,0.05)', border: '1px solid #e8eaf2' }}>
-                <p style={{ fontWeight: 700, fontSize: 15, color: '#0f172a', marginBottom: 4 }}>Scores exacts</p>
-                <p style={{ fontSize: 12, color: '#94a3b8', marginBottom: 20 }}>Nombre de 3 points</p>
-                <ExactsChart data={exacts} />
-              </div>
-              <div style={{ background: '#fff', borderRadius: 20, padding: '28px 24px', boxShadow: '0 1px 4px rgba(0,0,0,0.05)', border: '1px solid #e8eaf2' }}>
-                <p style={{ fontWeight: 700, fontSize: 15, color: '#0f172a', marginBottom: 4 }}>Taux de réussite</p>
-                <p style={{ fontSize: 12, color: '#94a3b8', marginBottom: 20 }}>% pronos à 2 ou 3 pts</p>
-                <PourcentagesChart data={pourcentagesColored} />
-              </div>
-            </div>
-
-            <div style={{ background: '#fff', borderRadius: 20, padding: '28px 24px', boxShadow: '0 1px 4px rgba(0,0,0,0.05)', border: '1px solid #e8eaf2' }}>
-              <p style={{ fontWeight: 700, fontSize: 15, color: '#0f172a', marginBottom: 4 }}>Passages en tête / lanterne rouge</p>
-              <p style={{ fontSize: 12, color: '#94a3b8', marginBottom: 20 }}>Nombre de fois 1er ou dernier après chaque match</p>
-              <PlacesChart premiere={premiere} derniere={derniere} joueurs={nomsJoueurs} />
             </div>
           </div>
         )}

@@ -26,6 +26,8 @@ export default function RootLayout({ children }) {
                 className="hover:text-white transition-colors">Classement</a>
               <a href="/matchs" style={{ color: '#8aaad8', fontSize: 13, fontWeight: 500, textDecoration: 'none', letterSpacing: '0.02em' }}
                 className="hover:text-white transition-colors">Matchs</a>
+              <a href="/stats" style={{ color: '#8aaad8', fontSize: 13, fontWeight: 500, textDecoration: 'none', letterSpacing: '0.02em' }}
+                className="hover:text-white transition-colors">Stats</a>
             </nav>
           </div>
         </header>
