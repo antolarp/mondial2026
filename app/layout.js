@@ -3,6 +3,17 @@ import './globals.css'
 export const metadata = {
   title: 'Pronos · Mondial 2026',
   description: 'Concours de pronostics — Coupe du Monde 2026',
+  manifest: '/manifest.webmanifest',
+  appleWebApp: {
+    capable: true,
+    statusBarStyle: 'black-translucent',
+    title: 'Pronos 2026',
+  },
+  icons: {
+    icon: '/icon.svg',
+    apple: '/apple-touch-icon.png',
+  },
+  themeColor: '#0c1e52',
 }
 
 export default function RootLayout({ children }) {
