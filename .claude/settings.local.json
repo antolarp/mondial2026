@@ -7,7 +7,8 @@
       "Bash(node scripts/generer-donnees.js)",
       "Bash(node -e ' *)",
       "Bash(node -e \"const m=require\\('./data/matchs.json'\\); console.log\\([...new Set\\(m.map\\(x=>x.phase\\)\\)]\\)\")",
-      "WebSearch"
+      "WebSearch",
+      "Bash(node scripts/generate-icons.js)"
     ]
   }
 }

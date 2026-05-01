@@ -184,16 +184,20 @@ export default function PronosPanel({ phases, joueurs }) {
         </select>
 
         <label style={{ display: 'block', fontSize: 12, fontWeight: 700, color: '#64748b', letterSpacing: '0.08em', textTransform: 'uppercase', marginBottom: 6 }}>
-          Ton code perso
+          Ton code PIN
         </label>
         <input
-          type="text"
-          placeholder="ex: ant26"
+          type="password"
+          inputMode="numeric"
+          pattern="[0-9]*"
+          placeholder="• • • •"
+          maxLength={8}
           value={code}
-          onChange={e => { setCode(e.target.value.toLowerCase().trim()); setCodeError('') }}
+          onChange={e => { setCode(e.target.value.replace(/[^0-9]/g, '')); setCodeError('') }}
           onKeyDown={e => e.key === 'Enter' && handleLogin()}
           style={{
-            width: '100%', padding: '14px 16px', borderRadius: 12, fontSize: 16,
+            width: '100%', padding: '14px 16px', borderRadius: 12, fontSize: 24,
+            letterSpacing: '0.3em', textAlign: 'center',
             border: codeError ? '2px solid #ef4444' : '2px solid #e2e8f0',
             outline: 'none', boxSizing: 'border-box', marginBottom: 8,
           }}
@@ -265,31 +269,40 @@ export default function PronosPanel({ phases, joueurs }) {
           background: '#fff', borderBottom: '1px solid #e2e8f0',
           padding: '20px 20px', maxWidth: 560, margin: '0 auto',
         }}>
-          <p style={{ fontSize: 14, fontWeight: 700, color: '#0c1e52', marginBottom: 14 }}>
-            🔑 Choisir mon code perso
+          <p style={{ fontSize: 14, fontWeight: 700, color: '#0c1e52', marginBottom: 4 }}>
+            🔑 Choisir mon code PIN
           </p>
+          <p style={{ fontSize: 12, color: '#94a3b8', marginBottom: 14 }}>4 à 8 chiffres</p>
           <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
             <input
-              type="text"
-              placeholder="Nouveau code (4 car. min)"
+              type="password"
+              inputMode="numeric"
+              pattern="[0-9]*"
+              placeholder="Nouveau PIN"
+              maxLength={8}
               value={newCode}
-              onChange={e => { setNewCode(e.target.value.toLowerCase().trim()); setChangeCodeError('') }}
+              onChange={e => { setNewCode(e.target.value.replace(/[^0-9]/g, '')); setChangeCodeError('') }}
               style={{
-                padding: '12px 14px', borderRadius: 10, fontSize: 15,
-                border: '2px solid #e2e8f0', outline: 'none',
+                padding: '12px 14px', borderRadius: 10, fontSize: 22,
+                letterSpacing: '0.3em', textAlign: 'center',
+                border: '2px solid #e2e8f0', outline: 'none', width: '100%', boxSizing: 'border-box',
               }}
               autoFocus
             />
             <input
-              type="text"
-              placeholder="Confirmer le code"
+              type="password"
+              inputMode="numeric"
+              pattern="[0-9]*"
+              placeholder="Confirmer le PIN"
+              maxLength={8}
               value={newCode2}
-              onChange={e => { setNewCode2(e.target.value.toLowerCase().trim()); setChangeCodeError('') }}
+              onChange={e => { setNewCode2(e.target.value.replace(/[^0-9]/g, '')); setChangeCodeError('') }}
               onKeyDown={e => e.key === 'Enter' && handleChangeCode()}
               style={{
-                padding: '12px 14px', borderRadius: 10, fontSize: 15,
+                padding: '12px 14px', borderRadius: 10, fontSize: 22,
+                letterSpacing: '0.3em', textAlign: 'center',
                 border: changeCodeError ? '2px solid #ef4444' : '2px solid #e2e8f0',
-                outline: 'none',
+                outline: 'none', width: '100%', boxSizing: 'border-box',
               }}
             />
             {changeCodeError && (

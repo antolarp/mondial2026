@@ -49,8 +49,8 @@ export async function POST(request) {
 
   if (!nom || !currentCode || !newCode)
     return NextResponse.json({ error: 'Données manquantes' }, { status: 400 })
-  if (newCode.length < 4)
-    return NextResponse.json({ error: 'Code trop court (4 caractères min)' }, { status: 400 })
+  if (!/^\d{4,8}$/.test(newCode))
+    return NextResponse.json({ error: 'PIN invalide (4 à 8 chiffres)' }, { status: 400 })
 
   const filename = `data/joueurs/${nom.toLowerCase()}.json`
 
