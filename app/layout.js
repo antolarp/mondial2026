@@ -32,13 +32,15 @@ export default function RootLayout({ children }) {
                 <span style={{ color: '#5a7fc0', fontWeight: 400, marginLeft: 6, fontSize: 13 }}>Pronos</span>
               </span>
             </a>
-            <nav style={{ display: 'flex', gap: 32 }}>
+            <nav style={{ display: 'flex', gap: 24 }}>
               <a href="/" style={{ color: '#8aaad8', fontSize: 13, fontWeight: 500, textDecoration: 'none', letterSpacing: '0.02em' }}
                 className="hover:text-white transition-colors">Classement</a>
               <a href="/matchs" style={{ color: '#8aaad8', fontSize: 13, fontWeight: 500, textDecoration: 'none', letterSpacing: '0.02em' }}
                 className="hover:text-white transition-colors">Matchs</a>
               <a href="/stats" style={{ color: '#8aaad8', fontSize: 13, fontWeight: 500, textDecoration: 'none', letterSpacing: '0.02em' }}
                 className="hover:text-white transition-colors">Stats</a>
+              <a href="/pronos" style={{ color: '#f0b429', fontSize: 13, fontWeight: 700, textDecoration: 'none', letterSpacing: '0.02em' }}
+                className="hover:opacity-80 transition-opacity">🎯 Pronos</a>
             </nav>
           </div>
         </header>
