@@ -3,7 +3,7 @@
   "code": "1234",
   "pronos": {
     "M01": {
-      "domicile": 1,
+      "domicile": 0,
       "exterieur": 1
     },
     "M02": {
