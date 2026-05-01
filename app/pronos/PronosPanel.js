@@ -14,6 +14,11 @@ export default function PronosPanel({ phases, joueurs }) {
   const [saving, setSaving]         = useState(false)
   const [toast, setToast]           = useState(null)
   const [savedPhases, setSavedPhases] = useState(new Set())
+  const [showChangeCode, setShowChangeCode] = useState(false)
+  const [newCode, setNewCode]       = useState('')
+  const [newCode2, setNewCode2]     = useState('')
+  const [changingCode, setChangingCode] = useState(false)
+  const [changeCodeError, setChangeCodeError] = useState('')
 
   const showToast = (msg, ok = true) => {
     setToast({ msg, ok })
@@ -73,6 +78,34 @@ export default function PronosPanel({ phases, joueurs }) {
   }
 
   const countFilled = (phase) => phase?.matchs.filter(m => hasPrno(m.id)).length ?? 0
+
+  // ── Changement de code ────────────────────────────────────────
+  const handleChangeCode = async () => {
+    if (!newCode || !newCode2) return
+    if (newCode !== newCode2) { setChangeCodeError('Les codes ne correspondent pas'); return }
+    if (newCode.length < 4)   { setChangeCodeError('4 caractères minimum'); return }
+    setChangingCode(true)
+    setChangeCodeError('')
+    try {
+      const res = await fetch('/api/pronos/change-code', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ nom: nomSelected, currentCode: code, newCode }),
+      })
+      const data = await res.json()
+      if (res.ok) {
+        setCode(newCode)
+        setShowChangeCode(false)
+        setNewCode(''); setNewCode2('')
+        showToast('✅ Code mis à jour !')
+      } else {
+        setChangeCodeError(data.error || 'Erreur')
+      }
+    } catch {
+      setChangeCodeError('Erreur réseau')
+    }
+    setChangingCode(false)
+  }
 
   // ── Submit ─────────────────────────────────────────────────────
   const activePhase = phases.find(p => p.id === activePhaseId)
@@ -210,13 +243,84 @@ export default function PronosPanel({ phases, joueurs }) {
             {nomSelected}
           </p>
         </div>
-        <button
-          onClick={() => { setStep('login'); setCode(''); setCodeError('') }}
-          style={{ color: '#8aaad8', fontSize: 13, background: 'none', border: 'none', cursor: 'pointer', fontWeight: 500 }}
-        >
-          Changer ↗
-        </button>
+        <div style={{ display: 'flex', gap: 16, alignItems: 'center' }}>
+          <button
+            onClick={() => { setShowChangeCode(v => !v); setNewCode(''); setNewCode2(''); setChangeCodeError('') }}
+            style={{ color: showChangeCode ? '#f0b429' : '#8aaad8', fontSize: 13, background: 'none', border: 'none', cursor: 'pointer', fontWeight: 500 }}
+          >
+            🔑 Mon code
+          </button>
+          <button
+            onClick={() => { setStep('login'); setCode(''); setCodeError('') }}
+            style={{ color: '#8aaad8', fontSize: 13, background: 'none', border: 'none', cursor: 'pointer', fontWeight: 500 }}
+          >
+            Quitter ↗
+          </button>
+        </div>
       </div>
+
+      {/* Panneau changement de code */}
+      {showChangeCode && (
+        <div style={{
+          background: '#fff', borderBottom: '1px solid #e2e8f0',
+          padding: '20px 20px', maxWidth: 560, margin: '0 auto',
+        }}>
+          <p style={{ fontSize: 14, fontWeight: 700, color: '#0c1e52', marginBottom: 14 }}>
+            🔑 Choisir mon code perso
+          </p>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
+            <input
+              type="text"
+              placeholder="Nouveau code (4 car. min)"
+              value={newCode}
+              onChange={e => { setNewCode(e.target.value.toLowerCase().trim()); setChangeCodeError('') }}
+              style={{
+                padding: '12px 14px', borderRadius: 10, fontSize: 15,
+                border: '2px solid #e2e8f0', outline: 'none',
+              }}
+              autoFocus
+            />
+            <input
+              type="text"
+              placeholder="Confirmer le code"
+              value={newCode2}
+              onChange={e => { setNewCode2(e.target.value.toLowerCase().trim()); setChangeCodeError('') }}
+              onKeyDown={e => e.key === 'Enter' && handleChangeCode()}
+              style={{
+                padding: '12px 14px', borderRadius: 10, fontSize: 15,
+                border: changeCodeError ? '2px solid #ef4444' : '2px solid #e2e8f0',
+                outline: 'none',
+              }}
+            />
+            {changeCodeError && (
+              <p style={{ color: '#ef4444', fontSize: 13, fontWeight: 500 }}>{changeCodeError}</p>
+            )}
+            <div style={{ display: 'flex', gap: 8 }}>
+              <button
+                onClick={handleChangeCode}
+                disabled={!newCode || !newCode2 || changingCode}
+                style={{
+                  flex: 1, padding: '12px', borderRadius: 10, fontSize: 14, fontWeight: 700,
+                  background: (!newCode || !newCode2 || changingCode) ? '#e2e8f0' : '#0c1e52',
+                  color: (!newCode || !newCode2 || changingCode) ? '#94a3b8' : '#fff',
+                  border: 'none', cursor: 'pointer',
+                }}
+              >
+                {changingCode ? '…' : 'Valider'}
+              </button>
+              <button
+                onClick={() => { setShowChangeCode(false); setNewCode(''); setNewCode2(''); setChangeCodeError('') }}
+                style={{
+                  padding: '12px 18px', borderRadius: 10, fontSize: 14, fontWeight: 700,
+                  background: '#f1f5f9', color: '#64748b', border: 'none', cursor: 'pointer',
+                }}
+              >
+                Annuler
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* Onglets phases */}
       <div style={{ overflowX: 'auto', whiteSpace: 'nowrap', padding: '10px 12px', background: '#fff', borderBottom: '1px solid #e8eaf2' }}>
