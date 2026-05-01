@@ -39,7 +39,8 @@ export default function PronosPanel({ phases, joueurs }) {
       if (res.ok) {
         const joueur = joueurs.find(j => j.nom === nomSelected)
         if (joueur?.pronos) setLocalPronos({ ...joueur.pronos })
-        setStep('pronos')
+        // PIN par défaut → forcer le changement avant d'accéder aux pronos
+        setStep(code === '0000' ? 'force-change' : 'pronos')
       } else {
         const data = await res.json()
         setCodeError(data.error || 'Erreur de connexion')
@@ -97,7 +98,11 @@ export default function PronosPanel({ phases, joueurs }) {
         setCode(newCode)
         setShowChangeCode(false)
         setNewCode(''); setNewCode2('')
-        showToast('✅ Code mis à jour !')
+        if (step === 'force-change') {
+          setStep('pronos')
+        } else {
+          showToast('✅ PIN mis à jour !')
+        }
       } else {
         setChangeCodeError(data.error || 'Erreur')
       }
@@ -225,6 +230,85 @@ export default function PronosPanel({ phases, joueurs }) {
         >
           {checking ? 'Vérification…' : 'Accéder à mes pronos →'}
         </button>
+      </div>
+    </div>
+  )
+
+  // ── ÉCRAN CRÉATION PIN (première connexion) ───────────────────
+  if (step === 'force-change') return (
+    <div style={{
+      minHeight: 'calc(100vh - 56px)', display: 'flex', alignItems: 'center',
+      justifyContent: 'center',
+      background: 'linear-gradient(135deg, #0c1e52 0%, #16357a 100%)', padding: 24,
+    }}>
+      <div style={{
+        background: '#fff', borderRadius: 24, padding: '40px 32px',
+        width: '100%', maxWidth: 380, boxShadow: '0 24px 64px rgba(0,0,0,0.35)',
+      }}>
+        <div style={{ textAlign: 'center', marginBottom: 28 }}>
+          <span style={{ fontSize: 44 }}>🔑</span>
+          <h1 style={{ fontSize: 22, fontWeight: 900, color: '#0c1e52', margin: '12px 0 4px' }}>
+            Bienvenue {nomSelected} !
+          </h1>
+          <p style={{ fontSize: 13, color: '#94a3b8', lineHeight: 1.5 }}>
+            Choisis ton PIN perso avant de continuer.<br/>
+            Tu en auras besoin à chaque connexion.
+          </p>
+        </div>
+
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
+          <input
+            type="password"
+            inputMode="numeric"
+            pattern="[0-9]*"
+            placeholder="Nouveau PIN"
+            maxLength={8}
+            value={newCode}
+            onChange={e => { setNewCode(e.target.value.replace(/[^0-9]/g, '')); setChangeCodeError('') }}
+            style={{
+              padding: '14px 16px', borderRadius: 12, fontSize: 28,
+              letterSpacing: '0.4em', textAlign: 'center',
+              border: '2px solid #e2e8f0', outline: 'none',
+              width: '100%', boxSizing: 'border-box',
+            }}
+            autoFocus
+          />
+          <input
+            type="password"
+            inputMode="numeric"
+            pattern="[0-9]*"
+            placeholder="Confirmer le PIN"
+            maxLength={8}
+            value={newCode2}
+            onChange={e => { setNewCode2(e.target.value.replace(/[^0-9]/g, '')); setChangeCodeError('') }}
+            onKeyDown={e => e.key === 'Enter' && handleChangeCode()}
+            style={{
+              padding: '14px 16px', borderRadius: 12, fontSize: 28,
+              letterSpacing: '0.4em', textAlign: 'center',
+              border: changeCodeError ? '2px solid #ef4444' : '2px solid #e2e8f0',
+              outline: 'none', width: '100%', boxSizing: 'border-box',
+            }}
+          />
+          {changeCodeError && (
+            <p style={{ color: '#ef4444', fontSize: 13, fontWeight: 500, textAlign: 'center' }}>
+              {changeCodeError}
+            </p>
+          )}
+          <button
+            onClick={handleChangeCode}
+            disabled={!newCode || !newCode2 || changingCode}
+            style={{
+              width: '100%', padding: 15, borderRadius: 12, fontSize: 15, fontWeight: 800,
+              background: (!newCode || !newCode2 || changingCode)
+                ? '#e2e8f0'
+                : 'linear-gradient(135deg, #16a34a, #15803d)',
+              color: (!newCode || !newCode2 || changingCode) ? '#94a3b8' : '#fff',
+              border: 'none', cursor: 'pointer', marginTop: 4,
+            }}
+          >
+            {changingCode ? 'Enregistrement…' : 'Valider mon PIN →'}
+          </button>
+        </div>
       </div>
     </div>
   )
