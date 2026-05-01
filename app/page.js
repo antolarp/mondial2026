@@ -1,8 +1,10 @@
 import Link from 'next/link'
 import { chargerJoueurs, chargerMatchs, chargerResultats, calculerClassement } from '../lib/scoring'
-import { calculerEvolution, calculerPourcentages } from '../lib/stats'
+import { calculerEvolution, calculerPourcentages, calculerSeries } from '../lib/stats'
 import { EvolutionChart } from '../components/Charts'
 import { PLAYER_COLORS } from '../lib/colors'
+import Countdown from '../components/Countdown'
+import AutoRefresh from '../components/AutoRefresh'
 
 function calculerChangements(joueurs, matchs, resultats, classementActuel) {
   const matchsJoues = matchs.filter(m => resultats[m.id]).sort((a, b) => new Date(b.date) - new Date(a.date))
@@ -36,14 +38,20 @@ export default function Home() {
   const matchsJoues = matchs.filter(m => resultats[m.id]).length
   const evolution = calculerEvolution(joueurs, matchs, resultats)
   const pourcentages = calculerPourcentages(joueurs, resultats)
+  const series = calculerSeries(joueurs, matchs, resultats)
   const nomsJoueurs = joueurs.map(j => j.nom)
   const maxPoints = classement[0]?.points || 1
   const meilleurPct = [...pourcentages].sort((a, b) => b.pourcentage - a.pourcentage)[0]
   const posChanges = calculerChangements(joueurs, matchs, resultats, classement)
 
+  // Prochain match sans résultat
+  const prochainMatch = matchs
+    .filter(m => !resultats[m.id])
+    .sort((a, b) => new Date(a.date) - new Date(b.date))[0] ?? null
+
   return (
     <>
-      {/* ── HERO ── */}
+      <AutoRefresh interval={60000} />
       <div style={{
         background: 'linear-gradient(135deg, #0c1e52 0%, #16357a 55%, #0c2c60 100%)',
         paddingBottom: 0,
@@ -62,6 +70,9 @@ export default function Home() {
                 {joueurs.length} joueurs · {matchsJoues} match{matchsJoues > 1 ? 's' : ''} joué{matchsJoues > 1 ? 's' : ''} sur {matchs.length}
               </p>
             </div>
+            {/* Countdown prochain match */}
+            {prochainMatch && <Countdown match={prochainMatch} />}
+
             {/* Leader card in hero */}
             {classement[0] && (
               <div style={{
@@ -142,6 +153,7 @@ export default function Home() {
           <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
             {classement.map((joueur, i) => {
               const pct = pourcentages.find(p => p.nom === joueur.nom)?.pourcentage ?? 0
+              const serie = series.find(s => s.nom === joueur.nom)?.serie ?? 0
               const color = PLAYER_COLORS[nomsJoueurs.indexOf(joueur.nom) % PLAYER_COLORS.length]
               const rankStyle = RANK_STYLES[i] ?? { color: '#cbd5e1', bg: '#fff', border: '1px solid #e8eaf2' }
               const progress = Math.round((joueur.points / (maxPoints || 1)) * 100)
@@ -195,7 +207,7 @@ export default function Home() {
 
                     {/* Name + stats */}
                     <div style={{ flex: 1, minWidth: 0 }}>
-                      <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 6 }}>
+                      <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 6, flexWrap: 'wrap' }}>
                         <span style={{ fontWeight: 800, fontSize: 17, color: '#0f172a' }}>{joueur.nom}</span>
                         {isTop3 && (
                           <span style={{
@@ -203,6 +215,15 @@ export default function Home() {
                             background: rankStyle.bg, color: rankStyle.color, padding: '2px 8px', borderRadius: 20,
                           }}>
                             {i === 0 ? '🥇 1er' : i === 1 ? '🥈 2e' : '🥉 3e'}
+                          </span>
+                        )}
+                        {serie >= 2 && (
+                          <span style={{
+                            fontSize: 10, fontWeight: 700, background: '#fff7ed',
+                            color: '#ea580c', padding: '2px 8px', borderRadius: 20,
+                            border: '1px solid #fed7aa',
+                          }}>
+                            🔥 {serie} en série
                           </span>
                         )}
                       </div>
