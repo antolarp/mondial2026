@@ -44,7 +44,7 @@ export default function Home() {
   const phaseAlerte = pronoPhases.find(p => {
     if (!p.isOpen || !p.deadlineISO) return false
     const heures = (new Date(p.deadlineISO) - new Date()) / 3_600_000
-    return heures <= 168 // 7 jours
+    return true // toujours afficher si la phase est ouverte
   })
   const heuresAlerte = phaseAlerte
     ? (new Date(phaseAlerte.deadlineISO) - new Date()) / 3_600_000

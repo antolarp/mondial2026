@@ -493,7 +493,7 @@ export default function PronosPanel({ phases, joueurs }) {
       {(() => {
         if (!isOpen || !activePhase?.deadlineISO) return null
         const heuresRestantes = (new Date(activePhase.deadlineISO) - new Date()) / 3_600_000
-        if (heuresRestantes > 168) return null
+        // toujours afficher si la phase est ouverte
         const urgent  = heuresRestantes < 24
         const warning = heuresRestantes < 72
         const jours   = Math.floor(heuresRestantes / 24)
