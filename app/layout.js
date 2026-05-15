@@ -31,7 +31,10 @@ export default function RootLayout({ children }) {
                 alt="FIFA World Cup 2026"
                 style={{ height: 36, width: 'auto', mixBlendMode: 'screen' }}
               />
-              <span style={{ color: '#5a7fc0', fontWeight: 400, fontSize: 13 }}>Pronos</span>
+              <span style={{ color: '#fff', fontWeight: 700, fontSize: 15, letterSpacing: '-0.3px' }}>
+                Mondial 2026
+                <span style={{ color: '#5a7fc0', fontWeight: 400, marginLeft: 6, fontSize: 13 }}>Pronos</span>
+              </span>
             </a>
             <nav style={{ display: 'flex', gap: 24 }}>
               <a href="/" style={{ color: '#8aaad8', fontSize: 13, fontWeight: 500, textDecoration: 'none', letterSpacing: '0.02em' }}
