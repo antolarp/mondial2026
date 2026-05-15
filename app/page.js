@@ -44,7 +44,7 @@ export default function Home() {
   const phaseAlerte = pronoPhases.find(p => {
     if (!p.isOpen || !p.deadlineISO) return false
     const heures = (new Date(p.deadlineISO) - new Date()) / 3_600_000
-    return heures <= 48
+    return heures <= 72
   })
   const heuresAlerte = phaseAlerte
     ? (new Date(phaseAlerte.deadlineISO) - new Date()) / 3_600_000
@@ -130,11 +130,12 @@ export default function Home() {
       {/* ── BANDEAU FERMETURE ── */}
       {phaseAlerte && heuresAlerte !== null && (() => {
         const urgent = heuresAlerte < 24
+        const jours = Math.floor(heuresAlerte / 24)
         const label = heuresAlerte < 1
           ? "Fermeture dans moins d'1 heure !"
           : heuresAlerte < 24
             ? `Fermeture dans ${Math.floor(heuresAlerte)}h !`
-            : `Fermeture dans ${Math.floor(heuresAlerte / 24)} jour${Math.floor(heuresAlerte / 24) > 1 ? 's' : ''} !`
+            : `Il reste ${jours} jour${jours > 1 ? 's' : ''} avant la fermeture`
         return (
           <div style={{
             background: urgent ? '#fef2f2' : '#fffbeb',

@@ -493,13 +493,14 @@ export default function PronosPanel({ phases, joueurs }) {
       {(() => {
         if (!isOpen || !activePhase?.deadlineISO) return null
         const heuresRestantes = (new Date(activePhase.deadlineISO) - new Date()) / 3_600_000
-        if (heuresRestantes > 48) return null
+        if (heuresRestantes > 72) return null
         const urgent = heuresRestantes < 24
+        const jours = Math.floor(heuresRestantes / 24)
         const label = heuresRestantes < 1
           ? 'Fermeture dans moins d\'1 heure !'
           : heuresRestantes < 24
             ? `Fermeture dans ${Math.floor(heuresRestantes)}h !`
-            : `Fermeture dans ${Math.floor(heuresRestantes / 24)} jour${Math.floor(heuresRestantes / 24) > 1 ? 's' : ''} !`
+            : `Il reste ${jours} jour${jours > 1 ? 's' : ''} avant la fermeture`
         return (
           <div style={{
             background: urgent ? '#fef2f2' : '#fffbeb',
