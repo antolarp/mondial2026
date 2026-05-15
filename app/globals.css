@@ -11,3 +11,44 @@
     -webkit-font-smoothing: antialiased;
   }
 }
+
+/* ── RESPONSIVE MOBILE ── */
+@media (max-width: 640px) {
+
+  /* Navbar */
+  .nav-inner { padding: 0 12px !important; }
+  .nav-brand-text { display: none !important; }
+  .nav-links { gap: 10px !important; }
+  .nav-link { font-size: 11px !important; }
+
+  /* Page wrapper padding */
+  .page-wrap { padding-left: 14px !important; padding-right: 14px !important; }
+
+  /* Match cards */
+  .match-card-outer { padding: 10px 12px !important; gap: 6px !important; }
+  .match-main-row { width: 100% !important; flex: none !important; min-width: 0; }
+  .match-pronos-row {
+    width: 100% !important;
+    overflow-x: auto !important;
+    padding-bottom: 4px !important;
+    gap: 6px !important;
+    scrollbar-width: thin;
+  }
+
+  /* Classement - home page */
+  .home-stats-grid { grid-template-columns: repeat(3, 1fr) !important; }
+  .classement-header-row {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 10px !important;
+  }
+  .rank-watermark {
+    font-size: 60px !important;
+    right: 8px !important;
+  }
+  .player-pts-col { margin-right: 12px !important; }
+  .pts-value { font-size: 26px !important; }
+
+  /* Stats records grid */
+  .records-grid { grid-template-columns: repeat(2, 1fr) !important; }
+}

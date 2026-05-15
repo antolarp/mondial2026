@@ -56,7 +56,7 @@ export default function Home() {
         background: 'linear-gradient(135deg, #0c1e52 0%, #16357a 55%, #0c2c60 100%)',
         paddingBottom: 0,
       }}>
-        <div style={{ ...WRAP, paddingTop: 52, paddingBottom: 0 }}>
+        <div className="page-wrap" style={{ ...WRAP, paddingTop: 52, paddingBottom: 0 }}>
           <p style={{ color: '#5a7fc0', fontSize: 11, letterSpacing: '0.25em', textTransform: 'uppercase', marginBottom: 14, fontWeight: 600 }}>
             USA · Canada · Mexique · Juin–Juillet 2026
           </p>
@@ -113,7 +113,7 @@ export default function Home() {
       </div>
 
       {/* ── CONTENT ── */}
-      <div style={{ ...WRAP, paddingTop: 32, paddingBottom: 60 }}>
+      <div className="page-wrap" style={{ ...WRAP, paddingTop: 32, paddingBottom: 60 }}>
 
         {/* STAT CARDS */}
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 12, marginBottom: 40 }}>
@@ -136,7 +136,7 @@ export default function Home() {
 
         {/* LEADERBOARD */}
         <div style={{ marginBottom: 12 }}>
-          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 20 }}>
+          <div className="classement-header-row" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 20 }}>
             <p style={{ fontSize: 10, letterSpacing: '0.2em', textTransform: 'uppercase', color: '#94a3b8', fontWeight: 600 }}>
               Classement général
             </p>
@@ -173,7 +173,7 @@ export default function Home() {
                   transition: 'transform 0.15s, box-shadow 0.15s',
                 }}>
                   {/* Giant rank watermark */}
-                  <span style={{
+                  <span className="rank-watermark" style={{
                     position: 'absolute', right: 20, top: '50%', transform: 'translateY(-50%)',
                     fontSize: 96, fontWeight: 900, lineHeight: 1,
                     color: i === 0 ? '#fef3c7' : i === 1 ? '#f1f5f9' : i === 2 ? '#fdf6f0' : '#f8fafc',
@@ -246,8 +246,8 @@ export default function Home() {
                     </div>
 
                     {/* Points */}
-                    <div style={{ textAlign: 'right', flexShrink: 0, marginRight: 48 }}>
-                      <span style={{ fontSize: 40, fontWeight: 900, color: '#0f172a', lineHeight: 1 }}>{joueur.points}</span>
+                    <div className="player-pts-col" style={{ textAlign: 'right', flexShrink: 0, marginRight: 48 }}>
+                      <span className="pts-value" style={{ fontSize: 40, fontWeight: 900, color: '#0f172a', lineHeight: 1 }}>{joueur.points}</span>
                       <p style={{ fontSize: 11, color: '#94a3b8', marginTop: 2 }}>points</p>
                     </div>
 

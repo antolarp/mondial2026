@@ -52,7 +52,7 @@ export default function Stats() {
     <>
       {/* HERO */}
       <div style={{ background: 'linear-gradient(135deg, #0c1e52 0%, #16357a 55%, #0c2c60 100%)' }}>
-        <div style={{ ...WRAP, paddingTop: 40 }}>
+        <div className="page-wrap" style={{ ...WRAP, paddingTop: 40 }}>
           <p style={{ color: '#5a7fc0', fontSize: 11, letterSpacing: '0.25em', textTransform: 'uppercase', marginBottom: 10, fontWeight: 600 }}>
             Données & analyses
           </p>
@@ -68,10 +68,10 @@ export default function Stats() {
         </div>
       </div>
 
-      <div style={{ ...WRAP, paddingTop: 32, paddingBottom: 60 }}>
+      <div className="page-wrap" style={{ ...WRAP, paddingTop: 32, paddingBottom: 60 }}>
 
         {/* RECORDS */}
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 12, marginBottom: 40 }}>
+        <div className="records-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 12, marginBottom: 40 }}>
           {records.map(r => (
             <div key={r.label} style={{
               background: '#fff', borderRadius: 16, padding: '18px 20px',

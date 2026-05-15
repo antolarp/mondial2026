@@ -9,6 +9,7 @@ const PHASES_ORDER = [
   'Demi-finales','Troisième place','Finale',
 ]
 const WRAP = { maxWidth: 1100, margin: '0 auto', padding: '0 24px' }
+const WRAP_CLS = 'page-wrap'
 
 export default function Matchs() {
   const matchs    = chargerMatchs()
@@ -32,7 +33,7 @@ export default function Matchs() {
   return (
     <>
       <div style={{ background: 'linear-gradient(135deg, #0c1e52 0%, #16357a 55%, #0c2c60 100%)', paddingBottom: 0 }}>
-        <div style={{ ...WRAP, paddingTop: 40 }}>
+        <div className={WRAP_CLS} style={{ ...WRAP, paddingTop: 40 }}>
           <p style={{ color: '#5a7fc0', fontSize: 11, letterSpacing: '0.25em', textTransform: 'uppercase', marginBottom: 10, fontWeight: 600 }}>
             Programme
           </p>
@@ -48,7 +49,7 @@ export default function Matchs() {
         </div>
       </div>
 
-      <div style={{ ...WRAP, paddingTop: 32, paddingBottom: 60 }}>
+      <div className={WRAP_CLS} style={{ ...WRAP, paddingTop: 32, paddingBottom: 60 }}>
         {phases.map(phase => (
           <div key={phase} style={{ marginBottom: 40 }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 12 }}>
@@ -62,48 +63,56 @@ export default function Matchs() {
                 const pronosOpen  = pronosOuverts.has(match.id)
 
                 return (
-                  <div key={match.id} style={{
+                  <div key={match.id} className="match-card-outer" style={{
                     background: '#fff', borderRadius: 14,
                     border: res ? '1px solid #e8eaf2' : '1px solid #eef0f8',
                     boxShadow: '0 1px 3px rgba(0,0,0,0.04)',
-                    padding: '14px 20px',
-                    display: 'flex', alignItems: 'center', gap: 20,
+                    padding: '12px 18px',
+                    display: 'flex', flexWrap: 'wrap', alignItems: 'center', gap: 8,
                   }}>
-                    <span style={{ fontSize: 11, color: '#cbd5e1', width: 80, flexShrink: 0, fontVariantNumeric: 'tabular-nums' }}>
-                      {date.toLocaleDateString('fr-FR', { day: 'numeric', month: 'short' })}
-                    </span>
 
-                    <div style={{ display: 'flex', alignItems: 'center', gap: 12, flex: 1 }}>
-                      <span style={{ fontWeight: 600, fontSize: 14, textAlign: 'right', flex: 1, color: '#0f172a', display: 'flex', alignItems: 'center', justifyContent: 'flex-end', gap: 6 }}>
-                        {match.domicile}
-                        {getFlagUrl(match.domicile) && <img src={getFlagUrl(match.domicile)} style={{ width: 22, height: 'auto', borderRadius: 2, flexShrink: 0 }} alt="" />}
+                    {/* Ligne principale : date + équipes + score */}
+                    <div className="match-main-row" style={{ display: 'flex', alignItems: 'center', gap: 10, flex: 1, minWidth: 0 }}>
+                      <span style={{ fontSize: 11, color: '#cbd5e1', width: 66, flexShrink: 0, fontVariantNumeric: 'tabular-nums' }}>
+                        {date.toLocaleDateString('fr-FR', { day: 'numeric', month: 'short' })}
                       </span>
-                      {res ? (
-                        <span style={{
-                          background: '#0c1e52', color: '#fff',
-                          fontWeight: 800, fontSize: 15, padding: '6px 16px', borderRadius: 10,
-                          fontVariantNumeric: 'tabular-nums', letterSpacing: '0.05em', flexShrink: 0,
-                        }}>
-                          {res.domicile} – {res.exterieur}
+
+                      <div style={{ display: 'flex', alignItems: 'center', gap: 7, flex: 1, minWidth: 0 }}>
+                        {/* Équipe domicile */}
+                        <span style={{ fontWeight: 600, fontSize: 13, textAlign: 'right', flex: 1, color: '#0f172a', display: 'flex', alignItems: 'center', justifyContent: 'flex-end', gap: 5, minWidth: 0 }}>
+                          <span style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', minWidth: 0 }}>{match.domicile}</span>
+                          {getFlagUrl(match.domicile) && <img src={getFlagUrl(match.domicile)} style={{ width: 20, height: 'auto', borderRadius: 2, flexShrink: 0 }} alt="" />}
                         </span>
-                      ) : (
-                        <span style={{
-                          background: '#f1f5f9', color: '#cbd5e1',
-                          fontSize: 12, padding: '6px 16px', borderRadius: 10, flexShrink: 0,
-                        }}>
-                          à venir
+
+                        {/* Score */}
+                        {res ? (
+                          <span style={{
+                            background: '#0c1e52', color: '#fff',
+                            fontWeight: 800, fontSize: 13, padding: '5px 11px', borderRadius: 9,
+                            fontVariantNumeric: 'tabular-nums', letterSpacing: '0.05em', flexShrink: 0,
+                          }}>
+                            {res.domicile} – {res.exterieur}
+                          </span>
+                        ) : (
+                          <span style={{
+                            background: '#f1f5f9', color: '#cbd5e1',
+                            fontSize: 11, padding: '5px 10px', borderRadius: 9, flexShrink: 0,
+                          }}>
+                            vs
+                          </span>
+                        )}
+
+                        {/* Équipe extérieure */}
+                        <span style={{ fontWeight: 600, fontSize: 13, flex: 1, color: '#0f172a', display: 'flex', alignItems: 'center', gap: 5, minWidth: 0 }}>
+                          {getFlagUrl(match.exterieur) && <img src={getFlagUrl(match.exterieur)} style={{ width: 20, height: 'auto', borderRadius: 2, flexShrink: 0 }} alt="" />}
+                          <span style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', minWidth: 0 }}>{match.exterieur}</span>
                         </span>
-                      )}
-                      <span style={{ fontWeight: 600, fontSize: 14, flex: 1, color: '#0f172a', display: 'flex', alignItems: 'center', gap: 6 }}>
-                        {getFlagUrl(match.exterieur) && <img src={getFlagUrl(match.exterieur)} style={{ width: 22, height: 'auto', borderRadius: 2, flexShrink: 0 }} alt="" />}
-                        {match.exterieur}
-                      </span>
+                      </div>
                     </div>
 
-                    {/* Pronos joueurs — masqués si phase encore ouverte */}
-                    <div style={{ display: 'flex', gap: 12, flexShrink: 0 }}>
+                    {/* Pronos joueurs — wrappent en dessous sur mobile */}
+                    <div className="match-pronos-row" style={{ display: 'flex', gap: 10, flexShrink: 0, alignItems: 'center' }}>
                       {pronosOpen ? (
-                        /* Phase ouverte : on cache tout */
                         <span style={{
                           fontSize: 11, color: '#94a3b8', fontStyle: 'italic',
                           display: 'flex', alignItems: 'center', gap: 4,
@@ -111,19 +120,18 @@ export default function Matchs() {
                           🔒 <span>Pronos cachés</span>
                         </span>
                       ) : (
-                        /* Phase fermée : on affiche */
                         joueurs.map(joueur => {
                           const prono = joueur.pronos[match.id]
                           const pts   = prono && res ? calculerPoints(prono, res) : null
                           return (
-                            <div key={joueur.nom} style={{ textAlign: 'center', minWidth: 38 }}>
-                              <p style={{ fontSize: 10, color: '#cbd5e1', marginBottom: 2 }}>{joueur.nom.slice(0, 3)}</p>
-                              <p style={{ fontSize: 12, fontWeight: 600, color: '#64748b', fontVariantNumeric: 'tabular-nums' }}>
+                            <div key={joueur.nom} style={{ textAlign: 'center', minWidth: 34 }}>
+                              <p style={{ fontSize: 9, color: '#cbd5e1', marginBottom: 1 }}>{joueur.nom.slice(0, 3)}</p>
+                              <p style={{ fontSize: 11, fontWeight: 600, color: '#64748b', fontVariantNumeric: 'tabular-nums' }}>
                                 {prono ? `${prono.domicile}-${prono.exterieur}` : '—'}
                               </p>
-                              {pts === 3 && <p style={{ fontSize: 10, fontWeight: 700, color: '#16a34a' }}>+3</p>}
-                              {pts === 2 && <p style={{ fontSize: 10, fontWeight: 700, color: '#b8922a' }}>+2</p>}
-                              {pts === 0 && <p style={{ fontSize: 10, fontWeight: 700, color: '#e2e8f0' }}>0</p>}
+                              {pts === 3 && <p style={{ fontSize: 9, fontWeight: 700, color: '#16a34a' }}>+3</p>}
+                              {pts === 2 && <p style={{ fontSize: 9, fontWeight: 700, color: '#b8922a' }}>+2</p>}
+                              {pts === 0 && <p style={{ fontSize: 9, fontWeight: 700, color: '#e2e8f0' }}>0</p>}
                             </div>
                           )
                         })
