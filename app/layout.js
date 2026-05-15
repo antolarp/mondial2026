@@ -26,11 +26,12 @@ export default function RootLayout({ children }) {
         }}>
           <div style={{ maxWidth: 1100, margin: '0 auto', padding: '0 24px', height: 56, display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
             <a href="/" style={{ display: 'flex', alignItems: 'center', gap: 10, textDecoration: 'none' }}>
-              <span style={{ fontSize: 20 }}>⚽</span>
-              <span style={{ color: '#fff', fontWeight: 700, fontSize: 15, letterSpacing: '-0.3px' }}>
-                Mondial 2026
-                <span style={{ color: '#5a7fc0', fontWeight: 400, marginLeft: 6, fontSize: 13 }}>Pronos</span>
-              </span>
+              <img
+                src="/2026_FIFA_World_Cup.svg.png"
+                alt="FIFA World Cup 2026"
+                style={{ height: 36, width: 'auto', mixBlendMode: 'screen' }}
+              />
+              <span style={{ color: '#5a7fc0', fontWeight: 400, fontSize: 13 }}>Pronos</span>
             </a>
             <nav style={{ display: 'flex', gap: 24 }}>
               <a href="/" style={{ color: '#8aaad8', fontSize: 13, fontWeight: 500, textDecoration: 'none', letterSpacing: '0.02em' }}

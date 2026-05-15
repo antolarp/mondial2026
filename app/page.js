@@ -54,26 +54,9 @@ export default function Home() {
       <AutoRefresh interval={60000} />
       <div style={{
         background: 'linear-gradient(135deg, #0c1e52 0%, #16357a 55%, #0c2c60 100%)',
-        paddingBottom: 0, position: 'relative', overflow: 'hidden',
+        paddingBottom: 0,
       }}>
-        {/* Trophée décoratif — fond noir effacé via mix-blend-mode */}
-        <img
-          src="/IMG_6227.png"
-          alt=""
-          style={{
-            position: 'absolute', right: -20, top: -30,
-            height: 260, width: 'auto', opacity: 0.55,
-            mixBlendMode: 'screen', pointerEvents: 'none',
-            userSelect: 'none',
-          }}
-        />
-        <div style={{ ...WRAP, paddingTop: 52, paddingBottom: 0, position: 'relative' }}>
-          {/* Logo officiel FIFA WC 2026 */}
-          <img
-            src="/2026_FIFA_World_Cup.svg.png"
-            alt="FIFA World Cup 2026"
-            style={{ height: 48, width: 'auto', marginBottom: 16, mixBlendMode: 'screen', opacity: 0.9 }}
-          />
+        <div style={{ ...WRAP, paddingTop: 52, paddingBottom: 0 }}>
           <p style={{ color: '#5a7fc0', fontSize: 11, letterSpacing: '0.25em', textTransform: 'uppercase', marginBottom: 14, fontWeight: 600 }}>
             USA · Canada · Mexique · Juin–Juillet 2026
           </p>
