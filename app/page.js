@@ -5,6 +5,7 @@ import { EvolutionChart } from '../components/Charts'
 import { PLAYER_COLORS } from '../lib/colors'
 import Countdown from '../components/Countdown'
 import AutoRefresh from '../components/AutoRefresh'
+import ConfettiLeader from '../components/ConfettiLeader'
 
 function calculerChangements(joueurs, matchs, resultats, classementActuel) {
   const matchsJoues = matchs.filter(m => resultats[m.id]).sort((a, b) => new Date(b.date) - new Date(a.date))
@@ -52,6 +53,7 @@ export default function Home() {
   return (
     <>
       <AutoRefresh interval={60000} />
+      <ConfettiLeader leader={classement[0]?.nom ?? ''} />
       <div style={{
         background: 'linear-gradient(135deg, #0c1e52 0%, #16357a 55%, #0c2c60 100%)',
         paddingBottom: 0,
@@ -266,6 +268,16 @@ export default function Home() {
               )
             })}
           </div>
+        </div>
+
+        {/* Lien règles */}
+        <div style={{ textAlign: 'center', marginTop: 8, marginBottom: 8 }}>
+          <Link href="/regles" style={{
+            fontSize: 12, color: '#94a3b8', textDecoration: 'none', fontWeight: 500,
+            display: 'inline-flex', alignItems: 'center', gap: 5,
+          }}>
+            📋 Voir les règles du jeu →
+          </Link>
         </div>
 
         {/* ÉVOLUTION */}

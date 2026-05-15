@@ -489,6 +489,37 @@ export default function PronosPanel({ phases, joueurs }) {
         </div>
       )}
 
+      {/* Bandeau d'alerte fermeture imminente */}
+      {(() => {
+        if (!isOpen || !activePhase?.deadlineISO) return null
+        const heuresRestantes = (new Date(activePhase.deadlineISO) - new Date()) / 3_600_000
+        if (heuresRestantes > 48) return null
+        const urgent = heuresRestantes < 24
+        const label = heuresRestantes < 1
+          ? 'Fermeture dans moins d\'1 heure !'
+          : heuresRestantes < 24
+            ? `Fermeture dans ${Math.floor(heuresRestantes)}h !`
+            : `Fermeture dans ${Math.floor(heuresRestantes / 24)} jour${Math.floor(heuresRestantes / 24) > 1 ? 's' : ''} !`
+        return (
+          <div style={{
+            background: urgent ? '#fef2f2' : '#fffbeb',
+            borderBottom: urgent ? '1px solid #fecaca' : '1px solid #fde68a',
+            padding: '10px 16px',
+            display: 'flex', alignItems: 'center', gap: 10,
+          }}>
+            <span style={{ fontSize: 20, flexShrink: 0 }}>{urgent ? '🚨' : '⚠️'}</span>
+            <div>
+              <p style={{ fontSize: 13, fontWeight: 800, color: urgent ? '#dc2626' : '#92400e', marginBottom: 1 }}>
+                {label}
+              </p>
+              <p style={{ fontSize: 11, color: urgent ? '#ef4444' : '#b45309', margin: 0 }}>
+                Valide tes pronos avant la fermeture de la phase
+              </p>
+            </div>
+          </div>
+        )
+      })()}
+
       {/* Liste des matchs */}
       <div style={{ maxWidth: 560, margin: '0 auto', padding: '12px 12px 0' }}>
         {activePhase?.matchs.map(match => {

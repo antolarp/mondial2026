@@ -18,6 +18,7 @@
   /* Navbar */
   .nav-inner { padding: 0 12px !important; }
   .nav-brand-text { display: none !important; }
+  .nav-regles { display: none !important; }
   .nav-links { gap: 10px !important; }
   .nav-link { font-size: 11px !important; }
 
