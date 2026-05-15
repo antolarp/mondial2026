@@ -493,27 +493,33 @@ export default function PronosPanel({ phases, joueurs }) {
       {(() => {
         if (!isOpen || !activePhase?.deadlineISO) return null
         const heuresRestantes = (new Date(activePhase.deadlineISO) - new Date()) / 3_600_000
-        if (heuresRestantes > 72) return null
-        const urgent = heuresRestantes < 24
-        const jours = Math.floor(heuresRestantes / 24)
-        const label = heuresRestantes < 1
+        if (heuresRestantes > 168) return null
+        const urgent  = heuresRestantes < 24
+        const warning = heuresRestantes < 72
+        const jours   = Math.floor(heuresRestantes / 24)
+        const label   = heuresRestantes < 1
           ? 'Fermeture dans moins d\'1 heure !'
           : heuresRestantes < 24
             ? `Fermeture dans ${Math.floor(heuresRestantes)}h !`
             : `Il reste ${jours} jour${jours > 1 ? 's' : ''} avant la fermeture`
+        const bg      = urgent ? '#fef2f2' : warning ? '#fffbeb' : '#f0fdf4'
+        const border  = urgent ? '#fecaca' : warning ? '#fde68a' : '#bbf7d0'
+        const txtMain = urgent ? '#dc2626' : warning ? '#92400e' : '#15803d'
+        const txtSub  = urgent ? '#ef4444' : warning ? '#b45309' : '#16a34a'
+        const emoji   = urgent ? '🚨'      : warning ? '⚠️'      : '🟢'
         return (
           <div style={{
-            background: urgent ? '#fef2f2' : '#fffbeb',
-            borderBottom: urgent ? '1px solid #fecaca' : '1px solid #fde68a',
+            background: bg,
+            borderBottom: `1px solid ${border}`,
             padding: '10px 16px',
             display: 'flex', alignItems: 'center', gap: 10,
           }}>
-            <span style={{ fontSize: 20, flexShrink: 0 }}>{urgent ? '🚨' : '⚠️'}</span>
+            <span style={{ fontSize: 20, flexShrink: 0 }}>{emoji}</span>
             <div>
-              <p style={{ fontSize: 13, fontWeight: 800, color: urgent ? '#dc2626' : '#92400e', marginBottom: 1 }}>
+              <p style={{ fontSize: 13, fontWeight: 800, color: txtMain, marginBottom: 1 }}>
                 {label}
               </p>
-              <p style={{ fontSize: 11, color: urgent ? '#ef4444' : '#b45309', margin: 0 }}>
+              <p style={{ fontSize: 11, color: txtSub, margin: 0 }}>
                 Valide tes pronos avant la fermeture de la phase
               </p>
             </div>

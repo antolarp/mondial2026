@@ -44,7 +44,7 @@ export default function Home() {
   const phaseAlerte = pronoPhases.find(p => {
     if (!p.isOpen || !p.deadlineISO) return false
     const heures = (new Date(p.deadlineISO) - new Date()) / 3_600_000
-    return heures <= 72
+    return heures <= 168 // 7 jours
   })
   const heuresAlerte = phaseAlerte
     ? (new Date(phaseAlerte.deadlineISO) - new Date()) / 3_600_000
@@ -130,32 +130,38 @@ export default function Home() {
       {/* ── BANDEAU FERMETURE ── */}
       {phaseAlerte && heuresAlerte !== null && (() => {
         const urgent = heuresAlerte < 24
+        const warning = heuresAlerte < 72
         const jours = Math.floor(heuresAlerte / 24)
         const label = heuresAlerte < 1
           ? "Fermeture dans moins d'1 heure !"
           : heuresAlerte < 24
             ? `Fermeture dans ${Math.floor(heuresAlerte)}h !`
             : `Il reste ${jours} jour${jours > 1 ? 's' : ''} avant la fermeture`
+        const bg      = urgent ? '#fef2f2'  : warning ? '#fffbeb'  : '#f0fdf4'
+        const border  = urgent ? '#fecaca'  : warning ? '#fde68a'  : '#bbf7d0'
+        const txtMain = urgent ? '#dc2626'  : warning ? '#92400e'  : '#15803d'
+        const txtSub  = urgent ? '#ef4444'  : warning ? '#b45309'  : '#16a34a'
+        const emoji   = urgent ? '🚨'       : warning ? '⚠️'       : '🟢'
         return (
           <div style={{
-            background: urgent ? '#fef2f2' : '#fffbeb',
-            borderBottom: urgent ? '2px solid #fecaca' : '2px solid #fde68a',
+            background: bg,
+            borderBottom: `2px solid ${border}`,
             padding: '12px 24px',
             display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 12,
           }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-              <span style={{ fontSize: 22, flexShrink: 0 }}>{urgent ? '🚨' : '⚠️'}</span>
+              <span style={{ fontSize: 22, flexShrink: 0 }}>{emoji}</span>
               <div>
-                <p style={{ fontSize: 14, fontWeight: 800, color: urgent ? '#dc2626' : '#92400e', marginBottom: 2 }}>
+                <p style={{ fontSize: 14, fontWeight: 800, color: txtMain, marginBottom: 2 }}>
                   {phaseAlerte.label} — {label}
                 </p>
-                <p style={{ fontSize: 12, color: urgent ? '#ef4444' : '#b45309', margin: 0 }}>
+                <p style={{ fontSize: 12, color: txtSub, margin: 0 }}>
                   Fermeture le {new Date(phaseAlerte.deadlineISO).toLocaleDateString('fr-FR', { weekday: 'long', day: 'numeric', month: 'long' })} à 23h59
                 </p>
               </div>
             </div>
             <Link href="/pronos" style={{
-              background: urgent ? '#dc2626' : '#d97706',
+              background: urgent ? '#dc2626' : warning ? '#d97706' : '#16a34a',
               color: '#fff', textDecoration: 'none',
               fontSize: 12, fontWeight: 700, padding: '8px 16px', borderRadius: 10,
               flexShrink: 0, whiteSpace: 'nowrap',
