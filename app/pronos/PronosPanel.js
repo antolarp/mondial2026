@@ -166,7 +166,7 @@ export default function PronosPanel({ phases, joueurs }) {
           <img
             src="/2026_FIFA_World_Cup.svg.png"
             alt="FIFA World Cup 2026"
-            style={{ height: 72, width: 'auto', marginBottom: 12 }}
+            style={{ height: 72, width: 'auto', marginBottom: 12, display: 'block', margin: '0 auto 12px' }}
           />
           <h1 style={{ fontSize: 22, fontWeight: 900, color: '#0c1e52', margin: '0 0 4px' }}>
             Mes Pronos
@@ -254,7 +254,7 @@ export default function PronosPanel({ phases, joueurs }) {
           <img
             src="/2026_FIFA_World_Cup.svg.png"
             alt="FIFA World Cup 2026"
-            style={{ height: 56, width: 'auto', marginBottom: 12 }}
+            style={{ height: 56, width: 'auto', display: 'block', margin: '0 auto 12px' }}
           />
           <h1 style={{ fontSize: 22, fontWeight: 900, color: '#0c1e52', margin: '0 0 4px' }}>
             Bienvenue {nomSelected} !
