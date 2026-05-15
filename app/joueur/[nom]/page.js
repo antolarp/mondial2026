@@ -1,4 +1,5 @@
 import { chargerMatchs, chargerResultats, chargerJoueurs, calculerPoints, calculerClassement } from '../../../lib/scoring'
+import { computePronoPhases } from '../../../lib/phases'
 import { notFound } from 'next/navigation'
 import { PLAYER_COLORS } from '../../../lib/colors'
 import Link from 'next/link'
@@ -18,7 +19,14 @@ export default function PageJoueur({ params }) {
   const rang = classement.findIndex(j => j.nom === joueur.nom) + 1
   const color = PLAYER_COLORS[joueurs.findIndex(j => j.nom === joueur.nom) % PLAYER_COLORS.length]
   const maxPoints = classement[0]?.points || 1
-  const matchsAvecProno = matchs.filter(m => joueur.pronos[m.id])
+  // IDs des matchs dont la phase de pronos est encore ouverte (pronos cachés)
+  const pronoPhases = computePronoPhases(matchs)
+  const pronosOuverts = new Set(
+    pronoPhases.filter(p => p.isOpen).flatMap(p => p.matchs.map(m => m.id))
+  )
+
+  // On n'affiche que les pronos dont la phase est fermée
+  const matchsAvecProno = matchs.filter(m => joueur.pronos[m.id] && !pronosOuverts.has(m.id))
   const matchsJoues = matchsAvecProno.filter(m => resultats[m.id])
   const pct = matchsJoues.length > 0
     ? Math.round(matchsJoues.filter(m => calculerPoints(joueur.pronos[m.id], resultats[m.id]) > 0).length / matchsJoues.length * 100)
@@ -94,6 +102,21 @@ export default function PageJoueur({ params }) {
         <p style={{ fontSize: 10, letterSpacing: '0.2em', textTransform: 'uppercase', color: '#94a3b8', fontWeight: 600, marginBottom: 16 }}>
           Pronos
         </p>
+
+        {/* Avertissement si des pronos sont cachés */}
+        {pronosOuverts.size > 0 && (
+          <div style={{
+            background: '#f8fafc', border: '1px solid #e2e8f0', borderRadius: 12,
+            padding: '12px 16px', marginBottom: 12,
+            display: 'flex', alignItems: 'center', gap: 10,
+          }}>
+            <span style={{ fontSize: 18 }}>🔒</span>
+            <p style={{ fontSize: 13, color: '#64748b', margin: 0 }}>
+              Les pronos de la phase en cours sont cachés jusqu'à la fermeture des saisies.
+            </p>
+          </div>
+        )}
+
         <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
           {matchsAvecProno.map(match => {
             const prono = joueur.pronos[match.id]
