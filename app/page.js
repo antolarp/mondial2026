@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import { chargerJoueurs, chargerMatchs, chargerResultats, calculerClassement } from '../lib/scoring'
 import { calculerEvolution, calculerPourcentages, calculerSeries } from '../lib/stats'
+import { computePronoPhases } from '../lib/phases'
 import { EvolutionChart } from '../components/Charts'
 import { PLAYER_COLORS } from '../lib/colors'
 import Countdown from '../components/Countdown'
@@ -37,6 +38,18 @@ export default function Home() {
   const classement = calculerClassement(joueurs, matchs, resultats)
 
   const matchsJoues = matchs.filter(m => resultats[m.id]).length
+
+  // Bandeau fermeture imminente
+  const pronoPhases = computePronoPhases(matchs)
+  const phaseAlerte = pronoPhases.find(p => {
+    if (!p.isOpen || !p.deadlineISO) return false
+    const heures = (new Date(p.deadlineISO) - new Date()) / 3_600_000
+    return heures <= 48
+  })
+  const heuresAlerte = phaseAlerte
+    ? (new Date(phaseAlerte.deadlineISO) - new Date()) / 3_600_000
+    : null
+
   const evolution = calculerEvolution(joueurs, matchs, resultats)
   const pourcentages = calculerPourcentages(joueurs, resultats)
   const series = calculerSeries(joueurs, matchs, resultats)
@@ -113,6 +126,44 @@ export default function Home() {
           </div>
         </div>
       </div>
+
+      {/* ── BANDEAU FERMETURE ── */}
+      {phaseAlerte && heuresAlerte !== null && (() => {
+        const urgent = heuresAlerte < 24
+        const label = heuresAlerte < 1
+          ? "Fermeture dans moins d'1 heure !"
+          : heuresAlerte < 24
+            ? `Fermeture dans ${Math.floor(heuresAlerte)}h !`
+            : `Fermeture dans ${Math.floor(heuresAlerte / 24)} jour${Math.floor(heuresAlerte / 24) > 1 ? 's' : ''} !`
+        return (
+          <div style={{
+            background: urgent ? '#fef2f2' : '#fffbeb',
+            borderBottom: urgent ? '2px solid #fecaca' : '2px solid #fde68a',
+            padding: '12px 24px',
+            display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 12,
+          }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+              <span style={{ fontSize: 22, flexShrink: 0 }}>{urgent ? '🚨' : '⚠️'}</span>
+              <div>
+                <p style={{ fontSize: 14, fontWeight: 800, color: urgent ? '#dc2626' : '#92400e', marginBottom: 2 }}>
+                  {phaseAlerte.label} — {label}
+                </p>
+                <p style={{ fontSize: 12, color: urgent ? '#ef4444' : '#b45309', margin: 0 }}>
+                  Fermeture le {new Date(phaseAlerte.deadlineISO).toLocaleDateString('fr-FR', { weekday: 'long', day: 'numeric', month: 'long' })} à 23h59
+                </p>
+              </div>
+            </div>
+            <Link href="/pronos" style={{
+              background: urgent ? '#dc2626' : '#d97706',
+              color: '#fff', textDecoration: 'none',
+              fontSize: 12, fontWeight: 700, padding: '8px 16px', borderRadius: 10,
+              flexShrink: 0, whiteSpace: 'nowrap',
+            }}>
+              Saisir mes pronos →
+            </Link>
+          </div>
+        )
+      })()}
 
       {/* ── CONTENT ── */}
       <div className="page-wrap" style={{ ...WRAP, paddingTop: 32, paddingBottom: 60 }}>
