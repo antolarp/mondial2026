@@ -1,17 +1,27 @@
 import { chargerMatchs, chargerResultats, chargerJoueurs, calculerPoints } from '../../lib/scoring'
 import { getFlagUrl } from '../../lib/flags'
+import { computePronoPhases } from '../../lib/phases'
 
 const PHASES_ORDER = [
   'Groupe A','Groupe B','Groupe C','Groupe D','Groupe E','Groupe F',
   'Groupe G','Groupe H','Groupe I','Groupe J','Groupe K','Groupe L',
-  'Huitièmes de finale','Quarts de finale','Demi-finales','Troisième place','Finale',
+  'Seizièmes de finale','Huitièmes de finale','Quarts de finale',
+  'Demi-finales','Troisième place','Finale',
 ]
 const WRAP = { maxWidth: 1100, margin: '0 auto', padding: '0 24px' }
 
 export default function Matchs() {
-  const matchs = chargerMatchs()
+  const matchs    = chargerMatchs()
   const resultats = chargerResultats()
-  const joueurs = chargerJoueurs()
+  const joueurs   = chargerJoueurs()
+
+  // Pour chaque match, savoir si sa phase de pronos est encore ouverte
+  const pronoPhases = computePronoPhases(matchs)
+  const pronosOuverts = new Set(
+    pronoPhases
+      .filter(p => p.isOpen)
+      .flatMap(p => p.matchs.map(m => m.id))
+  )
 
   const phases = [...new Set(matchs.map(m => m.phase))]
     .sort((a, b) => {
@@ -47,8 +57,10 @@ export default function Matchs() {
             </div>
             <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
               {matchs.filter(m => m.phase === phase).map(match => {
-                const res = resultats[match.id]
-                const date = new Date(match.date)
+                const res         = resultats[match.id]
+                const date        = new Date(match.date)
+                const pronosOpen  = pronosOuverts.has(match.id)
+
                 return (
                   <div key={match.id} style={{
                     background: '#fff', borderRadius: 14,
@@ -88,22 +100,34 @@ export default function Matchs() {
                       </span>
                     </div>
 
+                    {/* Pronos joueurs — masqués si phase encore ouverte */}
                     <div style={{ display: 'flex', gap: 12, flexShrink: 0 }}>
-                      {joueurs.map(joueur => {
-                        const prono = joueur.pronos[match.id]
-                        const pts = prono && res ? calculerPoints(prono, res) : null
-                        return (
-                          <div key={joueur.nom} style={{ textAlign: 'center', minWidth: 38 }}>
-                            <p style={{ fontSize: 10, color: '#cbd5e1', marginBottom: 2 }}>{joueur.nom.slice(0, 3)}</p>
-                            <p style={{ fontSize: 12, fontWeight: 600, color: '#64748b', fontVariantNumeric: 'tabular-nums' }}>
-                              {prono ? `${prono.domicile}-${prono.exterieur}` : '—'}
-                            </p>
-                            {pts === 3 && <p style={{ fontSize: 10, fontWeight: 700, color: '#16a34a' }}>+3</p>}
-                            {pts === 2 && <p style={{ fontSize: 10, fontWeight: 700, color: '#b8922a' }}>+2</p>}
-                            {pts === 0 && <p style={{ fontSize: 10, fontWeight: 700, color: '#e2e8f0' }}>0</p>}
-                          </div>
-                        )
-                      })}
+                      {pronosOpen ? (
+                        /* Phase ouverte : on cache tout */
+                        <span style={{
+                          fontSize: 11, color: '#94a3b8', fontStyle: 'italic',
+                          display: 'flex', alignItems: 'center', gap: 4,
+                        }}>
+                          🔒 <span>Pronos cachés</span>
+                        </span>
+                      ) : (
+                        /* Phase fermée : on affiche */
+                        joueurs.map(joueur => {
+                          const prono = joueur.pronos[match.id]
+                          const pts   = prono && res ? calculerPoints(prono, res) : null
+                          return (
+                            <div key={joueur.nom} style={{ textAlign: 'center', minWidth: 38 }}>
+                              <p style={{ fontSize: 10, color: '#cbd5e1', marginBottom: 2 }}>{joueur.nom.slice(0, 3)}</p>
+                              <p style={{ fontSize: 12, fontWeight: 600, color: '#64748b', fontVariantNumeric: 'tabular-nums' }}>
+                                {prono ? `${prono.domicile}-${prono.exterieur}` : '—'}
+                              </p>
+                              {pts === 3 && <p style={{ fontSize: 10, fontWeight: 700, color: '#16a34a' }}>+3</p>}
+                              {pts === 2 && <p style={{ fontSize: 10, fontWeight: 700, color: '#b8922a' }}>+2</p>}
+                              {pts === 0 && <p style={{ fontSize: 10, fontWeight: 700, color: '#e2e8f0' }}>0</p>}
+                            </div>
+                          )
+                        })
+                      )}
                     </div>
                   </div>
                 )
