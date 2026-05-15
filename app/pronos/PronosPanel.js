@@ -1,5 +1,6 @@
 'use client'
 import { useState } from 'react'
+import { getFlag } from '../../lib/flags'
 
 export default function PronosPanel({ phases, joueurs }) {
   const [step, setStep]             = useState('login')
@@ -508,7 +509,7 @@ export default function PronosPanel({ phases, joueurs }) {
                   flex: 1, fontSize: 13, fontWeight: 700, color: '#0f172a',
                   textAlign: 'right', lineHeight: 1.3, minWidth: 0,
                 }}>
-                  {match.domicile}
+                  {match.domicile} {getFlag(match.domicile)}
                 </span>
 
                 {isOpen ? (
@@ -557,7 +558,7 @@ export default function PronosPanel({ phases, joueurs }) {
                   flex: 1, fontSize: 13, fontWeight: 700, color: '#0f172a',
                   textAlign: 'left', lineHeight: 1.3, minWidth: 0,
                 }}>
-                  {match.exterieur}
+                  {getFlag(match.exterieur)} {match.exterieur}
                 </span>
               </div>
             </div>

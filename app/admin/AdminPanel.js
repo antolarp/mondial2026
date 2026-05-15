@@ -1,5 +1,6 @@
 'use client'
 import { useState } from 'react'
+import { getFlag } from '../../lib/flags'
 
 const PHASES_ORDER = [
   'Groupe A','Groupe B','Groupe C','Groupe D','Groupe E','Groupe F',
@@ -188,9 +189,9 @@ export default function AdminPanel({ matchs, resultats: initRes }) {
                     {date.toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' })}
                   </p>
                   <p style={{ fontSize: 14, fontWeight: 700, color: '#0f172a', lineHeight: 1.3 }}>
-                    {match.domicile}
+                    {match.domicile} {getFlag(match.domicile)}
                     <span style={{ color: '#cbd5e1', fontWeight: 400, margin: '0 6px' }}>vs</span>
-                    {match.exterieur}
+                    {getFlag(match.exterieur)} {match.exterieur}
                   </p>
                 </div>
                 {res !== undefined ? (
