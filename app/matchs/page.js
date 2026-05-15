@@ -1,5 +1,5 @@
 import { chargerMatchs, chargerResultats, chargerJoueurs, calculerPoints } from '../../lib/scoring'
-import { getFlag } from '../../lib/flags'
+import { getFlagUrl } from '../../lib/flags'
 
 const PHASES_ORDER = [
   'Groupe A','Groupe B','Groupe C','Groupe D','Groupe E','Groupe F',
@@ -62,7 +62,10 @@ export default function Matchs() {
                     </span>
 
                     <div style={{ display: 'flex', alignItems: 'center', gap: 12, flex: 1 }}>
-                      <span style={{ fontWeight: 600, fontSize: 14, textAlign: 'right', flex: 1, color: '#0f172a' }}>{match.domicile} {getFlag(match.domicile)}</span>
+                      <span style={{ fontWeight: 600, fontSize: 14, textAlign: 'right', flex: 1, color: '#0f172a', display: 'flex', alignItems: 'center', justifyContent: 'flex-end', gap: 6 }}>
+                        {match.domicile}
+                        {getFlagUrl(match.domicile) && <img src={getFlagUrl(match.domicile)} style={{ width: 22, height: 'auto', borderRadius: 2, flexShrink: 0 }} alt="" />}
+                      </span>
                       {res ? (
                         <span style={{
                           background: '#0c1e52', color: '#fff',
@@ -79,7 +82,10 @@ export default function Matchs() {
                           à venir
                         </span>
                       )}
-                      <span style={{ fontWeight: 600, fontSize: 14, flex: 1, color: '#0f172a' }}>{getFlag(match.exterieur)} {match.exterieur}</span>
+                      <span style={{ fontWeight: 600, fontSize: 14, flex: 1, color: '#0f172a', display: 'flex', alignItems: 'center', gap: 6 }}>
+                        {getFlagUrl(match.exterieur) && <img src={getFlagUrl(match.exterieur)} style={{ width: 22, height: 'auto', borderRadius: 2, flexShrink: 0 }} alt="" />}
+                        {match.exterieur}
+                      </span>
                     </div>
 
                     <div style={{ display: 'flex', gap: 12, flexShrink: 0 }}>

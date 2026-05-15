@@ -1,6 +1,6 @@
 'use client'
 import { useState } from 'react'
-import { getFlag } from '../../lib/flags'
+import { getFlagUrl } from '../../lib/flags'
 
 export default function PronosPanel({ phases, joueurs }) {
   const [step, setStep]             = useState('login')
@@ -505,11 +505,9 @@ export default function PronosPanel({ phases, joueurs }) {
               </p>
               <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
                 {/* Équipe domicile */}
-                <span style={{
-                  flex: 1, fontSize: 13, fontWeight: 700, color: '#0f172a',
-                  textAlign: 'right', lineHeight: 1.3, minWidth: 0,
-                }}>
-                  {match.domicile} {getFlag(match.domicile)}
+                <span style={{ flex: 1, fontSize: 13, fontWeight: 700, color: '#0f172a', display: 'flex', alignItems: 'center', justifyContent: 'flex-end', gap: 5, minWidth: 0 }}>
+                  <span style={{ textAlign: 'right', lineHeight: 1.3 }}>{match.domicile}</span>
+                  {getFlagUrl(match.domicile) && <img src={getFlagUrl(match.domicile)} style={{ width: 20, height: 'auto', borderRadius: 2, flexShrink: 0 }} alt="" />}
                 </span>
 
                 {isOpen ? (
@@ -554,11 +552,9 @@ export default function PronosPanel({ phases, joueurs }) {
                 )}
 
                 {/* Équipe extérieure */}
-                <span style={{
-                  flex: 1, fontSize: 13, fontWeight: 700, color: '#0f172a',
-                  textAlign: 'left', lineHeight: 1.3, minWidth: 0,
-                }}>
-                  {getFlag(match.exterieur)} {match.exterieur}
+                <span style={{ flex: 1, fontSize: 13, fontWeight: 700, color: '#0f172a', display: 'flex', alignItems: 'center', gap: 5, minWidth: 0 }}>
+                  {getFlagUrl(match.exterieur) && <img src={getFlagUrl(match.exterieur)} style={{ width: 20, height: 'auto', borderRadius: 2, flexShrink: 0 }} alt="" />}
+                  <span style={{ lineHeight: 1.3 }}>{match.exterieur}</span>
                 </span>
               </div>
             </div>

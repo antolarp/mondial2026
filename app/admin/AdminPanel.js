@@ -1,6 +1,6 @@
 'use client'
 import { useState } from 'react'
-import { getFlag } from '../../lib/flags'
+import { getFlagUrl } from '../../lib/flags'
 
 const PHASES_ORDER = [
   'Groupe A','Groupe B','Groupe C','Groupe D','Groupe E','Groupe F',
@@ -188,10 +188,12 @@ export default function AdminPanel({ matchs, resultats: initRes }) {
                     {' · '}
                     {date.toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' })}
                   </p>
-                  <p style={{ fontSize: 14, fontWeight: 700, color: '#0f172a', lineHeight: 1.3 }}>
-                    {match.domicile} {getFlag(match.domicile)}
-                    <span style={{ color: '#cbd5e1', fontWeight: 400, margin: '0 6px' }}>vs</span>
-                    {getFlag(match.exterieur)} {match.exterieur}
+                  <p style={{ fontSize: 14, fontWeight: 700, color: '#0f172a', lineHeight: 1.3, display: 'flex', alignItems: 'center', gap: 5, flexWrap: 'wrap' }}>
+                    {match.domicile}
+                    {getFlagUrl(match.domicile) && <img src={getFlagUrl(match.domicile)} style={{ width: 20, height: 'auto', borderRadius: 2 }} alt="" />}
+                    <span style={{ color: '#cbd5e1', fontWeight: 400, margin: '0 2px' }}>vs</span>
+                    {getFlagUrl(match.exterieur) && <img src={getFlagUrl(match.exterieur)} style={{ width: 20, height: 'auto', borderRadius: 2 }} alt="" />}
+                    {match.exterieur}
                   </p>
                 </div>
                 {res !== undefined ? (
