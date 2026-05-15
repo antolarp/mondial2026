@@ -162,9 +162,13 @@ export default function PronosPanel({ phases, joueurs }) {
         background: '#fff', borderRadius: 24, padding: '40px 32px',
         width: '100%', maxWidth: 380, boxShadow: '0 24px 64px rgba(0,0,0,0.35)',
       }}>
-        <div style={{ textAlign: 'center', marginBottom: 32 }}>
-          <span style={{ fontSize: 44 }}>🎯</span>
-          <h1 style={{ fontSize: 22, fontWeight: 900, color: '#0c1e52', margin: '12px 0 4px' }}>
+        <div style={{ textAlign: 'center', marginBottom: 28 }}>
+          <img
+            src="/2026_FIFA_World_Cup.svg.png"
+            alt="FIFA World Cup 2026"
+            style={{ height: 72, width: 'auto', marginBottom: 12 }}
+          />
+          <h1 style={{ fontSize: 22, fontWeight: 900, color: '#0c1e52', margin: '0 0 4px' }}>
             Mes Pronos
           </h1>
           <p style={{ fontSize: 13, color: '#94a3b8' }}>Mondial 2026</p>
@@ -247,8 +251,12 @@ export default function PronosPanel({ phases, joueurs }) {
         width: '100%', maxWidth: 380, boxShadow: '0 24px 64px rgba(0,0,0,0.35)',
       }}>
         <div style={{ textAlign: 'center', marginBottom: 28 }}>
-          <span style={{ fontSize: 44 }}>🔑</span>
-          <h1 style={{ fontSize: 22, fontWeight: 900, color: '#0c1e52', margin: '12px 0 4px' }}>
+          <img
+            src="/2026_FIFA_World_Cup.svg.png"
+            alt="FIFA World Cup 2026"
+            style={{ height: 56, width: 'auto', marginBottom: 12 }}
+          />
+          <h1 style={{ fontSize: 22, fontWeight: 900, color: '#0c1e52', margin: '0 0 4px' }}>
             Bienvenue {nomSelected} !
           </h1>
           <p style={{ fontSize: 13, color: '#94a3b8', lineHeight: 1.5 }}>
