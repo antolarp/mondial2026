@@ -52,7 +52,8 @@ export async function POST(request) {
   if (!/^\d{4,8}$/.test(newCode))
     return NextResponse.json({ error: 'PIN invalide (4 à 8 chiffres)' }, { status: 400 })
 
-  const filename = `data/joueurs/${nom.toLowerCase()}.json`
+  const slug = nom.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '')
+  const filename = `data/joueurs/${slug}.json`
 
   // ── Mode local ───────────────────────────────────────────────
   if (!process.env.GITHUB_TOKEN) {
