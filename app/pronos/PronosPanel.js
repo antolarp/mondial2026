@@ -115,9 +115,7 @@ export default function PronosPanel({ phases, joueurs }) {
 
   // ── Submit ─────────────────────────────────────────────────────
   const activePhase = phases.find(p => p.id === activePhaseId)
-  const isOpen = activePhase?.deadlineISO
-    ? new Date() < new Date(activePhase.deadlineISO)
-    : false
+  const isOpen = activePhase?.isOpen ?? false
   const filledCount = countFilled(activePhase)
   const totalCount  = activePhase?.matchs.length ?? 0
 
@@ -433,7 +431,7 @@ export default function PronosPanel({ phases, joueurs }) {
         {phases.map(p => {
           const isActive = p.id === activePhaseId
           const isSaved  = savedPhases.has(p.id)
-          const phaseOpen = p.deadlineISO ? new Date() < new Date(p.deadlineISO) : false
+          const phaseOpen = p.isOpen
 
           return (
             <button key={p.id} onClick={() => setActivePhaseId(p.id)} style={{
