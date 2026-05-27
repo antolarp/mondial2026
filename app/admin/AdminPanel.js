@@ -1,6 +1,8 @@
 'use client'
 import { useState } from 'react'
-import { getFlagUrl } from '../../lib/flags'
+import { getFlagUrl, TOUTES_EQUIPES } from '../../lib/flags'
+
+const PHASES_ELIM = ['Seizièmes de finale','Huitièmes de finale','Quarts de finale','Demi-finales','Troisième place','Finale']
 
 const PHASES_ORDER = [
   'Groupe A','Groupe B','Groupe C','Groupe D','Groupe E','Groupe F',
@@ -20,6 +22,11 @@ export default function AdminPanel({ matchs, resultats: initRes }) {
   const [scoreA, setScoreA]   = useState('')
   const [saving, setSaving]   = useState(false)
   const [toast, setToast]     = useState(null)
+  const [teamH, setTeamH]     = useState('')
+  const [teamA, setTeamA]     = useState('')
+  const [savingTeams, setSavingTeams] = useState(false)
+  // matchs locaux pour refléter les mises à jour d'équipes sans reload
+  const [localMatchs, setLocalMatchs] = useState(matchs)
 
   const showToast = (msg, ok = true) => {
     setToast({ msg, ok })
@@ -41,6 +48,26 @@ export default function AdminPanel({ matchs, resultats: initRes }) {
     setEditing(match.id)
     setScoreH(res !== undefined ? String(res.domicile) : '')
     setScoreA(res !== undefined ? String(res.exterieur) : '')
+    setTeamH(match.domicile || '')
+    setTeamA(match.exterieur || '')
+  }
+
+  const saveTeams = async (matchId) => {
+    if (!teamH || !teamA) return
+    setSavingTeams(true)
+    const res = await fetch('/api/admin/teams', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ password: pwd, matchId, domicile: teamH, exterieur: teamA }),
+    })
+    const data = await res.json()
+    if (res.ok) {
+      setLocalMatchs(prev => prev.map(m => m.id === matchId ? { ...m, domicile: teamH, exterieur: teamA } : m))
+      showToast(`✅ ${teamH} vs ${teamA} — site mis à jour dans ~45s`)
+    } else {
+      showToast(`❌ ${data.error || 'Erreur'}`, false)
+    }
+    setSavingTeams(false)
   }
 
   const save = async (matchId) => {
@@ -79,7 +106,7 @@ export default function AdminPanel({ matchs, resultats: initRes }) {
     setSaving(false)
   }
 
-  const phases = [...new Set(matchs.map(m => m.phase))]
+  const phases = [...new Set(localMatchs.map(m => m.phase))]
     .sort((a, b) => {
       const ia = PHASES_ORDER.indexOf(a), ib = PHASES_ORDER.indexOf(b)
       return (ia === -1 ? 99 : ia) - (ib === -1 ? 99 : ib)
@@ -126,7 +153,8 @@ export default function AdminPanel({ matchs, resultats: initRes }) {
   )
 
   /* ── PANNEAU ADMIN ──────────────────────────────────────────── */
-  const phaseMatchs = matchs.filter(m => m.phase === phase)
+  const phaseMatchs = localMatchs.filter(m => m.phase === phase)
+  const isElim = PHASES_ELIM.includes(phase)
 
   return (
     <div style={{ minHeight: '100vh', background: '#f0f2f8', paddingBottom: 60 }}>
@@ -149,8 +177,8 @@ export default function AdminPanel({ matchs, resultats: initRes }) {
             .replace('Huitièmes de finale', '1/8')
             .replace('Quarts de finale', 'Quarts')
             .replace('Troisième place', '3e place')
-          const done  = matchs.filter(m => m.phase === p && resultats[m.id] !== undefined).length
-          const total = matchs.filter(m => m.phase === p).length
+          const done  = localMatchs.filter(m => m.phase === p && resultats[m.id] !== undefined).length
+          const total = localMatchs.filter(m => m.phase === p).length
           const full  = done === total
           return (
             <button key={p} onClick={() => { setPhase(p); setEditing(null) }} style={{
@@ -211,52 +239,116 @@ export default function AdminPanel({ matchs, resultats: initRes }) {
 
               {/* Zone de saisie */}
               {isEditing && (
-                <div style={{
-                  borderTop: '1px solid #f1f5f9', padding: '14px 16px',
-                  background: '#fafbff', display: 'flex', alignItems: 'center', gap: 10,
-                }}>
-                  <input
-                    type="number" min="0" max="20" value={scoreH}
-                    onChange={e => setScoreH(e.target.value)}
-                    onKeyDown={e => e.key === 'Enter' && save(match.id)}
-                    placeholder="0" autoFocus
-                    style={{
-                      width: 60, height: 54, textAlign: 'center', fontSize: 26,
-                      fontWeight: 900, borderRadius: 12, border: '2px solid #e2e8f0',
-                      outline: 'none', flexShrink: 0,
-                    }}
-                  />
-                  <span style={{ fontSize: 20, color: '#94a3b8', fontWeight: 700, flexShrink: 0 }}>–</span>
-                  <input
-                    type="number" min="0" max="20" value={scoreA}
-                    onChange={e => setScoreA(e.target.value)}
-                    onKeyDown={e => e.key === 'Enter' && save(match.id)}
-                    placeholder="0"
-                    style={{
-                      width: 60, height: 54, textAlign: 'center', fontSize: 26,
-                      fontWeight: 900, borderRadius: 12, border: '2px solid #e2e8f0',
-                      outline: 'none', flexShrink: 0,
-                    }}
-                  />
-                  <button
-                    onClick={() => save(match.id)}
-                    disabled={saving || scoreH === '' || scoreA === ''}
-                    style={{
-                      flex: 1, height: 54, borderRadius: 12, border: 'none',
-                      background: (saving || scoreH === '' || scoreA === '') ? '#e2e8f0' : '#16a34a',
-                      color: (saving || scoreH === '' || scoreA === '') ? '#94a3b8' : '#fff',
-                      fontWeight: 800, fontSize: 15, cursor: saving ? 'wait' : 'pointer',
-                    }}
-                  >
-                    {saving ? '…' : '✓ Valider'}
-                  </button>
-                  {res !== undefined && (
-                    <button onClick={() => del(match.id)} disabled={saving} style={{
-                      width: 54, height: 54, borderRadius: 12, border: 'none',
-                      background: '#fef2f2', color: '#ef4444', fontSize: 20,
-                      cursor: 'pointer', flexShrink: 0, fontWeight: 700,
-                    }}>×</button>
+                <div style={{ borderTop: '1px solid #f1f5f9', background: '#fafbff' }}>
+
+                  {/* Sélection des équipes — phases éliminatoires seulement */}
+                  {isElim && (
+                    <div style={{ padding: '12px 16px', borderBottom: '1px solid #f1f5f9' }}>
+                      <p style={{ fontSize: 10, fontWeight: 700, color: '#94a3b8', letterSpacing: '0.15em', textTransform: 'uppercase', marginBottom: 8 }}>
+                        Équipes
+                      </p>
+                      <div style={{ display: 'flex', alignItems: 'center', gap: 8, flexWrap: 'wrap' }}>
+                        {/* Domicile */}
+                        <div style={{ flex: 1, minWidth: 140 }}>
+                          <div style={{ display: 'flex', alignItems: 'center', gap: 6, marginBottom: 4 }}>
+                            {getFlagUrl(teamH) && <img src={getFlagUrl(teamH)} style={{ width: 20, height: 'auto', borderRadius: 2 }} alt="" />}
+                            <span style={{ fontSize: 11, color: '#64748b', fontWeight: 600 }}>{teamH || '— domicile —'}</span>
+                          </div>
+                          <select
+                            value={teamH}
+                            onChange={e => setTeamH(e.target.value)}
+                            style={{
+                              width: '100%', padding: '8px 10px', borderRadius: 8, fontSize: 13,
+                              border: '2px solid #e2e8f0', outline: 'none', background: '#fff',
+                            }}
+                          >
+                            <option value="">— Choisir —</option>
+                            {TOUTES_EQUIPES.map(eq => <option key={eq} value={eq}>{eq}</option>)}
+                          </select>
+                        </div>
+
+                        <span style={{ color: '#cbd5e1', fontWeight: 700, fontSize: 16 }}>vs</span>
+
+                        {/* Extérieur */}
+                        <div style={{ flex: 1, minWidth: 140 }}>
+                          <div style={{ display: 'flex', alignItems: 'center', gap: 6, marginBottom: 4 }}>
+                            {getFlagUrl(teamA) && <img src={getFlagUrl(teamA)} style={{ width: 20, height: 'auto', borderRadius: 2 }} alt="" />}
+                            <span style={{ fontSize: 11, color: '#64748b', fontWeight: 600 }}>{teamA || '— extérieur —'}</span>
+                          </div>
+                          <select
+                            value={teamA}
+                            onChange={e => setTeamA(e.target.value)}
+                            style={{
+                              width: '100%', padding: '8px 10px', borderRadius: 8, fontSize: 13,
+                              border: '2px solid #e2e8f0', outline: 'none', background: '#fff',
+                            }}
+                          >
+                            <option value="">— Choisir —</option>
+                            {TOUTES_EQUIPES.map(eq => <option key={eq} value={eq}>{eq}</option>)}
+                          </select>
+                        </div>
+
+                        <button
+                          onClick={() => saveTeams(match.id)}
+                          disabled={savingTeams || !teamH || !teamA}
+                          style={{
+                            padding: '8px 16px', borderRadius: 8, border: 'none', height: 38,
+                            background: (savingTeams || !teamH || !teamA) ? '#e2e8f0' : '#0c1e52',
+                            color: (savingTeams || !teamH || !teamA) ? '#94a3b8' : '#fff',
+                            fontWeight: 700, fontSize: 13, cursor: 'pointer', flexShrink: 0,
+                          }}
+                        >
+                          {savingTeams ? '…' : '✓ Valider'}
+                        </button>
+                      </div>
+                    </div>
                   )}
+
+                  {/* Saisie du score */}
+                  <div style={{ padding: '14px 16px', display: 'flex', alignItems: 'center', gap: 10 }}>
+                    <input
+                      type="number" min="0" max="20" value={scoreH}
+                      onChange={e => setScoreH(e.target.value)}
+                      onKeyDown={e => e.key === 'Enter' && save(match.id)}
+                      placeholder="0" autoFocus={!isElim}
+                      style={{
+                        width: 60, height: 54, textAlign: 'center', fontSize: 26,
+                        fontWeight: 900, borderRadius: 12, border: '2px solid #e2e8f0',
+                        outline: 'none', flexShrink: 0,
+                      }}
+                    />
+                    <span style={{ fontSize: 20, color: '#94a3b8', fontWeight: 700, flexShrink: 0 }}>–</span>
+                    <input
+                      type="number" min="0" max="20" value={scoreA}
+                      onChange={e => setScoreA(e.target.value)}
+                      onKeyDown={e => e.key === 'Enter' && save(match.id)}
+                      placeholder="0"
+                      style={{
+                        width: 60, height: 54, textAlign: 'center', fontSize: 26,
+                        fontWeight: 900, borderRadius: 12, border: '2px solid #e2e8f0',
+                        outline: 'none', flexShrink: 0,
+                      }}
+                    />
+                    <button
+                      onClick={() => save(match.id)}
+                      disabled={saving || scoreH === '' || scoreA === ''}
+                      style={{
+                        flex: 1, height: 54, borderRadius: 12, border: 'none',
+                        background: (saving || scoreH === '' || scoreA === '') ? '#e2e8f0' : '#16a34a',
+                        color: (saving || scoreH === '' || scoreA === '') ? '#94a3b8' : '#fff',
+                        fontWeight: 800, fontSize: 15, cursor: saving ? 'wait' : 'pointer',
+                      }}
+                    >
+                      {saving ? '…' : '✓ Score'}
+                    </button>
+                    {res !== undefined && (
+                      <button onClick={() => del(match.id)} disabled={saving} style={{
+                        width: 54, height: 54, borderRadius: 12, border: 'none',
+                        background: '#fef2f2', color: '#ef4444', fontSize: 20,
+                        cursor: 'pointer', flexShrink: 0, fontWeight: 700,
+                      }}>×</button>
+                    )}
+                  </div>
                 </div>
               )}
             </div>
