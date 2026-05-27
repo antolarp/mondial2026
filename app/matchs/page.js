@@ -58,9 +58,10 @@ export default function Matchs() {
             </div>
             <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
               {matchs.filter(m => m.phase === phase).map(match => {
-                const res         = resultats[match.id]
-                const date        = new Date(match.date)
-                const pronosOpen  = pronosOuverts.has(match.id)
+                const res             = resultats[match.id]
+                const date            = new Date(match.date)
+                const pronosOpen      = pronosOuverts.has(match.id)
+                const teamsUnknown    = !match.domicile && !match.exterieur
 
                 return (
                   <div key={match.id} className="match-card-outer" style={{
@@ -112,7 +113,7 @@ export default function Matchs() {
 
                     {/* Pronos joueurs — wrappent en dessous sur mobile */}
                     <div className="match-pronos-row" style={{ display: 'flex', gap: 10, flexShrink: 0, alignItems: 'center' }}>
-                      {pronosOpen ? (
+                      {teamsUnknown ? null : pronosOpen ? (
                         <span style={{
                           fontSize: 11, color: '#94a3b8', fontStyle: 'italic',
                           display: 'flex', alignItems: 'center', gap: 4,
