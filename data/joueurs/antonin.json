@@ -1,5 +1,10 @@
 {
   "nom": "Antonin",
   "code": "1973",
-  "pronos": {}
+  "pronos": {
+    "M01": {
+      "domicile": 2,
+      "exterieur": 0
+    }
+  }
 }
