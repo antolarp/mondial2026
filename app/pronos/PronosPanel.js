@@ -120,11 +120,7 @@ export default function PronosPanel({ phases, joueurs }) {
   const totalCount  = activePhase?.matchs.length ?? 0
 
   const handleSubmit = async () => {
-    if (!activePhase || !isOpen) return
-    if (filledCount < totalCount) {
-      showToast(`⚠️ Remplis tous les scores (${filledCount}/${totalCount})`, false)
-      return
-    }
+    if (!activePhase || !isOpen || filledCount === 0) return
     setSaving(true)
     const matchIds  = activePhase.matchs.map(m => m.id)
     const pronosData = {}
@@ -624,7 +620,9 @@ export default function PronosPanel({ phases, joueurs }) {
                 ? '#94a3b8'
                 : filledCount === totalCount
                   ? 'linear-gradient(135deg, #16a34a, #15803d)'
-                  : 'linear-gradient(135deg, #0c1e52, #1a3a7a)',
+                  : filledCount > 0
+                    ? 'linear-gradient(135deg, #d97706, #b45309)'
+                    : '#e2e8f0',
               color: '#fff', border: 'none',
               cursor: saving ? 'wait' : 'pointer',
               transition: 'background 0.2s',
@@ -633,8 +631,10 @@ export default function PronosPanel({ phases, joueurs }) {
             {saving
               ? 'Enregistrement…'
               : filledCount === totalCount
-                ? `✅ Valider mes ${totalCount} pronos`
-                : `Valider (${filledCount}/${totalCount} remplis)`}
+                ? `✅ Sauvegarder mes ${totalCount} pronos`
+                : filledCount > 0
+                  ? `💾 Sauvegarder (${filledCount}/${totalCount} remplis)`
+                  : `Remplis au moins un score`}
           </button>
         </div>
       )}
