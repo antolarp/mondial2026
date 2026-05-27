@@ -5,6 +5,11 @@ import path from 'path'
 const OWNER = process.env.GITHUB_OWNER || 'antolarp'
 const REPO  = process.env.GITHUB_REPO  || 'mondial2026'
 
+// "Aurélie" → "aurelie" (minuscules + suppression des accents)
+function toFilename(nom) {
+  return nom.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '')
+}
+
 export async function POST(request) {
   const { nom, code } = await request.json()
   if (!nom || !code)
@@ -13,7 +18,7 @@ export async function POST(request) {
   // ── Mode local (pas de GITHUB_TOKEN) : lecture filesystem ───────
   if (!process.env.GITHUB_TOKEN) {
     try {
-      const filePath = path.join(process.cwd(), 'data', 'joueurs', `${nom.toLowerCase()}.json`)
+      const filePath = path.join(process.cwd(), 'data', 'joueurs', `${toFilename(nom)}.json`)
       const joueur = JSON.parse(fs.readFileSync(filePath, 'utf-8'))
       if (joueur.code !== code)
         return NextResponse.json({ error: 'Code incorrect' }, { status: 401 })
@@ -25,7 +30,7 @@ export async function POST(request) {
 
   // ── Mode production : lecture GitHub ────────────────────────────
   try {
-    const filename = `${nom.toLowerCase()}.json`
+    const filename = `${toFilename(nom)}.json`
     const url = `https://api.github.com/repos/${OWNER}/${REPO}/contents/data/joueurs/${filename}`
     const res = await fetch(url, {
       headers: {

@@ -3,6 +3,7 @@ import fs from 'fs'
 import path from 'path'
 import { computePronoPhases } from '../../../lib/phases'
 
+
 const OWNER = process.env.GITHUB_OWNER || 'antolarp'
 const REPO  = process.env.GITHUB_REPO  || 'mondial2026'
 
@@ -53,7 +54,8 @@ export async function POST(request) {
   if (!nom || !code || !pronos || !matchIds)
     return NextResponse.json({ error: 'Données manquantes' }, { status: 400 })
 
-  const filename = `data/joueurs/${nom.toLowerCase()}.json`
+  const slug = nom.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '')
+  const filename = `data/joueurs/${slug}.json`
 
   // ── Mode local (pas de GITHUB_TOKEN) ────────────────────────────
   if (!process.env.GITHUB_TOKEN) {
