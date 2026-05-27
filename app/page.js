@@ -142,12 +142,23 @@ export default function Home() {
         const txtMain = urgent ? '#dc2626'  : warning ? '#92400e'  : '#15803d'
         const txtSub  = urgent ? '#ef4444'  : warning ? '#b45309'  : '#16a34a'
         const emoji   = urgent ? '🚨'       : warning ? '⚠️'       : '🟢'
+
+        // Comptage des pronos par joueur pour la phase ouverte
+        const totalMatchs = phaseAlerte.matchs.length
+        const pronosParJoueur = joueurs.map(j => ({
+          nom: j.nom,
+          count: phaseAlerte.matchs.filter(m => j.pronos[m.id] !== undefined).length,
+          total: totalMatchs,
+          done: phaseAlerte.matchs.every(m => j.pronos[m.id] !== undefined),
+        }))
+
         return (
           <div style={{
             background: bg,
             borderBottom: `2px solid ${border}`,
             padding: '12px 24px',
             display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 12,
+            flexWrap: 'wrap',
           }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
               <span style={{ fontSize: 22, flexShrink: 0 }}>{emoji}</span>
@@ -158,6 +169,20 @@ export default function Home() {
                 <p style={{ fontSize: 12, color: txtSub, margin: 0 }}>
                   Fermeture le {new Date(phaseAlerte.deadlineISO).toLocaleDateString('fr-FR', { weekday: 'long', day: 'numeric', month: 'long' })} à 23h59
                 </p>
+                {/* Compteurs par joueur */}
+                <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6, marginTop: 8 }}>
+                  {pronosParJoueur.map(({ nom, count, total, done }) => (
+                    <span key={nom} style={{
+                      fontSize: 11, fontWeight: 700,
+                      background: done ? (urgent ? '#dc2626' : warning ? '#d97706' : '#16a34a') : 'rgba(0,0,0,0.06)',
+                      color: done ? '#fff' : txtSub,
+                      padding: '2px 8px', borderRadius: 20,
+                      whiteSpace: 'nowrap',
+                    }}>
+                      {nom} {count}/{total}
+                    </span>
+                  ))}
+                </div>
               </div>
             </div>
             <Link href="/pronos" style={{
