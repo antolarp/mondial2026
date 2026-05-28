@@ -5,6 +5,58 @@
     "M01": {
       "domicile": 2,
       "exterieur": 0
+    },
+    "M02": {
+      "domicile": 1,
+      "exterieur": 0
+    },
+    "M03": {
+      "domicile": 2,
+      "exterieur": 1
+    },
+    "M04": {
+      "domicile": 2,
+      "exterieur": 0
+    },
+    "M05": {
+      "domicile": 0,
+      "exterieur": 3
+    },
+    "M06": {
+      "domicile": 2,
+      "exterieur": 1
+    },
+    "M07": {
+      "domicile": 0,
+      "exterieur": 2
+    },
+    "M08": {
+      "domicile": 1,
+      "exterieur": 3
+    },
+    "M09": {
+      "domicile": 5,
+      "exterieur": 0
+    },
+    "M10": {
+      "domicile": 3,
+      "exterieur": 2
+    },
+    "M11": {
+      "domicile": 1,
+      "exterieur": 2
+    },
+    "M12": {
+      "domicile": 2,
+      "exterieur": 1
+    },
+    "M13": {
+      "domicile": 4,
+      "exterieur": 0
+    },
+    "M14": {
+      "domicile": 2,
+      "exterieur": 0
     }
   }
 }
