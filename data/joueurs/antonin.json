@@ -57,6 +57,10 @@
     "M14": {
       "domicile": 2,
       "exterieur": 0
+    },
+    "M15": {
+      "domicile": 1,
+      "exterieur": 2
     }
   }
 }
