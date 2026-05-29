@@ -1,5 +1,18 @@
 {
   "nom": "Tristan",
   "code": "1010",
-  "pronos": {}
+  "pronos": {
+    "M01": {
+      "exterieur": 0,
+      "domicile": 1
+    },
+    "M02": {
+      "domicile": 0,
+      "exterieur": 1
+    },
+    "M03": {
+      "domicile": 1,
+      "exterieur": 0
+    }
+  }
 }
