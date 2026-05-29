@@ -89,6 +89,46 @@
     "M22": {
       "exterieur": 1,
       "domicile": 1
+    },
+    "M23": {
+      "domicile": 1,
+      "exterieur": 0
+    },
+    "M24": {
+      "exterieur": 2,
+      "domicile": 0
+    },
+    "M25": {
+      "domicile": 2,
+      "exterieur": 1
+    },
+    "M26": {
+      "domicile": 2,
+      "exterieur": 0
+    },
+    "M27": {
+      "domicile": 1,
+      "exterieur": 0
+    },
+    "M28": {
+      "domicile": 1,
+      "exterieur": 1
+    },
+    "M29": {
+      "domicile": 1,
+      "exterieur": 0
+    },
+    "M30": {
+      "domicile": 1,
+      "exterieur": 1
+    },
+    "M31": {
+      "domicile": 3,
+      "exterieur": 0
+    },
+    "M32": {
+      "domicile": 2,
+      "exterieur": 1
     }
   }
 }
