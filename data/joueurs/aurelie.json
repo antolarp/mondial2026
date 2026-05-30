@@ -1,5 +1,154 @@
 {
   "nom": "Aurélie",
   "code": "1603",
-  "pronos": {}
+  "pronos": {
+    "M01": {
+      "domicile": 1,
+      "exterieur": 0
+    },
+    "M02": {
+      "domicile": 0,
+      "exterieur": 0
+    },
+    "M03": {
+      "exterieur": 0,
+      "domicile": 2
+    },
+    "M04": {
+      "domicile": 2,
+      "exterieur": 1
+    },
+    "M05": {
+      "exterieur": 2,
+      "domicile": 0
+    },
+    "M06": {
+      "domicile": 2,
+      "exterieur": 0
+    },
+    "M07": {
+      "domicile": 0,
+      "exterieur": 1
+    },
+    "M08": {
+      "domicile": 0,
+      "exterieur": 1
+    },
+    "M09": {
+      "exterieur": 0,
+      "domicile": 4
+    },
+    "M10": {
+      "exterieur": 1,
+      "domicile": 0
+    },
+    "M11": {
+      "domicile": 1,
+      "exterieur": 0
+    },
+    "M12": {
+      "domicile": 2,
+      "exterieur": 1
+    },
+    "M13": {
+      "domicile": 3,
+      "exterieur": 0
+    },
+    "M14": {
+      "domicile": 2,
+      "exterieur": 0
+    },
+    "M15": {
+      "domicile": 0,
+      "exterieur": 2
+    },
+    "M16": {
+      "domicile": 1,
+      "exterieur": 0
+    },
+    "M17": {
+      "domicile": 2,
+      "exterieur": 0
+    },
+    "M18": {
+      "domicile": 0,
+      "exterieur": 2
+    },
+    "M19": {
+      "domicile": 2,
+      "exterieur": 0
+    },
+    "M20": {
+      "domicile": 1,
+      "exterieur": 0
+    },
+    "M21": {
+      "exterieur": 0,
+      "domicile": 3
+    },
+    "M22": {
+      "domicile": 1,
+      "exterieur": 0
+    },
+    "M23": {
+      "domicile": 1,
+      "exterieur": 0
+    },
+    "M24": {
+      "exterieur": 2,
+      "domicile": 0
+    },
+    "M25": {
+      "domicile": 1,
+      "exterieur": 0
+    },
+    "M26": {
+      "domicile": 2,
+      "exterieur": 0
+    },
+    "M27": {
+      "domicile": 1,
+      "exterieur": 0
+    },
+    "M28": {
+      "domicile": 1,
+      "exterieur": 0
+    },
+    "M29": {
+      "domicile": 1,
+      "exterieur": 0
+    },
+    "M30": {
+      "exterieur": 1,
+      "domicile": 0
+    },
+    "M31": {
+      "domicile": 5,
+      "exterieur": 0
+    },
+    "M32": {
+      "domicile": 1,
+      "exterieur": 0
+    },
+    "M33": {
+      "domicile": 2,
+      "exterieur": 1
+    },
+    "M34": {
+      "domicile": 2,
+      "exterieur": 0
+    },
+    "M35": {
+      "domicile": 2,
+      "exterieur": 0
+    },
+    "M36": {
+      "domicile": 0,
+      "exterieur": 1
+    },
+    "M37": {
+      "domicile": 3,
+      "exterieur": 0
+    }
+  }
 }
