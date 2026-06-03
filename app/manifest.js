@@ -9,9 +9,9 @@ export default function manifest() {
     theme_color: '#0c1e52',
     orientation: 'portrait',
     icons: [
-      { src: '/icon.svg',     sizes: 'any',     type: 'image/svg+xml' },
-      { src: '/icon-192.png', sizes: '192x192', type: 'image/png' },
-      { src: '/icon-512.png', sizes: '512x512', type: 'image/png', purpose: 'maskable' },
+      { src: '/2026_FIFA_World_Cup.svg.png', sizes: 'any',     type: 'image/png' },
+      { src: '/icon-192.png',               sizes: '192x192', type: 'image/png' },
+      { src: '/icon-512.png',               sizes: '512x512', type: 'image/png', purpose: 'maskable' },
     ],
   }
 }
