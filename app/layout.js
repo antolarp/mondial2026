@@ -10,8 +10,8 @@ export const metadata = {
     title: 'Pronos 2026',
   },
   icons: {
-    icon: '/icon.svg',
-    apple: '/apple-touch-icon.png',
+    icon: '/2026_FIFA_World_Cup.svg.png',
+    apple: '/2026_FIFA_World_Cup.svg.png',
   },
   themeColor: '#0c1e52',
 }
