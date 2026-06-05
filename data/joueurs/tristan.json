@@ -43,8 +43,8 @@
       "exterieur": 0
     },
     "M11": {
-      "domicile": 1,
-      "exterieur": 1
+      "domicile": 0,
+      "exterieur": 0
     },
     "M12": {
       "domicile": 1,
