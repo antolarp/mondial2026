@@ -1,3 +1,5 @@
+export const dynamic = 'force-dynamic'
+
 import { chargerMatchs, chargerResultats, chargerJoueurs, calculerPoints } from '../../lib/scoring'
 import { getFlagUrl } from '../../lib/flags'
 import { computePronoPhases } from '../../lib/phases'

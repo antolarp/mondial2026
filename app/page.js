@@ -1,3 +1,5 @@
+export const dynamic = 'force-dynamic'
+
 import Link from 'next/link'
 import { chargerJoueurs, chargerMatchs, chargerResultats, calculerClassement } from '../lib/scoring'
 import { calculerEvolution, calculerPourcentages, calculerSeries } from '../lib/stats'
