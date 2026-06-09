@@ -237,6 +237,34 @@
     "M59": {
       "domicile": 1,
       "exterieur": 0
+    },
+    "M60": {
+      "domicile": 1,
+      "exterieur": 0
+    },
+    "M61": {
+      "exterieur": 2,
+      "domicile": 0
+    },
+    "M62": {
+      "domicile": 2,
+      "exterieur": 0
+    },
+    "M63": {
+      "exterieur": 3,
+      "domicile": 1
+    },
+    "M64": {
+      "domicile": 1,
+      "exterieur": 0
+    },
+    "M65": {
+      "exterieur": 3,
+      "domicile": 0
+    },
+    "M66": {
+      "domicile": 1,
+      "exterieur": 1
     }
   }
 }
