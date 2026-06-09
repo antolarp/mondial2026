@@ -1,5 +1,34 @@
 {
   "nom": "Amandine",
   "code": "1480",
-  "pronos": {}
+  "pronos": {
+    "M01": {
+      "exterieur": 0,
+      "domicile": 2
+    },
+    "M02": {
+      "domicile": 1,
+      "exterieur": 1
+    },
+    "M03": {
+      "domicile": 2,
+      "exterieur": 1
+    },
+    "M04": {
+      "domicile": 2,
+      "exterieur": 1
+    },
+    "M05": {
+      "domicile": 1,
+      "exterieur": 2
+    },
+    "M06": {
+      "domicile": 3,
+      "exterieur": 2
+    },
+    "M07": {
+      "exterieur": 2,
+      "domicile": 0
+    }
+  }
 }
