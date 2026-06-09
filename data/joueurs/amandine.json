@@ -69,6 +69,102 @@
     "M17": {
       "domicile": 3,
       "exterieur": 1
+    },
+    "M18": {
+      "exterieur": 4,
+      "domicile": 0
+    },
+    "M19": {
+      "domicile": 4,
+      "exterieur": 0
+    },
+    "M20": {
+      "domicile": 2,
+      "exterieur": 0
+    },
+    "M21": {
+      "domicile": 3,
+      "exterieur": 0
+    },
+    "M22": {
+      "domicile": 1,
+      "exterieur": 1
+    },
+    "M23": {
+      "domicile": 1,
+      "exterieur": 0
+    },
+    "M24": {
+      "exterieur": 2,
+      "domicile": 0
+    },
+    "M25": {
+      "domicile": 1,
+      "exterieur": 0
+    },
+    "M26": {
+      "domicile": 2,
+      "exterieur": 1
+    },
+    "M27": {
+      "domicile": 2,
+      "exterieur": 0
+    },
+    "M28": {
+      "domicile": 2,
+      "exterieur": 1
+    },
+    "M29": {
+      "domicile": 2,
+      "exterieur": 1
+    },
+    "M30": {
+      "exterieur": 2,
+      "domicile": 1
+    },
+    "M31": {
+      "domicile": 5,
+      "exterieur": 0
+    },
+    "M32": {
+      "domicile": 2,
+      "exterieur": 1
+    },
+    "M33": {
+      "domicile": 2,
+      "exterieur": 1
+    },
+    "M34": {
+      "domicile": 2,
+      "exterieur": 2
+    },
+    "M35": {
+      "domicile": 3,
+      "exterieur": 0
+    },
+    "M36": {
+      "exterieur": 1,
+      "domicile": 0
+    },
+    "M37": {
+      "domicile": 3,
+      "exterieur": 2
+    },
+    "M38": {
+      "domicile": 2,
+      "exterieur": 1
+    },
+    "M39": {
+      "domicile": 2,
+      "exterieur": 1
+    },
+    "M40": {
+      "exterieur": 2,
+      "domicile": 0
+    },
+    "M41": {
+      "domicile": 3,
+      "exterieur": 2
     }
   }
 }
