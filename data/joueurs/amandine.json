@@ -265,6 +265,30 @@
     "M66": {
       "domicile": 1,
       "exterieur": 1
+    },
+    "M67": {
+      "domicile": 0,
+      "exterieur": 3
+    },
+    "M68": {
+      "domicile": 2,
+      "exterieur": 0
+    },
+    "M69": {
+      "exterieur": 2,
+      "domicile": 1
+    },
+    "M70": {
+      "domicile": 2,
+      "exterieur": 2
+    },
+    "M71": {
+      "exterieur": 3,
+      "domicile": 0
+    },
+    "M72": {
+      "domicile": 1,
+      "exterieur": 0
     }
   }
 }
