@@ -267,20 +267,20 @@
       "exterieur": 1
     },
     "M67": {
-      "domicile": 0,
-      "exterieur": 3
+      "exterieur": 3,
+      "domicile": 0
     },
     "M68": {
       "domicile": 2,
-      "exterieur": 0
+      "exterieur": 1
     },
     "M69": {
-      "exterieur": 2,
-      "domicile": 1
+      "exterieur": 3,
+      "domicile": 0
     },
     "M70": {
-      "domicile": 2,
-      "exterieur": 2
+      "domicile": 1,
+      "exterieur": 0
     },
     "M71": {
       "exterieur": 3,
