@@ -6,5 +6,9 @@
   "M02": {
     "domicile": 2,
     "exterieur": 1
+  },
+  "M03": {
+    "domicile": 0,
+    "exterieur": 1
   }
 }
