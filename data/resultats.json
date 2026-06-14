@@ -22,5 +22,9 @@
   "M06": {
     "domicile": 1,
     "exterieur": 1
+  },
+  "M07": {
+    "domicile": 0,
+    "exterieur": 1
   }
 }
