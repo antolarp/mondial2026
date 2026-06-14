@@ -2,6 +2,19 @@ const WRAP = { maxWidth: 900, margin: '0 auto', padding: '0 24px' }
 
 const COMPETITIONS = [
   {
+    id: 'euro2024',
+    titre: 'Euro',
+    annee: '2024',
+    pays: 'Allemagne',
+    emoji: '⭐',
+    couleur: '#0c1e52',
+    podium: [
+      { place: 1, noms: ['?'], medaille: '#f0b429', inconnu: true },
+      { place: 2, noms: ['?'], medaille: '#94a3b8', inconnu: true },
+      { place: 3, noms: ['?'], medaille: '#d97706', inconnu: true },
+    ],
+  },
+  {
     id: 'cdm2022',
     titre: 'Coupe du Monde',
     annee: '2022',
