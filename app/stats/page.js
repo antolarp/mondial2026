@@ -40,6 +40,27 @@ export default function Stats() {
     color: PLAYER_COLORS[nomsJoueurs.indexOf(j.nom) % PLAYER_COLORS.length],
   }))
 
+  // Stats CDM
+  const matchsJoues = matchs.filter(m => resultats[m.id])
+  const totalButs = matchsJoues.reduce((acc, m) => {
+    const r = resultats[m.id]
+    return acc + r.domicile + r.exterieur
+  }, 0)
+  const butsPar = {}
+  matchsJoues.forEach(m => {
+    const r = resultats[m.id]
+    butsPar[m.domicile] = (butsPar[m.domicile] || 0) + r.domicile
+    butsPar[m.exterieur] = (butsPar[m.exterieur] || 0) + r.exterieur
+  })
+  const butsParEquipe = Object.entries(butsPar)
+    .map(([nom, buts]) => ({ nom, buts }))
+    .sort((a, b) => b.buts - a.buts)
+  const moyenneButs = matchsJoues.length > 0 ? (totalButs / matchsJoues.length).toFixed(2) : 0
+  const plusCleanSheet = Object.entries(butsPar)
+    .filter(([, b]) => b === 0).length
+  // Meilleure attaque (top 5)
+  const top5 = butsParEquipe.slice(0, 5)
+
   // Records
   const records = [
     { label: 'Meilleur score', value: classement[0]?.points ?? 0, sub: classement[0]?.nom, color: '#f0b429' },
@@ -113,6 +134,60 @@ export default function Stats() {
           <p style={{ fontSize: 12, color: '#94a3b8', marginBottom: 20 }}>Points moyens par match joué</p>
           <EfficaciteChart data={efficacite} />
         </div>
+
+        {/* STATS CDM */}
+        {matchsJoues.length > 0 && (
+          <div style={{ marginTop: 16 }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 16 }}>
+              <span style={{ fontSize: 10, letterSpacing: '0.2em', textTransform: 'uppercase', color: '#94a3b8', fontWeight: 600 }}>Coupe du Monde 2026</span>
+              <div style={{ flex: 1, height: 1, background: '#e2e8f0' }} />
+            </div>
+
+            {/* Chiffres clés */}
+            <div className="records-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 12, marginBottom: 16 }}>
+              {[
+                { label: 'Buts marqués', value: totalButs, sub: `en ${matchsJoues.length} match${matchsJoues.length > 1 ? 's' : ''}`, color: '#f0b429' },
+                { label: 'Moyenne / match', value: moyenneButs, sub: 'buts par match', color: '#3b82f6' },
+                { label: 'Meilleure attaque', value: butsParEquipe[0]?.buts ?? 0, sub: butsParEquipe[0]?.nom, color: '#10b981' },
+                { label: 'Matchs sans but', value: matchsJoues.filter(m => resultats[m.id].domicile + resultats[m.id].exterieur === 0).length, sub: 'scores 0-0', color: '#94a3b8' },
+              ].map(r => (
+                <div key={r.label} style={{
+                  background: '#fff', borderRadius: 16, padding: '18px 20px',
+                  border: '1px solid #e8eaf2', boxShadow: '0 1px 3px rgba(0,0,0,0.05)',
+                  borderTop: `3px solid ${r.color}`,
+                }}>
+                  <p style={{ fontSize: 10, letterSpacing: '0.18em', textTransform: 'uppercase', color: '#94a3b8', fontWeight: 600, marginBottom: 8 }}>{r.label}</p>
+                  <p style={{ fontSize: 28, fontWeight: 900, color: '#0f172a', lineHeight: 1 }}>{r.value}</p>
+                  <p style={{ fontSize: 12, color: '#94a3b8', marginTop: 4 }}>{r.sub}</p>
+                </div>
+              ))}
+            </div>
+
+            {/* Top 5 buteurs */}
+            {top5.length > 0 && (
+              <div style={{ ...CARD }}>
+                <p style={{ fontWeight: 800, fontSize: 17, color: '#0f172a', marginBottom: 2 }}>Classement des attaques</p>
+                <p style={{ fontSize: 12, color: '#94a3b8', marginBottom: 20 }}>Buts marqués par équipe depuis le début du tournoi</p>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
+                  {top5.map((eq, i) => {
+                    const pct = Math.round((eq.buts / (butsParEquipe[0]?.buts || 1)) * 100)
+                    const colors2 = ['#f0b429', '#94a3b8', '#d97706', '#3b82f6', '#10b981']
+                    return (
+                      <div key={eq.nom} style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
+                        <span style={{ fontSize: 13, fontWeight: 800, color: colors2[i], width: 20, flexShrink: 0 }}>{i + 1}</span>
+                        <span style={{ fontSize: 13, fontWeight: 600, color: '#0f172a', width: 160, flexShrink: 0 }}>{eq.nom}</span>
+                        <div style={{ flex: 1, background: '#f1f5f9', borderRadius: 4, height: 8 }}>
+                          <div style={{ height: 8, borderRadius: 4, background: colors2[i], width: `${pct}%`, transition: 'width 0.6s' }} />
+                        </div>
+                        <span style={{ fontSize: 14, fontWeight: 900, color: '#0f172a', width: 32, textAlign: 'right', flexShrink: 0 }}>{eq.buts}</span>
+                      </div>
+                    )
+                  })}
+                </div>
+              </div>
+            )}
+          </div>
+        )}
       </div>
     </>
   )
