@@ -26,5 +26,9 @@
   "M07": {
     "domicile": 0,
     "exterieur": 1
+  },
+  "M08": {
+    "domicile": 2,
+    "exterieur": 0
   }
 }
