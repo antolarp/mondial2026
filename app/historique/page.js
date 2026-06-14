@@ -2,14 +2,14 @@ const WRAP = { maxWidth: 900, margin: '0 auto', padding: '0 24px' }
 
 const COMPETITIONS = [
   {
-    id: 'cdm2018',
+    id: 'cdm2022',
     titre: 'Coupe du Monde',
-    annee: '2018',
-    pays: 'Russie',
+    annee: '2022',
+    pays: 'Qatar',
     emoji: '🏆',
-    couleur: '#c0392b',
+    couleur: '#7c3aed',
     podium: [
-      { place: 1, noms: ['Antonin'], medaille: '#f0b429' },
+      { place: 1, noms: ['Hugo'], medaille: '#f0b429' },
       { place: 2, noms: ['?'], medaille: '#94a3b8', inconnu: true },
       { place: 3, noms: ['?'], medaille: '#d97706', inconnu: true },
     ],
@@ -28,14 +28,14 @@ const COMPETITIONS = [
     ],
   },
   {
-    id: 'cdm2022',
+    id: 'cdm2018',
     titre: 'Coupe du Monde',
-    annee: '2022',
-    pays: 'Qatar',
+    annee: '2018',
+    pays: 'Russie',
     emoji: '🏆',
-    couleur: '#7c3aed',
+    couleur: '#c0392b',
     podium: [
-      { place: 1, noms: ['Hugo'], medaille: '#f0b429' },
+      { place: 1, noms: ['Antonin'], medaille: '#f0b429' },
       { place: 2, noms: ['?'], medaille: '#94a3b8', inconnu: true },
       { place: 3, noms: ['?'], medaille: '#d97706', inconnu: true },
     ],
