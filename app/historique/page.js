@@ -10,7 +10,7 @@ const COMPETITIONS = [
     couleur: '#7c3aed',
     podium: [
       { place: 1, noms: ['Hugo'], medaille: '#f0b429' },
-      { place: 2, noms: ['?'], medaille: '#94a3b8', inconnu: true },
+      { place: 2, noms: ['Antonin'], medaille: '#94a3b8' },
       { place: 3, noms: ['?'], medaille: '#d97706', inconnu: true },
     ],
   },
