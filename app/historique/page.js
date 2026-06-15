@@ -49,8 +49,8 @@ const COMPETITIONS = [
     couleur: '#c0392b',
     podium: [
       { place: 1, noms: ['Antonin'], medaille: '#f0b429' },
-      { place: 2, noms: ['?'], medaille: '#94a3b8', inconnu: true },
-      { place: 3, noms: ['?'], medaille: '#d97706', inconnu: true },
+      { place: 2, noms: ['Lucas'], medaille: '#94a3b8' },
+      { place: 3, noms: ['Hugo'], medaille: '#d97706' },
     ],
   },
 ]
