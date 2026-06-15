@@ -41,6 +41,19 @@ const COMPETITIONS = [
     ],
   },
   {
+    id: 'cdm2014',
+    titre: 'Coupe du Monde',
+    annee: '2014',
+    pays: 'Brésil',
+    emoji: '🏆',
+    couleur: '#065f46',
+    podium: [
+      { place: 1, noms: ['Tristan'], medaille: '#f0b429' },
+      { place: 2, noms: ['Lucas'], medaille: '#94a3b8' },
+      { place: 3, noms: ['Hugo'], medaille: '#d97706' },
+    ],
+  },
+  {
     id: 'cdm2018',
     titre: 'Coupe du Monde',
     annee: '2018',
