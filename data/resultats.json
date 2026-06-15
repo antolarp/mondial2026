@@ -52,7 +52,7 @@
     "exterieur": 0
   },
   "M14": {
-    "domicile": 0,
+    "domicile": 1,
     "exterieur": 1
   }
 }
