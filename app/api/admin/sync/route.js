@@ -1,5 +1,8 @@
 import { NextResponse } from 'next/server'
 
+export const runtime = 'nodejs'
+export const dynamic = 'force-dynamic'
+
 const OWNER = process.env.GITHUB_OWNER || 'antolarp'
 const REPOS = (process.env.GITHUB_REPOS_ALL || 'mondial2026').split(',').map(r => r.trim())
 const GH_TOKEN = process.env.GITHUB_TOKEN
