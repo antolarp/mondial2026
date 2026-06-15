@@ -150,7 +150,7 @@ export default function Stats() {
               <span style={{ fontSize: 10, letterSpacing: '0.2em', textTransform: 'uppercase', color: '#94a3b8', fontWeight: 600 }}>Classements CDM</span>
               <div style={{ flex: 1, height: 1, background: '#e2e8f0' }} />
             </div>
-            <div style={{ display: 'grid', gridTemplateColumns: scorers.some(s => s.assists > 0) ? '1fr 1fr' : '1fr', gap: 16 }}>
+            <div style={{ display: 'grid', gridTemplateColumns: scorers.filter(s => s.assists > 0).length >= 3 ? '1fr 1fr' : '1fr', gap: 16 }}>
               {/* Top buteurs */}
               <div style={{ ...CARD }}>
                 <p style={{ fontWeight: 800, fontSize: 17, color: '#0f172a', marginBottom: 2 }}>⚽ Meilleurs buteurs</p>
@@ -174,7 +174,7 @@ export default function Stats() {
               </div>
 
               {/* Top passeurs — affiché uniquement si données dispo */}
-              {scorers.some(s => s.assists > 0) && (
+              {scorers.filter(s => s.assists > 0).length >= 3 && (
                 <div style={{ ...CARD }}>
                   <p style={{ fontWeight: 800, fontSize: 17, color: '#0f172a', marginBottom: 2 }}>🎯 Meilleurs passeurs</p>
                   <p style={{ fontSize: 12, color: '#94a3b8', marginBottom: 20 }}>Passes décisives depuis le début du tournoi</p>
