@@ -118,57 +118,33 @@ async function putGithubFile(repo, filePath, content, sha, message) {
   }
 }
 
-async function main() {
-  // 1. Charger matchs.json local pour construire le lookup domicile+extérieur → id
-  const matchs = JSON.parse(fs.readFileSync(path.join(__dirname, '../data/matchs.json'), 'utf-8'))
-  const lookup = {}
-  for (const m of matchs) {
-    if (m.domicile && m.exterieur) {
-      lookup[`${m.domicile}|${m.exterieur}`] = m.id
-    }
-  }
-
-  // 2. Récupérer les matchs terminés depuis football-data.org
-  console.log('Fetching matches from football-data.org...')
+async function syncScores(lookup) {
+  console.log('Fetching scores from football-data.org...')
   const apiData = await fetchJson(
     'https://api.football-data.org/v4/competitions/2000/matches?season=2026&status=FINISHED',
     { 'X-Auth-Token': FOOTBALL_API_KEY }
   )
-
   const finished = apiData.matches || []
   console.log(`${finished.length} matches terminés trouvés`)
 
-  // 3. Construire les nouveaux scores
   const newScores = {}
   for (const m of finished) {
     const domFR = TEAM_MAP[m.homeTeam.name]
     const extFR = TEAM_MAP[m.awayTeam.name]
-    if (!domFR || !extFR) {
-      console.warn(`⚠️  Équipe inconnue: ${m.homeTeam.name} / ${m.awayTeam.name}`)
-      continue
-    }
+    if (!domFR || !extFR) { console.warn(`⚠️  Équipe inconnue: ${m.homeTeam.name} / ${m.awayTeam.name}`); continue }
     const matchId = lookup[`${domFR}|${extFR}`]
-    if (!matchId) {
-      console.warn(`⚠️  Match introuvable dans matchs.json: ${domFR} vs ${extFR}`)
-      continue
-    }
+    if (!matchId) { console.warn(`⚠️  Match introuvable: ${domFR} vs ${extFR}`); continue }
     const score = m.score.fullTime
     if (score.home === null || score.away === null) continue
     newScores[matchId] = { domicile: score.home, exterieur: score.away }
   }
 
   console.log(`${Object.keys(newScores).length} scores à synchroniser`)
-  if (Object.keys(newScores).length === 0) {
-    console.log('Rien à mettre à jour.')
-    return
-  }
+  if (Object.keys(newScores).length === 0) return
 
-  // 4. Mettre à jour resultats.json dans chaque repo (seulement si changement)
   for (const repo of REPOS) {
     try {
       const { content: current, sha } = await getGithubFile(repo, RESULTATS_PATH)
-
-      // Vérifier s'il y a des changements
       let hasChanges = false
       const updated = { ...current }
       for (const [id, score] of Object.entries(newScores)) {
@@ -179,19 +155,75 @@ async function main() {
           console.log(`  [${repo}] ${id}: ${score.domicile}-${score.exterieur}${existing ? ' (màj)' : ' (nouveau)'}`)
         }
       }
-
-      if (!hasChanges) {
-        console.log(`[${repo}] Déjà à jour, rien à écrire.`)
-        continue
-      }
-
-      await putGithubFile(repo, RESULTATS_PATH, updated, sha, `⚽ sync scores automatique (${Object.keys(newScores).length} matchs)`)
-      console.log(`✅ [${repo}] Mis à jour`)
+      if (!hasChanges) { console.log(`[${repo}] Scores déjà à jour.`); continue }
+      await putGithubFile(repo, RESULTATS_PATH, updated, sha, `⚽ sync scores (${Object.keys(newScores).length} matchs)`)
+      console.log(`✅ [${repo}] Scores mis à jour`)
     } catch (err) {
-      console.error(`❌ [${repo}] Erreur: ${err.message}`)
+      console.error(`❌ [${repo}] Erreur scores: ${err.message}`)
     }
   }
+}
 
+async function syncScorers() {
+  console.log('Fetching scorers from football-data.org...')
+  const apiData = await fetchJson(
+    'https://api.football-data.org/v4/competitions/2000/scorers?season=2026&limit=20',
+    { 'X-Auth-Token': FOOTBALL_API_KEY }
+  )
+  const scorers = (apiData.scorers || []).map(s => ({
+    nom: s.player.name,
+    equipe: TEAM_MAP[s.team.name] || s.team.name,
+    equipeEN: s.team.name,
+    crest: s.team.crest,
+    buts: s.goals || 0,
+    assists: s.assists || 0,
+    penaltys: s.penalties || 0,
+    matchs: s.playedMatches || 0,
+  }))
+
+  console.log(`${scorers.length} buteurs trouvés`)
+  if (scorers.length === 0) return
+
+  for (const repo of REPOS) {
+    try {
+      let sha = null
+      try {
+        const existing = await getGithubFile(repo, 'data/scorers.json')
+        // Check if content changed
+        const same = JSON.stringify(existing.content) === JSON.stringify(scorers)
+        if (same) { console.log(`[${repo}] Buteurs déjà à jour.`); continue }
+        sha = existing.sha
+      } catch {
+        // File doesn't exist yet, will create it
+      }
+      const url = `https://api.github.com/repos/${GH_OWNER}/${repo}/contents/data/scorers.json`
+      const body = {
+        message: '🥅 sync buteurs',
+        content: Buffer.from(JSON.stringify(scorers, null, 2)).toString('base64'),
+        ...(sha ? { sha } : {}),
+      }
+      const res = await putJson(url, body, {
+        Authorization: `Bearer ${GH_TOKEN}`,
+        Accept: 'application/vnd.github.v3+json',
+        'User-Agent': 'sync-scores-bot',
+      })
+      if (res.status !== 200 && res.status !== 201) throw new Error(`status ${res.status}`)
+      console.log(`✅ [${repo}] Buteurs mis à jour`)
+    } catch (err) {
+      console.error(`❌ [${repo}] Erreur buteurs: ${err.message}`)
+    }
+  }
+}
+
+async function main() {
+  const matchs = JSON.parse(fs.readFileSync(path.join(__dirname, '../data/matchs.json'), 'utf-8'))
+  const lookup = {}
+  for (const m of matchs) {
+    if (m.domicile && m.exterieur) lookup[`${m.domicile}|${m.exterieur}`] = m.id
+  }
+
+  await syncScores(lookup)
+  await syncScorers()
   console.log('Sync terminé.')
 }
 

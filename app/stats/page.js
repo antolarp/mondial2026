@@ -2,6 +2,8 @@ import { chargerJoueurs, chargerMatchs, chargerResultats, calculerClassement } f
 import { calculerPlaces, calculerPourcentages, calculerExacts } from '../../lib/stats'
 import { ExactsChart, PourcentagesChart, PlacesPieCharts, EfficaciteChart } from '../../components/Charts'
 import { PLAYER_COLORS } from '../../lib/colors'
+import fs from 'fs'
+import path from 'path'
 
 const WRAP = { maxWidth: 1100, margin: '0 auto', padding: '0 24px' }
 
@@ -39,6 +41,12 @@ export default function Stats() {
     ppm: j.joues > 0 ? Math.round((j.points / j.joues) * 10) / 10 : 0,
     color: PLAYER_COLORS[nomsJoueurs.indexOf(j.nom) % PLAYER_COLORS.length],
   }))
+
+  // Buteurs
+  let scorers = []
+  try {
+    scorers = JSON.parse(fs.readFileSync(path.join(process.cwd(), 'data', 'scorers.json'), 'utf-8'))
+  } catch {}
 
   // Stats CDM
   const matchsJoues = matchs.filter(m => resultats[m.id])
@@ -134,6 +142,60 @@ export default function Stats() {
           <p style={{ fontSize: 12, color: '#94a3b8', marginBottom: 20 }}>Points moyens par match joué</p>
           <EfficaciteChart data={efficacite} />
         </div>
+
+        {/* BUTEURS */}
+        {scorers.length > 0 && (
+          <div style={{ marginTop: 16 }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 16 }}>
+              <span style={{ fontSize: 10, letterSpacing: '0.2em', textTransform: 'uppercase', color: '#94a3b8', fontWeight: 600 }}>Classements CDM</span>
+              <div style={{ flex: 1, height: 1, background: '#e2e8f0' }} />
+            </div>
+            <div style={{ display: 'grid', gridTemplateColumns: scorers.some(s => s.assists > 0) ? '1fr 1fr' : '1fr', gap: 16 }}>
+              {/* Top buteurs */}
+              <div style={{ ...CARD }}>
+                <p style={{ fontWeight: 800, fontSize: 17, color: '#0f172a', marginBottom: 2 }}>⚽ Meilleurs buteurs</p>
+                <p style={{ fontSize: 12, color: '#94a3b8', marginBottom: 20 }}>Buts marqués depuis le début du tournoi</p>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
+                  {scorers.slice(0, 10).map((s, i) => (
+                    <div key={s.nom} style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+                      <span style={{ fontSize: 12, fontWeight: 800, color: i === 0 ? '#f0b429' : i === 1 ? '#94a3b8' : i === 2 ? '#d97706' : '#cbd5e1', width: 20, textAlign: 'center', flexShrink: 0 }}>{i + 1}</span>
+                      {s.crest && <img src={s.crest} style={{ width: 20, height: 20, objectFit: 'contain', flexShrink: 0 }} alt="" />}
+                      <div style={{ flex: 1, minWidth: 0 }}>
+                        <p style={{ fontSize: 13, fontWeight: 700, color: '#0f172a', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{s.nom}</p>
+                        <p style={{ fontSize: 11, color: '#94a3b8' }}>{s.equipe} · {s.matchs} match{s.matchs > 1 ? 's' : ''}</p>
+                      </div>
+                      <div style={{ display: 'flex', alignItems: 'center', gap: 6, flexShrink: 0 }}>
+                        <span style={{ fontSize: 18, fontWeight: 900, color: '#0f172a' }}>{s.buts}</span>
+                        {s.penaltys > 0 && <span style={{ fontSize: 10, color: '#94a3b8' }}>({s.penaltys}p)</span>}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Top passeurs — affiché uniquement si données dispo */}
+              {scorers.some(s => s.assists > 0) && (
+                <div style={{ ...CARD }}>
+                  <p style={{ fontWeight: 800, fontSize: 17, color: '#0f172a', marginBottom: 2 }}>🎯 Meilleurs passeurs</p>
+                  <p style={{ fontSize: 12, color: '#94a3b8', marginBottom: 20 }}>Passes décisives depuis le début du tournoi</p>
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
+                    {[...scorers].sort((a, b) => b.assists - a.assists).filter(s => s.assists > 0).slice(0, 10).map((s, i) => (
+                      <div key={s.nom} style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+                        <span style={{ fontSize: 12, fontWeight: 800, color: i === 0 ? '#f0b429' : i === 1 ? '#94a3b8' : i === 2 ? '#d97706' : '#cbd5e1', width: 20, textAlign: 'center', flexShrink: 0 }}>{i + 1}</span>
+                        {s.crest && <img src={s.crest} style={{ width: 20, height: 20, objectFit: 'contain', flexShrink: 0 }} alt="" />}
+                        <div style={{ flex: 1, minWidth: 0 }}>
+                          <p style={{ fontSize: 13, fontWeight: 700, color: '#0f172a', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{s.nom}</p>
+                          <p style={{ fontSize: 11, color: '#94a3b8' }}>{s.equipe} · {s.matchs} match{s.matchs > 1 ? 's' : ''}</p>
+                        </div>
+                        <span style={{ fontSize: 18, fontWeight: 900, color: '#0f172a', flexShrink: 0 }}>{s.assists}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+            </div>
+          </div>
+        )}
 
         {/* STATS CDM */}
         {matchsJoues.length > 0 && (
