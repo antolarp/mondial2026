@@ -1,0 +1,22 @@
+name: Sync WC 2026 Scores
+
+on:
+  schedule:
+    - cron: '*/10 * * * *'   # toutes les 10 minutes
+  workflow_dispatch:           # bouton manuel dans GitHub si besoin
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Sync scores
+        env:
+          FOOTBALL_API_KEY: ${{ secrets.FOOTBALL_API_KEY }}
+          GH_PAT: ${{ secrets.GH_PAT }}
+        run: node scripts/sync-scores.js
