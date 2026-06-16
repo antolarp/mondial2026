@@ -22,6 +22,9 @@ export default function SuperAdminPanel({ matchs, resultats: initRes }) {
   const [scoreA, setScoreA] = useState('')
   const [saving, setSaving] = useState(false)
   const [toast, setToast]   = useState(null)
+  const [editingTeams, setEditingTeams] = useState(null)
+  const [teamH, setTeamH] = useState('')
+  const [teamA, setTeamA] = useState('')
 
   const showToast = (msg, ok = true) => {
     setToast({ msg, ok })
@@ -41,8 +44,37 @@ export default function SuperAdminPanel({ matchs, resultats: initRes }) {
   const openEdit = (match) => {
     const res = resultats[match.id]
     setEditing(match.id)
+    setEditingTeams(null)
     setScoreH(res !== undefined ? String(res.domicile) : '')
     setScoreA(res !== undefined ? String(res.exterieur) : '')
+  }
+
+  const openEditTeams = (match) => {
+    setEditingTeams(match.id)
+    setEditing(null)
+    setTeamH(match.domicile || '')
+    setTeamA(match.exterieur || '')
+  }
+
+  const saveTeams = async (matchId) => {
+    if (!teamH.trim() || !teamA.trim()) return
+    setSaving(true)
+    const res = await fetch('/api/admin/teams', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ password: pwd, matchId, domicile: teamH.trim(), exterieur: teamA.trim() }),
+    })
+    const data = await res.json()
+    if (res.ok) {
+      // Mettre à jour localement
+      const m = matchs.find(x => x.id === matchId)
+      if (m) { m.domicile = teamH.trim(); m.exterieur = teamA.trim() }
+      setEditingTeams(null)
+      showToast(`✅ Équipes mises à jour sur ${data.repos?.length ?? 4} concours`)
+    } else {
+      showToast(`❌ ${data.error || 'Erreur'}`, false)
+    }
+    setSaving(false)
   }
 
   const save = async (matchId) => {
@@ -177,6 +209,8 @@ export default function SuperAdminPanel({ matchs, resultats: initRes }) {
         {phaseMatchs.map(match => {
           const res = resultats[match.id]
           const isEditing = editing === match.id
+          const isEditingTeams = editingTeams === match.id
+          const teamsEmpty = !match.domicile && !match.exterieur
           const date = new Date(match.date)
 
           return (
@@ -185,23 +219,42 @@ export default function SuperAdminPanel({ matchs, resultats: initRes }) {
               border: res !== undefined ? '1px solid #e8eaf2' : '1px solid #eef0f8',
               boxShadow: '0 1px 4px rgba(0,0,0,0.05)', overflow: 'hidden',
             }}>
-              <div onClick={() => isEditing ? setEditing(null) : openEdit(match)}
-                style={{ padding: '13px 16px', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: 12 }}>
-                <div style={{ flex: 1, minWidth: 0 }}>
+              <div style={{ padding: '13px 16px', display: 'flex', alignItems: 'center', gap: 12 }}>
+                {/* Infos match */}
+                <div
+                  style={{ flex: 1, minWidth: 0, cursor: teamsEmpty ? 'default' : 'pointer' }}
+                  onClick={() => { if (!teamsEmpty) isEditing ? setEditing(null) : openEdit(match) }}
+                >
                   <p style={{ fontSize: 10, color: '#94a3b8', marginBottom: 3 }}>
                     {date.toLocaleDateString('fr-FR', { weekday: 'short', day: 'numeric', month: 'short' })}
                     {' · '}
                     {date.toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' })}
                   </p>
-                  <p style={{ fontSize: 14, fontWeight: 700, color: '#0f172a', lineHeight: 1.3, display: 'flex', alignItems: 'center', gap: 5, flexWrap: 'wrap' }}>
-                    {match.domicile}
-                    {getFlagUrl(match.domicile) && <img src={getFlagUrl(match.domicile)} style={{ width: 20, height: 'auto', borderRadius: 2 }} alt="" />}
-                    <span style={{ color: '#cbd5e1', fontWeight: 400, margin: '0 2px' }}>vs</span>
-                    {getFlagUrl(match.exterieur) && <img src={getFlagUrl(match.exterieur)} style={{ width: 20, height: 'auto', borderRadius: 2 }} alt="" />}
-                    {match.exterieur}
-                  </p>
+                  {teamsEmpty ? (
+                    <p style={{ fontSize: 13, color: '#cbd5e1', fontStyle: 'italic' }}>Équipes non définies</p>
+                  ) : (
+                    <p style={{ fontSize: 14, fontWeight: 700, color: '#0f172a', lineHeight: 1.3, display: 'flex', alignItems: 'center', gap: 5, flexWrap: 'wrap' }}>
+                      {match.domicile}
+                      {getFlagUrl(match.domicile) && <img src={getFlagUrl(match.domicile)} style={{ width: 20, height: 'auto', borderRadius: 2 }} alt="" />}
+                      <span style={{ color: '#cbd5e1', fontWeight: 400, margin: '0 2px' }}>vs</span>
+                      {getFlagUrl(match.exterieur) && <img src={getFlagUrl(match.exterieur)} style={{ width: 20, height: 'auto', borderRadius: 2 }} alt="" />}
+                      {match.exterieur}
+                    </p>
+                  )}
                 </div>
-                {res !== undefined ? (
+                {/* Bouton édition équipes */}
+                {teamsEmpty && (
+                  <button onClick={() => isEditingTeams ? setEditingTeams(null) : openEditTeams(match)} style={{
+                    padding: '6px 12px', borderRadius: 8, border: '1px solid #e2e8f0',
+                    background: isEditingTeams ? '#0c1e52' : '#f8fafc',
+                    color: isEditingTeams ? '#fff' : '#64748b',
+                    fontSize: 12, fontWeight: 600, cursor: 'pointer', flexShrink: 0,
+                  }}>
+                    ✏️ Équipes
+                  </button>
+                )}
+                {/* Score ou + */}
+                {!teamsEmpty && (res !== undefined ? (
                   <span style={{
                     background: '#0c1e52', color: '#fff',
                     fontWeight: 800, fontSize: 15, padding: '5px 14px', borderRadius: 8,
@@ -211,8 +264,41 @@ export default function SuperAdminPanel({ matchs, resultats: initRes }) {
                   </span>
                 ) : (
                   <span style={{ fontSize: 20, color: '#cbd5e1', fontWeight: 300, flexShrink: 0 }}>＋</span>
-                )}
+                ))}
               </div>
+
+              {/* Saisie équipes */}
+              {isEditingTeams && (
+                <div style={{ borderTop: '1px solid #f1f5f9', background: '#fafbff', padding: '14px 16px' }}>
+                  <p style={{ fontSize: 11, color: '#94a3b8', marginBottom: 8, fontWeight: 600 }}>Définir les équipes</p>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+                    <input
+                      type="text" value={teamH} onChange={e => setTeamH(e.target.value)}
+                      placeholder="Équipe domicile" autoFocus
+                      style={{ flex: 1, height: 44, padding: '0 12px', fontSize: 14, fontWeight: 600, borderRadius: 10, border: '2px solid #e2e8f0', outline: 'none' }}
+                    />
+                    <span style={{ color: '#94a3b8', fontWeight: 700 }}>vs</span>
+                    <input
+                      type="text" value={teamA} onChange={e => setTeamA(e.target.value)}
+                      placeholder="Équipe extérieur"
+                      onKeyDown={e => e.key === 'Enter' && saveTeams(match.id)}
+                      style={{ flex: 1, height: 44, padding: '0 12px', fontSize: 14, fontWeight: 600, borderRadius: 10, border: '2px solid #e2e8f0', outline: 'none' }}
+                    />
+                    <button
+                      onClick={() => saveTeams(match.id)}
+                      disabled={saving || !teamH.trim() || !teamA.trim()}
+                      style={{
+                        height: 44, padding: '0 16px', borderRadius: 10, border: 'none',
+                        background: (saving || !teamH.trim() || !teamA.trim()) ? '#e2e8f0' : '#0c1e52',
+                        color: (saving || !teamH.trim() || !teamA.trim()) ? '#94a3b8' : '#fff',
+                        fontWeight: 800, fontSize: 14, cursor: saving ? 'wait' : 'pointer', flexShrink: 0,
+                      }}
+                    >
+                      {saving ? '…' : '✓ Tous'}
+                    </button>
+                  </div>
+                </div>
+              )}
 
               {isEditing && (
                 <div style={{ borderTop: '1px solid #f1f5f9', background: '#fafbff', padding: '14px 16px' }}>
