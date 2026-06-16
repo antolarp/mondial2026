@@ -41,6 +41,8 @@ export default function RootLayout({ children }) {
                 className="nav-link hover:text-white transition-colors">Classement</a>
               <a href="/matchs" style={{ color: '#8aaad8', fontSize: 13, fontWeight: 500, textDecoration: 'none', letterSpacing: '0.02em' }}
                 className="nav-link hover:text-white transition-colors">Matchs</a>
+              <a href="/groupes" style={{ color: '#8aaad8', fontSize: 13, fontWeight: 500, textDecoration: 'none', letterSpacing: '0.02em' }}
+                className="nav-link hover:text-white transition-colors">Groupes</a>
               <a href="/stats" style={{ color: '#8aaad8', fontSize: 13, fontWeight: 500, textDecoration: 'none', letterSpacing: '0.02em' }}
                 className="nav-link hover:text-white transition-colors">Stats</a>
               <a href="/historique" style={{ color: '#8aaad8', fontSize: 13, fontWeight: 500, textDecoration: 'none', letterSpacing: '0.02em' }}
