@@ -66,5 +66,9 @@
   "M17": {
     "domicile": 3,
     "exterieur": 1
+  },
+  "M18": {
+    "domicile": 0,
+    "exterieur": 1
   }
 }
