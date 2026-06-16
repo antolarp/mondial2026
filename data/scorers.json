@@ -27,6 +27,15 @@
     "matchs": 1
   },
   {
+    "nom": "Elijah Just",
+    "equipe": "Nouvelle-Zélande",
+    "crest": "https://crests.football-data.org/783.svg",
+    "buts": 2,
+    "assists": 0,
+    "penaltys": 0,
+    "matchs": 1
+  },
+  {
     "nom": "Julián Quiñones",
     "equipe": "Mexique",
     "crest": "https://crests.football-data.org/769.svg",
@@ -165,15 +174,6 @@
     "nom": "Connor Metcalfe",
     "equipe": "Australie",
     "crest": "https://crests.football-data.org/779.svg",
-    "buts": 1,
-    "assists": 0,
-    "penaltys": 0,
-    "matchs": 1
-  },
-  {
-    "nom": "Felix Kalu Nmecha",
-    "equipe": "Allemagne",
-    "crest": "https://crests.football-data.org/759.svg",
     "buts": 1,
     "assists": 0,
     "penaltys": 0,
