@@ -51,19 +51,32 @@ function calculerGroupes(matchs, resultats) {
   return result
 }
 
+// ISO 2-letter codes pour flagcdn.com
 const FLAG_MAP = {
-  'Mexique': '🇲🇽', 'Afrique du Sud': '🇿🇦', 'République de Corée': '🇰🇷', 'Tchéquie': '🇨🇿',
-  'Canada': '🇨🇦', 'Bosnie-et-Herzégovine': '🇧🇦', 'États-Unis': '🇺🇸', 'Paraguay': '🇵🇾',
-  'Qatar': '🇶🇦', 'Suisse': '🇨🇭', 'Brésil': '🇧🇷', 'Maroc': '🇲🇦', 'Haïti': '🇭🇹',
-  'Écosse': '🏴󠁧󠁢󠁳󠁣󠁴󠁿', 'Australie': '🇦🇺', 'Turquie': '🇹🇷', 'Allemagne': '🇩🇪',
-  'Curaçao': '🇨🇼', 'Pays-Bas': '🇳🇱', 'Japon': '🇯🇵', 'Côte d\'Ivoire': '🇨🇮',
-  'Équateur': '🇪🇨', 'Suède': '🇸🇪', 'Tunisie': '🇹🇳', 'Espagne': '🇪🇸', 'Cap-Vert': '🇨🇻',
-  'Belgique': '🇧🇪', 'Égypte': '🇪🇬', 'Arabie saoudite': '🇸🇦', 'Uruguay': '🇺🇾',
-  'RI Iran': '🇮🇷', 'Nouvelle-Zélande': '🇳🇿', 'France': '🇫🇷', 'Sénégal': '🇸🇳',
-  'Irak': '🇮🇶', 'Norvège': '🇳🇴', 'Argentine': '🇦🇷', 'Algérie': '🇩🇿',
-  'Autriche': '🇦🇹', 'Jordanie': '🇯🇴', 'Portugal': '🇵🇹', 'RD Congo': '🇨🇩',
-  'Angleterre': '🏴󠁧󠁢󠁥󠁮󠁧󠁿', 'Croatie': '🇭🇷', 'Ghana': '🇬🇭', 'Panamá': '🇵🇦',
-  'Ouzbékistan': '🇺🇿', 'Colombie': '🇨🇴',
+  'Mexique': 'mx', 'Afrique du Sud': 'za', 'République de Corée': 'kr', 'Tchéquie': 'cz',
+  'Canada': 'ca', 'Bosnie-et-Herzégovine': 'ba', 'États-Unis': 'us', 'Paraguay': 'py',
+  'Qatar': 'qa', 'Suisse': 'ch', 'Brésil': 'br', 'Maroc': 'ma', 'Haïti': 'ht',
+  'Écosse': 'gb-sct', 'Australie': 'au', 'Turquie': 'tr', 'Allemagne': 'de',
+  'Curaçao': 'cw', 'Pays-Bas': 'nl', 'Japon': 'jp', "Côte d'Ivoire": 'ci',
+  'Équateur': 'ec', 'Suède': 'se', 'Tunisie': 'tn', 'Espagne': 'es', 'Cap-Vert': 'cv',
+  'Belgique': 'be', 'Égypte': 'eg', 'Arabie saoudite': 'sa', 'Uruguay': 'uy',
+  'RI Iran': 'ir', 'Nouvelle-Zélande': 'nz', 'France': 'fr', 'Sénégal': 'sn',
+  'Irak': 'iq', 'Norvège': 'no', 'Argentine': 'ar', 'Algérie': 'dz',
+  'Autriche': 'at', 'Jordanie': 'jo', 'Portugal': 'pt', 'RD Congo': 'cd',
+  'Angleterre': 'gb-eng', 'Croatie': 'hr', 'Ghana': 'gh', 'Panamá': 'pa',
+  'Ouzbékistan': 'uz', 'Colombie': 'co',
+}
+
+function Flag({ equipe }) {
+  const code = FLAG_MAP[equipe]
+  if (!code) return <span style={{ width: 24, display: 'inline-block' }} />
+  return (
+    <img
+      src={`https://flagcdn.com/w40/${code}.png`}
+      alt={equipe}
+      style={{ width: 24, height: 16, objectFit: 'cover', borderRadius: 2, display: 'inline-block', verticalAlign: 'middle' }}
+    />
+  )
 }
 
 const GROUP_COLORS = {
@@ -152,7 +165,7 @@ function TableauGroupe({ lettre, equipes }) {
                   </td>
                   <td style={{ padding: '10px 12px' }}>
                     <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-                      <span style={{ fontSize: 18, lineHeight: 1 }}>{FLAG_MAP[eq.nom] || '🏳️'}</span>
+                      <Flag equipe={eq.nom} />
                       <span style={{ fontWeight: qualifie ? 700 : 500, color: '#0f172a', fontSize: 13 }}>
                         {eq.nom}
                       </span>
