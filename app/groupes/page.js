@@ -5,6 +5,13 @@ import path from 'path'
 
 const WRAP = { maxWidth: 1100, margin: '0 auto', padding: '0 24px' }
 
+const MOBILE_STYLE = `
+  @media (max-width: 480px) {
+    .col-hide { display: none !important; }
+    .group-grid { grid-template-columns: 1fr !important; }
+  }
+`
+
 function chargerDonnees() {
   const matchs = JSON.parse(fs.readFileSync(path.join(process.cwd(), 'data', 'matchs.json'), 'utf-8'))
   let resultats = {}
@@ -127,16 +134,16 @@ function TableauGroupe({ lettre, equipes }) {
         <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: 13 }}>
           <thead>
             <tr style={{ borderBottom: '2px solid #f0f2f8' }}>
-              <th style={{ padding: '8px 12px', textAlign: 'left', color: '#94a3b8', fontWeight: 600, fontSize: 11, width: 28 }}>#</th>
-              <th style={{ padding: '8px 12px', textAlign: 'left', color: '#94a3b8', fontWeight: 600, fontSize: 11 }}>Équipe</th>
-              <th style={{ padding: '8px 8px', textAlign: 'center', color: '#94a3b8', fontWeight: 600, fontSize: 11, width: 32 }}>MJ</th>
-              <th style={{ padding: '8px 8px', textAlign: 'center', color: '#94a3b8', fontWeight: 600, fontSize: 11, width: 32 }}>V</th>
-              <th style={{ padding: '8px 8px', textAlign: 'center', color: '#94a3b8', fontWeight: 600, fontSize: 11, width: 32 }}>N</th>
-              <th style={{ padding: '8px 8px', textAlign: 'center', color: '#94a3b8', fontWeight: 600, fontSize: 11, width: 32 }}>D</th>
-              <th style={{ padding: '8px 8px', textAlign: 'center', color: '#94a3b8', fontWeight: 600, fontSize: 11, width: 40 }}>BP</th>
-              <th style={{ padding: '8px 8px', textAlign: 'center', color: '#94a3b8', fontWeight: 600, fontSize: 11, width: 40 }}>BC</th>
-              <th style={{ padding: '8px 8px', textAlign: 'center', color: '#94a3b8', fontWeight: 600, fontSize: 11, width: 40 }}>Diff</th>
-              <th style={{ padding: '8px 12px', textAlign: 'center', color: '#64748b', fontWeight: 700, fontSize: 12, width: 44 }}>Pts</th>
+              <th style={{ padding: '8px 6px', textAlign: 'left', color: '#94a3b8', fontWeight: 600, fontSize: 11, width: 24 }}>#</th>
+              <th style={{ padding: '8px 8px', textAlign: 'left', color: '#94a3b8', fontWeight: 600, fontSize: 11 }}>Équipe</th>
+              <th className="col-hide" style={{ padding: '8px 6px', textAlign: 'center', color: '#94a3b8', fontWeight: 600, fontSize: 11, width: 28 }}>MJ</th>
+              <th className="col-hide" style={{ padding: '8px 6px', textAlign: 'center', color: '#94a3b8', fontWeight: 600, fontSize: 11, width: 28 }}>V</th>
+              <th className="col-hide" style={{ padding: '8px 6px', textAlign: 'center', color: '#94a3b8', fontWeight: 600, fontSize: 11, width: 28 }}>N</th>
+              <th className="col-hide" style={{ padding: '8px 6px', textAlign: 'center', color: '#94a3b8', fontWeight: 600, fontSize: 11, width: 28 }}>D</th>
+              <th className="col-hide" style={{ padding: '8px 6px', textAlign: 'center', color: '#94a3b8', fontWeight: 600, fontSize: 11, width: 32 }}>BP</th>
+              <th className="col-hide" style={{ padding: '8px 6px', textAlign: 'center', color: '#94a3b8', fontWeight: 600, fontSize: 11, width: 32 }}>BC</th>
+              <th style={{ padding: '8px 6px', textAlign: 'center', color: '#94a3b8', fontWeight: 600, fontSize: 11, width: 36 }}>Diff</th>
+              <th style={{ padding: '8px 10px', textAlign: 'center', color: '#64748b', fontWeight: 700, fontSize: 12, width: 40 }}>Pts</th>
             </tr>
           </thead>
           <tbody>
@@ -181,12 +188,12 @@ function TableauGroupe({ lettre, equipes }) {
                       )}
                     </div>
                   </td>
-                  <td style={{ padding: '10px 8px', textAlign: 'center', color: '#64748b' }}>{eq.mj}</td>
-                  <td style={{ padding: '10px 8px', textAlign: 'center', color: '#22c55e', fontWeight: eq.v > 0 ? 700 : 400 }}>{eq.v}</td>
-                  <td style={{ padding: '10px 8px', textAlign: 'center', color: '#94a3b8' }}>{eq.n}</td>
-                  <td style={{ padding: '10px 8px', textAlign: 'center', color: '#ef4444', fontWeight: eq.d > 0 ? 700 : 400 }}>{eq.d}</td>
-                  <td style={{ padding: '10px 8px', textAlign: 'center', color: '#64748b' }}>{eq.bp}</td>
-                  <td style={{ padding: '10px 8px', textAlign: 'center', color: '#64748b' }}>{eq.bc}</td>
+                  <td className="col-hide" style={{ padding: '10px 6px', textAlign: 'center', color: '#64748b' }}>{eq.mj}</td>
+                  <td className="col-hide" style={{ padding: '10px 6px', textAlign: 'center', color: '#22c55e', fontWeight: eq.v > 0 ? 700 : 400 }}>{eq.v}</td>
+                  <td className="col-hide" style={{ padding: '10px 6px', textAlign: 'center', color: '#94a3b8' }}>{eq.n}</td>
+                  <td className="col-hide" style={{ padding: '10px 6px', textAlign: 'center', color: '#ef4444', fontWeight: eq.d > 0 ? 700 : 400 }}>{eq.d}</td>
+                  <td className="col-hide" style={{ padding: '10px 6px', textAlign: 'center', color: '#64748b' }}>{eq.bp}</td>
+                  <td className="col-hide" style={{ padding: '10px 6px', textAlign: 'center', color: '#64748b' }}>{eq.bc}</td>
                   <td style={{ padding: '10px 8px', textAlign: 'center', color: eq.diff > 0 ? '#22c55e' : eq.diff < 0 ? '#ef4444' : '#94a3b8', fontWeight: 600 }}>
                     {eq.diff > 0 ? `+${eq.diff}` : eq.diff}
                   </td>
@@ -218,6 +225,7 @@ export default function Groupes() {
 
   return (
     <>
+      <style>{MOBILE_STYLE}</style>
       {/* HERO */}
       <div style={{ background: 'linear-gradient(135deg, #0c1e52 0%, #16357a 55%, #0c2c60 100%)' }}>
         <div style={{ ...WRAP, paddingTop: 40 }}>
@@ -260,7 +268,7 @@ export default function Groupes() {
         </div>
 
         {/* Grille des groupes */}
-        <div style={{
+        <div className="group-grid" style={{
           display: 'grid',
           gridTemplateColumns: 'repeat(auto-fill, minmax(480px, 1fr))',
           gap: 20,
