@@ -82,5 +82,9 @@
   "M21": {
     "domicile": 1,
     "exterieur": 1
+  },
+  "M22": {
+    "domicile": 0,
+    "exterieur": 0
   }
 }
