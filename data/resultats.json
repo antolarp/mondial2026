@@ -68,7 +68,7 @@
     "exterieur": 1
   },
   "M18": {
-    "domicile": 0,
-    "exterieur": 1
+    "domicile": 1,
+    "exterieur": 4
   }
 }
