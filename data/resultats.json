@@ -74,5 +74,9 @@
   "M19": {
     "domicile": 3,
     "exterieur": 0
+  },
+  "M20": {
+    "domicile": 3,
+    "exterieur": 1
   }
 }
