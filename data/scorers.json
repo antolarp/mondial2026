@@ -63,6 +63,15 @@
     "matchs": 1
   },
   {
+    "nom": "Harry Kane",
+    "equipe": "Angleterre",
+    "crest": "https://crests.football-data.org/770.svg",
+    "buts": 2,
+    "assists": 0,
+    "penaltys": 1,
+    "matchs": 1
+  },
+  {
     "nom": "Julián Quiñones",
     "equipe": "Mexique",
     "crest": "https://crests.football-data.org/769.svg",
@@ -165,15 +174,6 @@
     "nom": "Ismael Saibari",
     "equipe": "Maroc",
     "crest": "https://crests.football-data.org/morocco.svg",
-    "buts": 1,
-    "assists": 0,
-    "penaltys": 0,
-    "matchs": 1
-  },
-  {
-    "nom": "Vinicius Junior",
-    "equipe": "Brésil",
-    "crest": "https://crests.football-data.org/764.svg",
     "buts": 1,
     "assists": 0,
     "penaltys": 0,
