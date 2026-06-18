@@ -94,5 +94,9 @@
   "M24": {
     "domicile": 1,
     "exterieur": 3
+  },
+  "M25": {
+    "domicile": 1,
+    "exterieur": 0
   }
 }
