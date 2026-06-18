@@ -9,6 +9,15 @@
     "matchs": 1
   },
   {
+    "nom": "Cyle Larin",
+    "equipe": "Canada",
+    "crest": "https://crests.football-data.org/canada.svg",
+    "buts": 2,
+    "assists": 0,
+    "penaltys": 0,
+    "matchs": 2
+  },
+  {
     "nom": "Folarin Balogun",
     "equipe": "États-Unis",
     "crest": "https://crests.football-data.org/usa.svg",
@@ -129,15 +138,6 @@
     "nom": "Jovo Lukić",
     "equipe": "Bosnie-et-Herzégovine",
     "crest": "https://crests.football-data.org/bosnia.svg",
-    "buts": 1,
-    "assists": 0,
-    "penaltys": 0,
-    "matchs": 2
-  },
-  {
-    "nom": "Cyle Larin",
-    "equipe": "Canada",
-    "crest": "https://crests.football-data.org/canada.svg",
     "buts": 1,
     "assists": 0,
     "penaltys": 0,
