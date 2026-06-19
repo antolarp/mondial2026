@@ -9,6 +9,15 @@
     "matchs": 1
   },
   {
+    "nom": "Jonathan David",
+    "equipe": "Canada",
+    "crest": "https://crests.football-data.org/canada.svg",
+    "buts": 3,
+    "assists": 0,
+    "penaltys": 0,
+    "matchs": 2
+  },
+  {
     "nom": "Cyle Larin",
     "equipe": "Canada",
     "crest": "https://crests.football-data.org/canada.svg",
@@ -84,15 +93,6 @@
     "nom": "Johan Manzambi",
     "equipe": "Suisse",
     "crest": "https://crests.football-data.org/788.svg",
-    "buts": 2,
-    "assists": 0,
-    "penaltys": 0,
-    "matchs": 2
-  },
-  {
-    "nom": "Jonathan David",
-    "equipe": "Canada",
-    "crest": "https://crests.football-data.org/canada.svg",
     "buts": 2,
     "assists": 0,
     "penaltys": 0,
