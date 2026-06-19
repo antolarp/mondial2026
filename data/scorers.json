@@ -36,6 +36,15 @@
     "matchs": 2
   },
   {
+    "nom": "Ismael Saibari",
+    "equipe": "Maroc",
+    "crest": "https://crests.football-data.org/morocco.svg",
+    "buts": 2,
+    "assists": 0,
+    "penaltys": 0,
+    "matchs": 2
+  },
+  {
     "nom": "Kai Havertz",
     "equipe": "Allemagne",
     "crest": "https://crests.football-data.org/759.svg",
@@ -168,15 +177,6 @@
     "buts": 1,
     "assists": 0,
     "penaltys": 0,
-    "matchs": 2
-  },
-  {
-    "nom": "Breel Embolo",
-    "equipe": "Suisse",
-    "crest": "https://crests.football-data.org/788.svg",
-    "buts": 1,
-    "assists": 1,
-    "penaltys": 1,
     "matchs": 2
   }
 ]
