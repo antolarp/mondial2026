@@ -2,6 +2,7 @@
   {
     "nom": "Lionel Messi",
     "equipe": "Argentine",
+    "equipeEN": "Argentina",
     "crest": "https://crests.football-data.org/762.png",
     "buts": 3,
     "assists": 0,
@@ -11,6 +12,7 @@
   {
     "nom": "Jonathan David",
     "equipe": "Canada",
+    "equipeEN": "Canada",
     "crest": "https://crests.football-data.org/canada.svg",
     "buts": 3,
     "assists": 0,
@@ -20,6 +22,7 @@
   {
     "nom": "Cyle Larin",
     "equipe": "Canada",
+    "equipeEN": "Canada",
     "crest": "https://crests.football-data.org/canada.svg",
     "buts": 2,
     "assists": 0,
@@ -29,6 +32,7 @@
   {
     "nom": "Folarin Balogun",
     "equipe": "États-Unis",
+    "equipeEN": "United States",
     "crest": "https://crests.football-data.org/usa.svg",
     "buts": 2,
     "assists": 0,
@@ -38,6 +42,7 @@
   {
     "nom": "Kai Havertz",
     "equipe": "Allemagne",
+    "equipeEN": "Germany",
     "crest": "https://crests.football-data.org/759.svg",
     "buts": 2,
     "assists": 0,
@@ -47,6 +52,7 @@
   {
     "nom": "Yasin Ayari",
     "equipe": "Suède",
+    "equipeEN": "Sweden",
     "crest": "https://crests.football-data.org/792.svg",
     "buts": 2,
     "assists": 0,
@@ -56,6 +62,7 @@
   {
     "nom": "Elijah Just",
     "equipe": "Nouvelle-Zélande",
+    "equipeEN": "New Zealand",
     "crest": "https://crests.football-data.org/783.svg",
     "buts": 2,
     "assists": 0,
@@ -65,6 +72,7 @@
   {
     "nom": "Kylian Mbappé",
     "equipe": "France",
+    "equipeEN": "France",
     "crest": "https://crests.football-data.org/773.svg",
     "buts": 2,
     "assists": 0,
@@ -74,6 +82,7 @@
   {
     "nom": "Erling Haaland",
     "equipe": "Norvège",
+    "equipeEN": "Norway",
     "crest": "https://crests.football-data.org/813.svg",
     "buts": 2,
     "assists": 0,
@@ -83,6 +92,7 @@
   {
     "nom": "Harry Kane",
     "equipe": "Angleterre",
+    "equipeEN": "England",
     "crest": "https://crests.football-data.org/770.svg",
     "buts": 2,
     "assists": 0,
@@ -92,6 +102,7 @@
   {
     "nom": "Johan Manzambi",
     "equipe": "Suisse",
+    "equipeEN": "Switzerland",
     "crest": "https://crests.football-data.org/788.svg",
     "buts": 2,
     "assists": 0,
@@ -101,6 +112,7 @@
   {
     "nom": "Julián Quiñones",
     "equipe": "Mexique",
+    "equipeEN": "Mexico",
     "crest": "https://crests.football-data.org/769.svg",
     "buts": 1,
     "assists": 0,
@@ -110,6 +122,7 @@
   {
     "nom": "Raúl Jiménez",
     "equipe": "Mexique",
+    "equipeEN": "Mexico",
     "crest": "https://crests.football-data.org/769.svg",
     "buts": 1,
     "assists": 0,
@@ -119,6 +132,7 @@
   {
     "nom": "Ladislav Krejčí",
     "equipe": "Tchéquie",
+    "equipeEN": "Czechia",
     "crest": "https://crests.football-data.org/798.svg",
     "buts": 1,
     "assists": 0,
@@ -128,6 +142,7 @@
   {
     "nom": "In-beom Hwang",
     "equipe": "République de Corée",
+    "equipeEN": "South Korea",
     "crest": "https://crests.football-data.org/772.png",
     "buts": 1,
     "assists": 1,
@@ -137,6 +152,7 @@
   {
     "nom": "Hyun-Gyu Oh",
     "equipe": "République de Corée",
+    "equipeEN": "South Korea",
     "crest": "https://crests.football-data.org/772.png",
     "buts": 1,
     "assists": 0,
@@ -146,6 +162,7 @@
   {
     "nom": "Jovo Lukić",
     "equipe": "Bosnie-et-Herzégovine",
+    "equipeEN": "Bosnia-Herzegovina",
     "crest": "https://crests.football-data.org/bosnia.svg",
     "buts": 1,
     "assists": 0,
@@ -155,6 +172,7 @@
   {
     "nom": "Mauricio",
     "equipe": "Paraguay",
+    "equipeEN": "Paraguay",
     "crest": "https://crests.football-data.org/761.svg",
     "buts": 1,
     "assists": 0,
@@ -164,6 +182,7 @@
   {
     "nom": "Gio Reyna",
     "equipe": "États-Unis",
+    "equipeEN": "United States",
     "crest": "https://crests.football-data.org/usa.svg",
     "buts": 1,
     "assists": 0,
@@ -173,6 +192,7 @@
   {
     "nom": "Breel Embolo",
     "equipe": "Suisse",
+    "equipeEN": "Switzerland",
     "crest": "https://crests.football-data.org/788.svg",
     "buts": 1,
     "assists": 1,
