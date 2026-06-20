@@ -126,6 +126,15 @@
     "matchs": 2
   },
   {
+    "nom": "Brian Brobbey",
+    "equipe": "Pays-Bas",
+    "crest": "https://crests.football-data.org/8601.svg",
+    "buts": 2,
+    "assists": 0,
+    "penaltys": 0,
+    "matchs": 2
+  },
+  {
     "nom": "Julián Quiñones",
     "equipe": "Mexique",
     "crest": "https://crests.football-data.org/769.svg",
@@ -165,15 +174,6 @@
     "nom": "Hyun-Gyu Oh",
     "equipe": "République de Corée",
     "crest": "https://crests.football-data.org/772.png",
-    "buts": 1,
-    "assists": 0,
-    "penaltys": 0,
-    "matchs": 2
-  },
-  {
-    "nom": "Jovo Lukić",
-    "equipe": "Bosnie-et-Herzégovine",
-    "crest": "https://crests.football-data.org/bosnia.svg",
     "buts": 1,
     "assists": 0,
     "penaltys": 0,
