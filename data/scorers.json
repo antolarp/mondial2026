@@ -108,6 +108,15 @@
     "matchs": 2
   },
   {
+    "nom": "Matheus Cunha",
+    "equipe": "Brésil",
+    "crest": "https://crests.football-data.org/764.svg",
+    "buts": 2,
+    "assists": 0,
+    "penaltys": 0,
+    "matchs": 2
+  },
+  {
     "nom": "Julián Quiñones",
     "equipe": "Mexique",
     "crest": "https://crests.football-data.org/769.svg",
@@ -169,14 +178,5 @@
     "assists": 0,
     "penaltys": 0,
     "matchs": 1
-  },
-  {
-    "nom": "Gio Reyna",
-    "equipe": "États-Unis",
-    "crest": "https://crests.football-data.org/usa.svg",
-    "buts": 1,
-    "assists": 0,
-    "penaltys": 0,
-    "matchs": 2
   }
 ]
