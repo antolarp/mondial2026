@@ -135,6 +135,15 @@
     "matchs": 2
   },
   {
+    "nom": "Cody Gakpo",
+    "equipe": "Pays-Bas",
+    "crest": "https://crests.football-data.org/8601.svg",
+    "buts": 2,
+    "assists": 1,
+    "penaltys": 0,
+    "matchs": 2
+  },
+  {
     "nom": "Julián Quiñones",
     "equipe": "Mexique",
     "crest": "https://crests.football-data.org/769.svg",
@@ -167,15 +176,6 @@
     "crest": "https://crests.football-data.org/772.png",
     "buts": 1,
     "assists": 1,
-    "penaltys": 0,
-    "matchs": 2
-  },
-  {
-    "nom": "Hyun-Gyu Oh",
-    "equipe": "République de Corée",
-    "crest": "https://crests.football-data.org/772.png",
-    "buts": 1,
-    "assists": 0,
     "penaltys": 0,
     "matchs": 2
   }
