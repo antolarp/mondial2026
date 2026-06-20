@@ -132,7 +132,7 @@
     "exterieur": 1
   },
   "M34": {
-    "domicile": 0,
+    "domicile": 1,
     "exterieur": 1
   }
 }
