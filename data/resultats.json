@@ -122,5 +122,9 @@
   "M31": {
     "domicile": 3,
     "exterieur": 0
+  },
+  "M32": {
+    "domicile": 0,
+    "exterieur": 1
   }
 }
