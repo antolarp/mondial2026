@@ -134,5 +134,9 @@
   "M34": {
     "domicile": 2,
     "exterieur": 1
+  },
+  "M35": {
+    "domicile": 0,
+    "exterieur": 0
   }
 }
