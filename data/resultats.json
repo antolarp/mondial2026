@@ -146,5 +146,9 @@
   "M37": {
     "domicile": 4,
     "exterieur": 0
+  },
+  "M38": {
+    "domicile": 0,
+    "exterieur": 0
   }
 }
