@@ -72,6 +72,15 @@
     "matchs": 2
   },
   {
+    "nom": "Daichi Kamada",
+    "equipe": "Japon",
+    "crest": "https://crests.football-data.org/766.svg",
+    "buts": 2,
+    "assists": 0,
+    "penaltys": 0,
+    "matchs": 2
+  },
+  {
     "nom": "Yasin Ayari",
     "equipe": "Suède",
     "crest": "https://crests.football-data.org/792.svg",
@@ -165,15 +174,6 @@
     "nom": "Raúl Jiménez",
     "equipe": "Mexique",
     "crest": "https://crests.football-data.org/769.svg",
-    "buts": 1,
-    "assists": 0,
-    "penaltys": 0,
-    "matchs": 2
-  },
-  {
-    "nom": "Ladislav Krejčí",
-    "equipe": "Tchéquie",
-    "crest": "https://crests.football-data.org/798.svg",
     "buts": 1,
     "assists": 0,
     "penaltys": 0,
