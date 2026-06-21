@@ -9,9 +9,9 @@ const COMPETITIONS = [
     emoji: '⭐',
     couleur: '#0c1e52',
     podium: [
-      { place: 1, noms: ['?'], medaille: '#f0b429', inconnu: true },
-      { place: 2, noms: ['?'], medaille: '#94a3b8', inconnu: true },
-      { place: 3, noms: ['?'], medaille: '#d97706', inconnu: true },
+      { place: 1, noms: ['Alix'], medaille: '#f0b429', inconnu: true },
+      { place: 2, noms: ['Aurélie'], medaille: '#94a3b8', inconnu: true },
+      { place: 3, noms: ['Antonin'], medaille: '#d97706', inconnu: true },
     ],
   },
   {
