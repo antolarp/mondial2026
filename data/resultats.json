@@ -158,5 +158,9 @@
   "M40": {
     "domicile": 1,
     "exterieur": 3
+  },
+  "M41": {
+    "domicile": 2,
+    "exterieur": 0
   }
 }
