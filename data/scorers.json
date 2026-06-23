@@ -90,6 +90,15 @@
     "matchs": 2
   },
   {
+    "nom": "Crysencio Summerville",
+    "equipe": "Pays-Bas",
+    "crest": "https://crests.football-data.org/8601.svg",
+    "buts": 2,
+    "assists": 1,
+    "penaltys": 0,
+    "matchs": 2
+  },
+  {
     "nom": "Daichi Kamada",
     "equipe": "Japon",
     "crest": "https://crests.football-data.org/766.svg",
@@ -165,15 +174,6 @@
     "nom": "Cody Gakpo",
     "equipe": "Pays-Bas",
     "crest": "https://crests.football-data.org/8601.svg",
-    "buts": 2,
-    "assists": 2,
-    "penaltys": 0,
-    "matchs": 2
-  },
-  {
-    "nom": "Ayase Ueda",
-    "equipe": "Japon",
-    "crest": "https://crests.football-data.org/766.svg",
     "buts": 2,
     "assists": 1,
     "penaltys": 0,
