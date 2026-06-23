@@ -162,5 +162,9 @@
   "M41": {
     "domicile": 2,
     "exterieur": 0
+  },
+  "M42": {
+    "domicile": 3,
+    "exterieur": 0
   }
 }
