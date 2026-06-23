@@ -170,5 +170,9 @@
   "M43": {
     "domicile": 3,
     "exterieur": 2
+  },
+  "M44": {
+    "domicile": 1,
+    "exterieur": 2
   }
 }
