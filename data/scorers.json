@@ -18,20 +18,20 @@
     "matchs": 2
   },
   {
+    "nom": "Erling Haaland",
+    "equipe": "Norvège",
+    "crest": "https://crests.football-data.org/813.svg",
+    "buts": 4,
+    "assists": 0,
+    "penaltys": 0,
+    "matchs": 2
+  },
+  {
     "nom": "Deniz Undav",
     "equipe": "Allemagne",
     "crest": "https://crests.football-data.org/759.svg",
     "buts": 3,
     "assists": 2,
-    "penaltys": 0,
-    "matchs": 2
-  },
-  {
-    "nom": "Erling Haaland",
-    "equipe": "Norvège",
-    "crest": "https://crests.football-data.org/813.svg",
-    "buts": 3,
-    "assists": 0,
     "penaltys": 0,
     "matchs": 2
   },
