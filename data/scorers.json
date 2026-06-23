@@ -27,6 +27,15 @@
     "matchs": 2
   },
   {
+    "nom": "Erling Haaland",
+    "equipe": "Norvège",
+    "crest": "https://crests.football-data.org/813.svg",
+    "buts": 3,
+    "assists": 0,
+    "penaltys": 0,
+    "matchs": 2
+  },
+  {
     "nom": "Jonathan David",
     "equipe": "Canada",
     "crest": "https://crests.football-data.org/canada.svg",
@@ -111,15 +120,6 @@
     "nom": "Elijah Just",
     "equipe": "Nouvelle-Zélande",
     "crest": "https://crests.football-data.org/783.svg",
-    "buts": 2,
-    "assists": 0,
-    "penaltys": 0,
-    "matchs": 2
-  },
-  {
-    "nom": "Erling Haaland",
-    "equipe": "Norvège",
-    "crest": "https://crests.football-data.org/813.svg",
     "buts": 2,
     "assists": 0,
     "penaltys": 0,
