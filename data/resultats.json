@@ -190,5 +190,13 @@
   "M48": {
     "domicile": 1,
     "exterieur": 0
+  },
+  "M49": {
+    "domicile": 2,
+    "exterieur": 1
+  },
+  "M50": {
+    "domicile": 3,
+    "exterieur": 1
   }
 }
