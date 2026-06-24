@@ -157,7 +157,16 @@
     "equipe": "Suisse",
     "crest": "https://crests.football-data.org/788.svg",
     "buts": 2,
-    "assists": 0,
+    "assists": 1,
+    "penaltys": 0,
+    "matchs": 3
+  },
+  {
+    "nom": "Ruben Vargas",
+    "equipe": "Suisse",
+    "crest": "https://crests.football-data.org/788.svg",
+    "buts": 2,
+    "assists": 1,
     "penaltys": 0,
     "matchs": 3
   },
@@ -165,15 +174,6 @@
     "nom": "Matheus Cunha",
     "equipe": "Brésil",
     "crest": "https://crests.football-data.org/764.svg",
-    "buts": 2,
-    "assists": 0,
-    "penaltys": 0,
-    "matchs": 2
-  },
-  {
-    "nom": "Brian Brobbey",
-    "equipe": "Pays-Bas",
-    "crest": "https://crests.football-data.org/8601.svg",
     "buts": 2,
     "assists": 0,
     "penaltys": 0,
