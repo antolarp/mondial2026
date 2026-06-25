@@ -206,5 +206,13 @@
   "M51": {
     "domicile": 0,
     "exterieur": 3
+  },
+  "M53": {
+    "domicile": 0,
+    "exterieur": 3
+  },
+  "M54": {
+    "domicile": 1,
+    "exterieur": 0
   }
 }
