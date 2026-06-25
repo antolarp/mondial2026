@@ -81,6 +81,15 @@
     "matchs": 3
   },
   {
+    "nom": "Julián Quiñones",
+    "equipe": "Mexique",
+    "crest": "https://crests.football-data.org/769.svg",
+    "buts": 2,
+    "assists": 0,
+    "penaltys": 0,
+    "matchs": 3
+  },
+  {
     "nom": "Cyle Larin",
     "equipe": "Canada",
     "crest": "https://crests.football-data.org/canada.svg",
@@ -169,14 +178,5 @@
     "assists": 0,
     "penaltys": 0,
     "matchs": 1
-  },
-  {
-    "nom": "Ruben Vargas",
-    "equipe": "Suisse",
-    "crest": "https://crests.football-data.org/788.svg",
-    "buts": 2,
-    "assists": 1,
-    "penaltys": 0,
-    "matchs": 3
   }
 ]
