@@ -291,8 +291,8 @@
       "exterieur": 1
     },
     "M73": {
-      "domicile": 2,
-      "exterieur": 2
+      "exterieur": 2,
+      "domicile": 1
     }
   }
 }
