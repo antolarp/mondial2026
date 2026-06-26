@@ -22,7 +22,7 @@
     "equipe": "France",
     "crest": "https://crests.football-data.org/773.svg",
     "buts": 4,
-    "assists": 1,
+    "assists": 2,
     "penaltys": 0,
     "matchs": 3
   },
@@ -86,6 +86,15 @@
     "crest": "https://crests.football-data.org/8601.svg",
     "buts": 3,
     "assists": 0,
+    "penaltys": 0,
+    "matchs": 3
+  },
+  {
+    "nom": "Ousmane Dembélé",
+    "equipe": "France",
+    "crest": "https://crests.football-data.org/773.svg",
+    "buts": 3,
+    "assists": 1,
     "penaltys": 0,
     "matchs": 3
   },
@@ -168,15 +177,6 @@
     "buts": 2,
     "assists": 0,
     "penaltys": 0,
-    "matchs": 2
-  },
-  {
-    "nom": "Harry Kane",
-    "equipe": "Angleterre",
-    "crest": "https://crests.football-data.org/770.svg",
-    "buts": 2,
-    "assists": 0,
-    "penaltys": 1,
     "matchs": 2
   }
 ]
