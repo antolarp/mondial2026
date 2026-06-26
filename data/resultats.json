@@ -242,5 +242,9 @@
   "M61": {
     "domicile": 1,
     "exterieur": 4
+  },
+  "M62": {
+    "domicile": 5,
+    "exterieur": 0
   }
 }
