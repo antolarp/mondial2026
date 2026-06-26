@@ -36,6 +36,15 @@
     "matchs": 3
   },
   {
+    "nom": "Ousmane Dembélé",
+    "equipe": "France",
+    "crest": "https://crests.football-data.org/773.svg",
+    "buts": 4,
+    "assists": 1,
+    "penaltys": 0,
+    "matchs": 3
+  },
+  {
     "nom": "Ismael Saibari",
     "equipe": "Maroc",
     "crest": "https://crests.football-data.org/morocco.svg",
@@ -86,15 +95,6 @@
     "crest": "https://crests.football-data.org/8601.svg",
     "buts": 3,
     "assists": 0,
-    "penaltys": 0,
-    "matchs": 3
-  },
-  {
-    "nom": "Ousmane Dembélé",
-    "equipe": "France",
-    "crest": "https://crests.football-data.org/773.svg",
-    "buts": 3,
-    "assists": 1,
     "penaltys": 0,
     "matchs": 3
   },
