@@ -514,8 +514,8 @@
     "id": "M74",
     "phase": "Seizièmes de finale",
     "date": "2026-06-29T16:30:00-04:00",
-    "domicile": "Brésil",
-    "exterieur": "Japon"
+    "domicile": "",
+    "exterieur": ""
   },
   {
     "id": "M75",
@@ -564,7 +564,7 @@
     "phase": "Seizièmes de finale",
     "date": "2026-07-01T20:00:00-04:00",
     "domicile": "États-Unis",
-    "exterieur": "Bosnie-Herzégovine"
+    "exterieur": "Bosnie-et-Herzégovine"
   },
   {
     "id": "M82",
