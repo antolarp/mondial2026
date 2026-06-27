@@ -289,6 +289,34 @@
     "M72": {
       "exterieur": 2,
       "domicile": 0
+    },
+    "M73": {
+      "domicile": 0,
+      "exterieur": 1
+    },
+    "M74": {
+      "domicile": 2,
+      "exterieur": 0
+    },
+    "M76": {
+      "domicile": 1,
+      "exterieur": 2
+    },
+    "M77": {
+      "domicile": 3,
+      "exterieur": 1
+    },
+    "M78": {
+      "domicile": 2,
+      "exterieur": 1
+    },
+    "M81": {
+      "exterieur": 1,
+      "domicile": 2
+    },
+    "M88": {
+      "domicile": 0,
+      "exterieur": 1
     }
   }
 }
