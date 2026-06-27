@@ -63,6 +63,15 @@
     "matchs": 3
   },
   {
+    "nom": "Elijah Just",
+    "equipe": "Nouvelle-Zélande",
+    "crest": "https://crests.football-data.org/783.svg",
+    "buts": 3,
+    "assists": 0,
+    "penaltys": 0,
+    "matchs": 3
+  },
+  {
     "nom": "Johan Manzambi",
     "equipe": "Suisse",
     "crest": "https://crests.football-data.org/788.svg",
@@ -167,15 +176,6 @@
     "crest": "https://crests.football-data.org/792.svg",
     "buts": 2,
     "assists": 0,
-    "penaltys": 0,
-    "matchs": 3
-  },
-  {
-    "nom": "Maximiliano Araújo",
-    "equipe": "Uruguay",
-    "crest": "https://crests.football-data.org/758.svg",
-    "buts": 2,
-    "assists": 1,
     "penaltys": 0,
     "matchs": 3
   }
