@@ -305,6 +305,54 @@
     "M81": {
       "domicile": 3,
       "exterieur": 1
+    },
+    "M74": {
+      "domicile": 3,
+      "exterieur": 0
+    },
+    "M77": {
+      "domicile": 2,
+      "exterieur": 0
+    },
+    "M78": {
+      "domicile": 1,
+      "exterieur": 3
+    },
+    "M79": {
+      "domicile": 2,
+      "exterieur": 3
+    },
+    "M80": {
+      "exterieur": 1,
+      "domicile": 2
+    },
+    "M82": {
+      "domicile": 1,
+      "exterieur": 0
+    },
+    "M83": {
+      "domicile": 2,
+      "exterieur": 0
+    },
+    "M84": {
+      "domicile": 3,
+      "exterieur": 0
+    },
+    "M85": {
+      "domicile": 1,
+      "exterieur": 2
+    },
+    "M86": {
+      "domicile": 4,
+      "exterieur": 0
+    },
+    "M87": {
+      "domicile": 2,
+      "exterieur": 1
+    },
+    "M88": {
+      "domicile": 1,
+      "exterieur": 2
     }
   }
 }
