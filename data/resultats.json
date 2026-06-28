@@ -286,5 +286,9 @@
   "M72": {
     "domicile": 3,
     "exterieur": 3
+  },
+  "M73": {
+    "domicile": 0,
+    "exterieur": 1
   }
 }
