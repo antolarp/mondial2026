@@ -72,6 +72,15 @@
     "matchs": 3
   },
   {
+    "nom": "Yoane Wissa",
+    "equipe": "RD Congo",
+    "crest": "https://crests.football-data.org/congo_dr.svg",
+    "buts": 3,
+    "assists": 0,
+    "penaltys": 1,
+    "matchs": 2
+  },
+  {
     "nom": "Harry Kane",
     "equipe": "Angleterre",
     "crest": "https://crests.football-data.org/770.svg",
@@ -167,15 +176,6 @@
     "crest": "https://crests.football-data.org/8601.svg",
     "buts": 2,
     "assists": 1,
-    "penaltys": 0,
-    "matchs": 3
-  },
-  {
-    "nom": "Daichi Kamada",
-    "equipe": "Japon",
-    "crest": "https://crests.football-data.org/766.svg",
-    "buts": 2,
-    "assists": 0,
     "penaltys": 0,
     "matchs": 3
   }
