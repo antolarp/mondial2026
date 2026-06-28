@@ -315,16 +315,16 @@
       "exterieur": 0
     },
     "M79": {
-      "exterieur": 1,
-      "domicile": 0
+      "domicile": 2,
+      "exterieur": 1
     },
     "M80": {
       "domicile": 3,
       "exterieur": 0
     },
     "M81": {
-      "domicile": 1,
-      "exterieur": 1
+      "domicile": 2,
+      "exterieur": 0
     },
     "M82": {
       "domicile": 0,
@@ -339,20 +339,20 @@
       "exterieur": 0
     },
     "M85": {
-      "domicile": 2,
-      "exterieur": 1
+      "domicile": 1,
+      "exterieur": 0
     },
     "M86": {
       "domicile": 3,
       "exterieur": 0
     },
     "M87": {
-      "domicile": 1,
+      "domicile": 2,
       "exterieur": 0
     },
     "M88": {
       "domicile": 1,
-      "exterieur": 0
+      "exterieur": 1
     }
   }
 }
