@@ -349,6 +349,10 @@
     "M87": {
       "domicile": 2,
       "exterieur": 1
+    },
+    "M82": {
+      "domicile": 2,
+      "exterieur": 1
     }
   }
 }
