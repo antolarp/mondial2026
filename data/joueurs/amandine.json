@@ -289,6 +289,70 @@
     "M72": {
       "domicile": 1,
       "exterieur": 0
+    },
+    "M73": {
+      "exterieur": 2,
+      "domicile": 1
+    },
+    "M74": {
+      "domicile": 3,
+      "exterieur": 0
+    },
+    "M75": {
+      "domicile": 3,
+      "exterieur": 2
+    },
+    "M76": {
+      "domicile": 2,
+      "exterieur": 1
+    },
+    "M77": {
+      "domicile": 1,
+      "exterieur": 0
+    },
+    "M78": {
+      "domicile": 1,
+      "exterieur": 2
+    },
+    "M79": {
+      "domicile": 2,
+      "exterieur": 1
+    },
+    "M80": {
+      "domicile": 3,
+      "exterieur": 0
+    },
+    "M81": {
+      "domicile": 2,
+      "exterieur": 0
+    },
+    "M82": {
+      "domicile": 2,
+      "exterieur": 3
+    },
+    "M83": {
+      "domicile": 2,
+      "exterieur": 1
+    },
+    "M84": {
+      "domicile": 2,
+      "exterieur": 0
+    },
+    "M85": {
+      "domicile": 2,
+      "exterieur": 1
+    },
+    "M86": {
+      "domicile": 3,
+      "exterieur": 0
+    },
+    "M87": {
+      "domicile": 2,
+      "exterieur": 1
+    },
+    "M88": {
+      "exterieur": 1,
+      "domicile": 0
     }
   }
 }
