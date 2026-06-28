@@ -270,5 +270,9 @@
   "M68": {
     "domicile": 2,
     "exterieur": 1
+  },
+  "M69": {
+    "domicile": 0,
+    "exterieur": 0
   }
 }
