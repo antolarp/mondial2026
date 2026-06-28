@@ -317,6 +317,42 @@
     "M88": {
       "domicile": 0,
       "exterieur": 1
+    },
+    "M75": {
+      "domicile": 1,
+      "exterieur": 2
+    },
+    "M79": {
+      "domicile": 1,
+      "exterieur": 2
+    },
+    "M80": {
+      "domicile": 1,
+      "exterieur": 0
+    },
+    "M82": {
+      "exterieur": 1,
+      "domicile": 0
+    },
+    "M83": {
+      "domicile": 2,
+      "exterieur": 1
+    },
+    "M84": {
+      "domicile": 2,
+      "exterieur": 1
+    },
+    "M85": {
+      "exterieur": 1,
+      "domicile": 2
+    },
+    "M86": {
+      "domicile": 2,
+      "exterieur": 0
+    },
+    "M87": {
+      "domicile": 3,
+      "exterieur": 1
     }
   }
 }
