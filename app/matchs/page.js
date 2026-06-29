@@ -1,6 +1,6 @@
 export const dynamic = 'force-dynamic'
 
-import { chargerMatchs, chargerResultats, chargerJoueurs } from '../../lib/scoring'
+import { chargerMatchs, chargerResultats, chargerJoueurs, calculerPoints } from '../../lib/scoring'
 import { computePronoPhases } from '../../lib/phases'
 import MatchsAccordion from './MatchsAccordion'
 
@@ -32,6 +32,17 @@ export default function Matchs() {
       return (ia === -1 ? 99 : ia) - (ib === -1 ? 99 : ib)
     })
 
+  // Pré-calcul des points côté serveur (scoring.js utilise fs, pas utilisable côté client)
+  const points = {}
+  for (const joueur of joueurs) {
+    points[joueur.nom] = {}
+    for (const match of matchs) {
+      const prono = joueur.pronos[match.id]
+      const res   = resultats[match.id]
+      if (prono && res) points[joueur.nom][match.id] = calculerPoints(prono, res)
+    }
+  }
+
   return (
     <>
       <div style={{ background: 'linear-gradient(135deg, #0c1e52 0%, #16357a 55%, #0c2c60 100%)', paddingBottom: 0 }}>
@@ -58,6 +69,7 @@ export default function Matchs() {
           resultats={resultats}
           joueurs={joueurs}
           pronosOuverts={[...pronosOuverts]}
+          points={points}
         />
       </div>
     </>

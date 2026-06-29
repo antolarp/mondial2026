@@ -2,9 +2,8 @@
 
 import { useState } from 'react'
 import { getFlagUrl } from '../../lib/flags'
-import { calculerPoints } from '../../lib/scoring'
 
-export default function MatchsAccordion({ phases, matchs, resultats, joueurs, pronosOuverts }) {
+export default function MatchsAccordion({ phases, matchs, resultats, joueurs, pronosOuverts, points }) {
   const [openPhases, setOpenPhases] = useState(new Set())
 
   const toggle = (phase) => {
@@ -102,7 +101,7 @@ export default function MatchsAccordion({ phases, matchs, resultats, joueurs, pr
                           ) : (
                             joueurs.map(joueur => {
                               const prono = joueur.pronos[match.id]
-                              const pts   = prono && res ? calculerPoints(prono, res) : null
+                              const pts   = points?.[joueur.nom]?.[match.id] ?? null
                               return (
                                 <div key={joueur.nom} style={{ textAlign: 'center', minWidth: 34 }}>
                                   <p style={{ fontSize: 9, color: '#cbd5e1', marginBottom: 1 }}>{joueur.nom.slice(0, 3)}</p>
