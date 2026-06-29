@@ -74,12 +74,21 @@ export default function PronosPanel({ phases, joueurs }) {
     }))
   }
 
+  const KNOCKOUT_PHASES = new Set(['seiziemes', 'huitiemes', 'quarts', 'demis', 'finale'])
+
   const hasPrno = (matchId) => {
     const p = localPronos[matchId]
     return p && typeof p.domicile === 'number' && typeof p.exterieur === 'number'
   }
 
+  const isDrawInvalid = (matchId) => {
+    if (!KNOCKOUT_PHASES.has(activePhaseId)) return false
+    const p = localPronos[matchId]
+    return p && typeof p.domicile === 'number' && typeof p.exterieur === 'number' && p.domicile === p.exterieur
+  }
+
   const countFilled = (phase) => phase?.matchs.filter(m => hasPrno(m.id)).length ?? 0
+  const countInvalidDraws = (phase) => phase?.matchs.filter(m => isDrawInvalid(m.id)).length ?? 0
 
   // ── Changement de code ────────────────────────────────────────
   const handleChangeCode = async () => {
@@ -118,6 +127,8 @@ export default function PronosPanel({ phases, joueurs }) {
   const isOpen = activePhase?.isOpen ?? false
   const filledCount = countFilled(activePhase)
   const totalCount  = activePhase?.matchs.length ?? 0
+  const invalidDraws = countInvalidDraws(activePhase)
+  const isKnockout = KNOCKOUT_PHASES.has(activePhaseId)
 
   const handleSubmit = async () => {
     if (!activePhase || !isOpen || filledCount === 0) return
@@ -524,16 +535,17 @@ export default function PronosPanel({ phases, joueurs }) {
       {/* Liste des matchs */}
       <div style={{ maxWidth: 560, margin: '0 auto', padding: '12px 12px 0' }}>
         {activePhase?.matchs.map(match => {
-          const prono = localPronos[match.id]
-          const dom   = prono?.domicile
-          const ext   = prono?.exterieur
-          const done  = typeof dom === 'number' && typeof ext === 'number'
-          const date  = new Date(match.date)
+          const prono   = localPronos[match.id]
+          const dom     = prono?.domicile
+          const ext     = prono?.exterieur
+          const done    = typeof dom === 'number' && typeof ext === 'number'
+          const drawErr = isDrawInvalid(match.id)
+          const date    = new Date(match.date)
 
           return (
             <div key={match.id} style={{
               background: '#fff', borderRadius: 16, marginBottom: 8,
-              border: done ? '1.5px solid #0c1e52' : '1px solid #e8eaf2',
+              border: drawErr ? '1.5px solid #ef4444' : done ? '1.5px solid #0c1e52' : '1px solid #e8eaf2',
               boxShadow: done ? '0 2px 8px rgba(12,30,82,0.08)' : '0 1px 4px rgba(0,0,0,0.04)',
               padding: '12px 14px',
               opacity: !isOpen && !done ? 0.6 : 1,
@@ -552,7 +564,7 @@ export default function PronosPanel({ phases, joueurs }) {
 
                 {isOpen ? (
                   /* Inputs éditables */
-                  <>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: 8, position: 'relative', paddingBottom: drawErr ? 16 : 0 }}>
                     <input
                       type="number" inputMode="numeric" min="0" max="20"
                       value={typeof dom === 'number' ? dom : ''}
@@ -561,8 +573,8 @@ export default function PronosPanel({ phases, joueurs }) {
                       style={{
                         width: 52, height: 50, textAlign: 'center', fontSize: 22,
                         fontWeight: 900, borderRadius: 10, flexShrink: 0,
-                        border: typeof dom === 'number' ? '2px solid #0c1e52' : '2px solid #e2e8f0',
-                        outline: 'none', color: '#0c1e52',
+                        border: drawErr ? '2px solid #ef4444' : typeof dom === 'number' ? '2px solid #0c1e52' : '2px solid #e2e8f0',
+                        outline: 'none', color: drawErr ? '#ef4444' : '#0c1e52',
                       }}
                     />
                     <span style={{ fontSize: 18, color: '#cbd5e1', fontWeight: 700, flexShrink: 0 }}>–</span>
@@ -574,10 +586,16 @@ export default function PronosPanel({ phases, joueurs }) {
                       style={{
                         width: 52, height: 50, textAlign: 'center', fontSize: 22,
                         fontWeight: 900, borderRadius: 10, flexShrink: 0,
-                        border: typeof ext === 'number' ? '2px solid #0c1e52' : '2px solid #e2e8f0',
-                        outline: 'none', color: '#0c1e52',
+                        border: drawErr ? '2px solid #ef4444' : typeof ext === 'number' ? '2px solid #0c1e52' : '2px solid #e2e8f0',
+                        outline: 'none', color: drawErr ? '#ef4444' : '#0c1e52',
                       }}
                     />
+                    {drawErr && (
+                      <span style={{ position: 'absolute', fontSize: 10, color: '#ef4444', fontWeight: 700, bottom: 0, left: '50%', transform: 'translateX(-50%)', whiteSpace: 'nowrap' }}>
+                        Pas de nul en élim. !
+                      </span>
+                    )}
+                  </div>
                   </>
                 ) : (
                   /* Lecture seule */
@@ -612,29 +630,32 @@ export default function PronosPanel({ phases, joueurs }) {
         }}>
           <button
             onClick={handleSubmit}
-            disabled={saving}
+            disabled={saving || invalidDraws > 0}
             style={{
               width: '100%', maxWidth: 560, display: 'block', margin: '0 auto',
               padding: 16, borderRadius: 14, fontSize: 15, fontWeight: 800,
-              background: saving
-                ? '#94a3b8'
+              background: saving || invalidDraws > 0
+                ? '#ef4444'
                 : filledCount === totalCount
                   ? 'linear-gradient(135deg, #16a34a, #15803d)'
                   : filledCount > 0
                     ? 'linear-gradient(135deg, #d97706, #b45309)'
                     : '#e2e8f0',
-              color: '#fff', border: 'none',
-              cursor: saving ? 'wait' : 'pointer',
+              color: (saving || invalidDraws > 0 || filledCount > 0) ? '#fff' : '#94a3b8',
+              border: 'none',
+              cursor: saving || invalidDraws > 0 ? 'not-allowed' : 'pointer',
               transition: 'background 0.2s',
             }}
           >
             {saving
               ? 'Enregistrement…'
-              : filledCount === totalCount
-                ? `✅ Sauvegarder mes ${totalCount} pronos`
-                : filledCount > 0
-                  ? `💾 Sauvegarder (${filledCount}/${totalCount} remplis)`
-                  : `Remplis au moins un score`}
+              : invalidDraws > 0
+                ? `❌ ${invalidDraws} match${invalidDraws > 1 ? 's' : ''} nul${invalidDraws > 1 ? 's' : ''} interdit${invalidDraws > 1 ? 's' : ''} en élim.`
+                : filledCount === totalCount
+                  ? `✅ Sauvegarder mes ${totalCount} pronos`
+                  : filledCount > 0
+                    ? `💾 Sauvegarder (${filledCount}/${totalCount} remplis)`
+                    : `Remplis au moins un score`}
           </button>
         </div>
       )}
