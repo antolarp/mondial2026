@@ -596,7 +596,6 @@ export default function PronosPanel({ phases, joueurs }) {
                       </span>
                     )}
                   </div>
-                  </>
                 ) : (
                   /* Lecture seule */
                   <span style={{
