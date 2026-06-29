@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react'
 
 function pad(n) { return String(n).padStart(2, '0') }
 
-export default function Countdown({ match }) {
+export default function Countdown({ match, pronos }) {
   const [left, setLeft] = useState(null)
 
   useEffect(() => {
@@ -57,6 +57,31 @@ export default function Countdown({ match }) {
           </div>
         ))}
       </div>
+
+      {pronos && pronos.total > 0 && (() => {
+        const pctDom = Math.round((pronos.dom / pronos.total) * 100)
+        const pctExt = Math.round((pronos.ext / pronos.total) * 100)
+        const pctNul = 100 - pctDom - pctExt
+        return (
+          <div style={{ marginTop: 14 }}>
+            <p style={{ color: '#5a7fc0', fontSize: 9, letterSpacing: '0.15em', textTransform: 'uppercase', fontWeight: 600, marginBottom: 6 }}>
+              Pronos ({pronos.total} joueur{pronos.total > 1 ? 's' : ''})
+            </p>
+            {/* Barre */}
+            <div style={{ display: 'flex', borderRadius: 6, overflow: 'hidden', height: 8 }}>
+              {pctDom > 0 && <div style={{ width: `${pctDom}%`, background: '#3b82f6' }} />}
+              {pctNul > 0 && <div style={{ width: `${pctNul}%`, background: 'rgba(255,255,255,0.25)' }} />}
+              {pctExt > 0 && <div style={{ width: `${pctExt}%`, background: '#f43f5e' }} />}
+            </div>
+            {/* Légende */}
+            <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: 5 }}>
+              <span style={{ fontSize: 10, color: '#93c5fd', fontWeight: 700 }}>{match.domicile.split(' ').pop()} {pctDom}%</span>
+              {pctNul > 0 && <span style={{ fontSize: 10, color: 'rgba(255,255,255,0.4)', fontWeight: 600 }}>Nul {pctNul}%</span>}
+              <span style={{ fontSize: 10, color: '#fda4af', fontWeight: 700 }}>{pctExt}% {match.exterieur.split(' ').pop()}</span>
+            </div>
+          </div>
+        )
+      })()}
     </div>
   )
 }

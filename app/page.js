@@ -65,6 +65,19 @@ export default function Home() {
     .filter(m => !resultats[m.id])
     .sort((a, b) => new Date(a.date) - new Date(b.date))[0] ?? null
 
+  // Stats pronos du prochain match
+  const pronosProchain = prochainMatch ? (() => {
+    let dom = 0, ext = 0, nul = 0
+    for (const j of joueurs) {
+      const p = j.pronos[prochainMatch.id]
+      if (!p || typeof p.domicile !== 'number') continue
+      if (p.domicile > p.exterieur) dom++
+      else if (p.exterieur > p.domicile) ext++
+      else nul++
+    }
+    return { dom, ext, nul, total: dom + ext + nul }
+  })() : null
+
   return (
     <>
       <AutoRefresh interval={60000} />
@@ -119,7 +132,7 @@ export default function Home() {
               </p>
             </div>
             {/* Countdown prochain match */}
-            {prochainMatch && <Countdown match={prochainMatch} />}
+            {prochainMatch && <Countdown match={prochainMatch} pronos={pronosProchain} />}
 
             {/* Leader card in hero */}
             {classement[0] && (
