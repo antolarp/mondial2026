@@ -8,9 +8,7 @@ export default function PronosPanel({ phases, joueurs }) {
   const [code, setCode]             = useState('')
   const [codeError, setCodeError]   = useState('')
   const [checking, setChecking]     = useState(false)
-  const [activePhaseId, setActivePhaseId] = useState(
-    () => (phases.find(p => p.isOpen) ?? phases[0])?.id ?? ''
-  )
+  const [activePhaseId, setActivePhaseId] = useState(null)
   const [localPronos, setLocalPronos] = useState({})
   const [saving, setSaving]         = useState(false)
   const [toast, setToast]           = useState(null)
@@ -123,12 +121,16 @@ export default function PronosPanel({ phases, joueurs }) {
   }
 
   // ── Submit ─────────────────────────────────────────────────────
-  const activePhase = phases.find(p => p.id === activePhaseId)
+  const activePhase = phases.find(p => p.id === activePhaseId) ?? null
   const isOpen = activePhase?.isOpen ?? false
   const filledCount = countFilled(activePhase)
   const totalCount  = activePhase?.matchs.length ?? 0
   const invalidDraws = countInvalidDraws(activePhase)
   const isKnockout = KNOCKOUT_PHASES.has(activePhaseId)
+
+  const togglePhase = (phaseId) => {
+    setActivePhaseId(prev => prev === phaseId ? null : phaseId)
+  }
 
   const handleSubmit = async () => {
     if (!activePhase || !isOpen || filledCount === 0) return
@@ -433,236 +435,159 @@ export default function PronosPanel({ phases, joueurs }) {
         </div>
       )}
 
-      {/* Onglets phases */}
-      <div style={{ overflowX: 'auto', whiteSpace: 'nowrap', padding: '10px 12px', background: '#fff', borderBottom: '1px solid #e8eaf2' }}>
-        {phases.map(p => {
-          const isActive = p.id === activePhaseId
-          const isSaved  = savedPhases.has(p.id)
-          const phaseOpen = p.isOpen
+      {/* Accordéon des phases */}
+      <div style={{ maxWidth: 560, margin: '0 auto', padding: '12px' }}>
+        {phases.map(phase => {
+          const isExpanded = activePhaseId === phase.id
+          const phaseOpen  = phase.isOpen
+          const isSaved    = savedPhases.has(phase.id)
+          const pFilled    = countFilled(phase)
+          const pTotal     = phase.matchs.length
+          const pInvalid   = isExpanded ? invalidDraws : 0
 
           return (
-            <button key={p.id} onClick={() => setActivePhaseId(p.id)} style={{
-              display: 'inline-block', marginRight: 6, padding: '7px 14px', borderRadius: 20,
-              background: isActive ? '#0c1e52' : isSaved ? '#f0fdf4' : phaseOpen ? '#eff6ff' : '#f8fafc',
-              color: isActive ? '#fff' : isSaved ? '#16a34a' : phaseOpen ? '#1d4ed8' : '#94a3b8',
-              border: isActive ? 'none' : isSaved ? '1px solid #bbf7d0' : phaseOpen ? '1px solid #bfdbfe' : '1px solid #e2e8f0',
-              cursor: 'pointer', fontSize: 12, fontWeight: 600, whiteSpace: 'nowrap',
-            }}>
-              {isSaved && '✓ '}
-              {p.shortLabel}
-              {phaseOpen && !isSaved && (
-                <span style={{ fontSize: 9, marginLeft: 4, background: '#dbeafe', color: '#1d4ed8', padding: '1px 5px', borderRadius: 4, verticalAlign: 'middle' }}>
-                  OUVERT
-                </span>
-              )}
-              {!phaseOpen && (
-                <span style={{ marginLeft: 4, fontSize: 11 }}>🔒</span>
-              )}
-            </button>
-          )
-        })}
-      </div>
+            <div key={phase.id} style={{ marginBottom: 10, borderRadius: 16, overflow: 'hidden', border: isExpanded ? '1.5px solid #0c1e52' : '1px solid #e8eaf2', background: '#fff', boxShadow: isExpanded ? '0 4px 16px rgba(12,30,82,0.10)' : '0 1px 4px rgba(0,0,0,0.04)' }}>
 
-      {/* Barre info phase */}
-      {activePhase && (
-        <div style={{
-          padding: '10px 16px',
-          background: isOpen ? '#eff6ff' : '#f8fafc',
-          borderBottom: '1px solid #e2e8f0',
-          display: 'flex', alignItems: 'center', justifyContent: 'space-between',
-        }}>
-          <div>
-            <p style={{ fontSize: 13, fontWeight: 700, color: isOpen ? '#1e40af' : '#64748b', marginBottom: 2 }}>
-              {isOpen ? '🟢 Phase ouverte' : '🔒 Phase verrouillée'}
-            </p>
-            {activePhase.deadlineISO && (
-              <p style={{ fontSize: 11, color: '#94a3b8' }}>
-                {isOpen ? 'Fermeture le ' : 'Fermée le '}
-                {new Date(activePhase.deadlineISO).toLocaleDateString('fr-FR', {
-                  weekday: 'long', day: 'numeric', month: 'long',
-                })}
-                {' à 23h59'}
-              </p>
-            )}
-          </div>
-          <span style={{
-            fontSize: 15, fontWeight: 800,
-            color: filledCount === totalCount ? '#16a34a' : isOpen ? '#1d4ed8' : '#94a3b8',
-          }}>
-            {filledCount}/{totalCount}
-          </span>
-        </div>
-      )}
-
-      {/* Bandeau d'alerte fermeture imminente */}
-      {(() => {
-        if (!isOpen || !activePhase?.deadlineISO) return null
-        const heuresRestantes = (new Date(activePhase.deadlineISO) - new Date()) / 3_600_000
-        // toujours afficher si la phase est ouverte
-        const urgent  = heuresRestantes < 24
-        const warning = heuresRestantes < 72
-        const jours   = Math.floor(heuresRestantes / 24)
-        const label   = heuresRestantes < 1
-          ? 'Fermeture dans moins d\'1 heure !'
-          : heuresRestantes < 24
-            ? `Fermeture dans ${Math.floor(heuresRestantes)}h !`
-            : `Il reste ${jours} jour${jours > 1 ? 's' : ''} avant la fermeture`
-        const bg      = urgent ? '#fef2f2' : warning ? '#fffbeb' : '#f0fdf4'
-        const border  = urgent ? '#fecaca' : warning ? '#fde68a' : '#bbf7d0'
-        const txtMain = urgent ? '#dc2626' : warning ? '#92400e' : '#15803d'
-        const txtSub  = urgent ? '#ef4444' : warning ? '#b45309' : '#16a34a'
-        const emoji   = urgent ? '🚨'      : warning ? '⚠️'      : '🟢'
-        return (
-          <div style={{
-            background: bg,
-            borderBottom: `1px solid ${border}`,
-            padding: '10px 16px',
-            display: 'flex', alignItems: 'center', gap: 10,
-          }}>
-            <span style={{ fontSize: 20, flexShrink: 0 }}>{emoji}</span>
-            <div>
-              <p style={{ fontSize: 13, fontWeight: 800, color: txtMain, marginBottom: 1 }}>
-                {label}
-              </p>
-              <p style={{ fontSize: 11, color: txtSub, margin: 0 }}>
-                Valide tes pronos avant la fermeture de la phase
-              </p>
-            </div>
-          </div>
-        )
-      })()}
-
-      {/* Liste des matchs */}
-      <div style={{ maxWidth: 560, margin: '0 auto', padding: '12px 12px 0' }}>
-        {activePhase?.matchs.map(match => {
-          const prono   = localPronos[match.id]
-          const dom     = prono?.domicile
-          const ext     = prono?.exterieur
-          const done    = typeof dom === 'number' && typeof ext === 'number'
-          const drawErr = isDrawInvalid(match.id)
-          const date    = new Date(match.date)
-
-          return (
-            <div key={match.id} style={{
-              background: '#fff', borderRadius: 16, marginBottom: 8,
-              border: drawErr ? '1.5px solid #ef4444' : done ? '1.5px solid #0c1e52' : '1px solid #e8eaf2',
-              boxShadow: done ? '0 2px 8px rgba(12,30,82,0.08)' : '0 1px 4px rgba(0,0,0,0.04)',
-              padding: '12px 14px',
-              opacity: !isOpen && !done ? 0.6 : 1,
-            }}>
-              <p style={{ fontSize: 10, color: '#94a3b8', marginBottom: 8, fontWeight: 500 }}>
-                {date.toLocaleDateString('fr-FR', { weekday: 'short', day: 'numeric', month: 'short' })}
-                {' · '}
-                {date.toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' })}
-              </p>
-              <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-                {/* Équipe domicile */}
-                <span style={{ flex: 1, fontSize: 13, fontWeight: 700, color: '#0f172a', display: 'flex', alignItems: 'center', justifyContent: 'flex-end', gap: 5, minWidth: 0 }}>
-                  <span style={{ textAlign: 'right', lineHeight: 1.3 }}>{match.domicile}</span>
-                  {getFlagUrl(match.domicile) && <img src={getFlagUrl(match.domicile)} style={{ width: 20, height: 'auto', borderRadius: 2, flexShrink: 0 }} alt="" />}
-                </span>
-
-                {isOpen ? (
-                  /* Inputs éditables */
-                  <div style={{ display: 'flex', alignItems: 'center', gap: 8, position: 'relative', paddingBottom: drawErr ? 16 : 0 }}>
-                    <input
-                      type="number" inputMode="numeric" min="0" max="20"
-                      value={typeof dom === 'number' ? dom : ''}
-                      onChange={e => setScore(match.id, 'domicile', e.target.value)}
-                      placeholder="–"
-                      style={{
-                        width: 52, height: 50, textAlign: 'center', fontSize: 22,
-                        fontWeight: 900, borderRadius: 10, flexShrink: 0,
-                        border: drawErr ? '2px solid #ef4444' : typeof dom === 'number' ? '2px solid #0c1e52' : '2px solid #e2e8f0',
-                        outline: 'none', color: drawErr ? '#ef4444' : '#0c1e52',
-                      }}
-                    />
-                    <span style={{ fontSize: 18, color: '#cbd5e1', fontWeight: 700, flexShrink: 0 }}>–</span>
-                    <input
-                      type="number" inputMode="numeric" min="0" max="20"
-                      value={typeof ext === 'number' ? ext : ''}
-                      onChange={e => setScore(match.id, 'exterieur', e.target.value)}
-                      placeholder="–"
-                      style={{
-                        width: 52, height: 50, textAlign: 'center', fontSize: 22,
-                        fontWeight: 900, borderRadius: 10, flexShrink: 0,
-                        border: drawErr ? '2px solid #ef4444' : typeof ext === 'number' ? '2px solid #0c1e52' : '2px solid #e2e8f0',
-                        outline: 'none', color: drawErr ? '#ef4444' : '#0c1e52',
-                      }}
-                    />
-                    {drawErr && (
-                      <span style={{ position: 'absolute', fontSize: 10, color: '#ef4444', fontWeight: 700, bottom: 0, left: '50%', transform: 'translateX(-50%)', whiteSpace: 'nowrap' }}>
-                        Pas de nul en élim. !
-                      </span>
-                    )}
-                  </div>
-                ) : (
-                  /* Lecture seule */
-                  <span style={{
-                    background: done ? '#0c1e52' : '#e2e8f0',
-                    color: done ? '#fff' : '#94a3b8',
-                    fontWeight: 800, fontSize: 15,
-                    padding: '7px 16px', borderRadius: 10, flexShrink: 0,
-                  }}>
-                    {done ? `${dom} – ${ext}` : '? – ?'}
+              {/* En-tête cliquable */}
+              <button onClick={() => togglePhase(phase.id)} style={{
+                width: '100%', padding: '14px 16px', background: 'none', border: 'none', cursor: 'pointer',
+                display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 8,
+              }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: 10, minWidth: 0 }}>
+                  <span style={{ fontSize: 15, fontWeight: 800, color: '#0c1e52' }}>{phase.label}</span>
+                  {phaseOpen && (
+                    <span style={{ fontSize: 9, background: '#dbeafe', color: '#1d4ed8', padding: '2px 7px', borderRadius: 6, fontWeight: 700, letterSpacing: '0.05em', whiteSpace: 'nowrap' }}>OUVERT</span>
+                  )}
+                  {!phaseOpen && (
+                    <span style={{ fontSize: 11, color: '#94a3b8' }}>🔒</span>
+                  )}
+                  {isSaved && (
+                    <span style={{ fontSize: 11, color: '#16a34a', fontWeight: 700 }}>✓ sauvegardé</span>
+                  )}
+                </div>
+                <div style={{ display: 'flex', alignItems: 'center', gap: 10, flexShrink: 0 }}>
+                  <span style={{ fontSize: 13, fontWeight: 800, color: pFilled === pTotal ? '#16a34a' : phaseOpen ? '#1d4ed8' : '#94a3b8' }}>
+                    {pFilled}/{pTotal}
                   </span>
-                )}
+                  <span style={{ fontSize: 13, color: '#94a3b8', transition: 'transform 0.2s', display: 'inline-block', transform: isExpanded ? 'rotate(180deg)' : 'rotate(0deg)' }}>▼</span>
+                </div>
+              </button>
 
-                {/* Équipe extérieure */}
-                <span style={{ flex: 1, fontSize: 13, fontWeight: 700, color: '#0f172a', display: 'flex', alignItems: 'center', gap: 5, minWidth: 0 }}>
-                  {getFlagUrl(match.exterieur) && <img src={getFlagUrl(match.exterieur)} style={{ width: 20, height: 'auto', borderRadius: 2, flexShrink: 0 }} alt="" />}
-                  <span style={{ lineHeight: 1.3 }}>{match.exterieur}</span>
-                </span>
-              </div>
+              {/* Contenu dépliable */}
+              {isExpanded && (
+                <div style={{ borderTop: '1px solid #e8eaf2' }}>
+
+                  {/* Bandeau deadline */}
+                  {phaseOpen && phase.deadlineISO && (() => {
+                    const h = (new Date(phase.deadlineISO) - new Date()) / 3_600_000
+                    const urgent = h < 24, warning = h < 72
+                    const jours = Math.floor(h / 24)
+                    const label = h < 1 ? 'Fermeture dans moins d\'1 heure !' : h < 24 ? `Fermeture dans ${Math.floor(h)}h !` : `Il reste ${jours} jour${jours > 1 ? 's' : ''} avant la fermeture`
+                    const bg = urgent ? '#fef2f2' : warning ? '#fffbeb' : '#f0fdf4'
+                    const border = urgent ? '#fecaca' : warning ? '#fde68a' : '#bbf7d0'
+                    const txtMain = urgent ? '#dc2626' : warning ? '#92400e' : '#15803d'
+                    const emoji = urgent ? '🚨' : warning ? '⚠️' : '🟢'
+                    return (
+                      <div style={{ background: bg, borderBottom: `1px solid ${border}`, padding: '10px 16px', display: 'flex', alignItems: 'center', gap: 10 }}>
+                        <span style={{ fontSize: 18 }}>{emoji}</span>
+                        <p style={{ fontSize: 13, fontWeight: 800, color: txtMain }}>{label}</p>
+                      </div>
+                    )
+                  })()}
+
+                  {/* Liste des matchs */}
+                  <div style={{ padding: '10px 12px' }}>
+                    {phase.matchs.map(match => {
+                      const prono   = localPronos[match.id]
+                      const dom     = prono?.domicile
+                      const ext     = prono?.exterieur
+                      const done    = typeof dom === 'number' && typeof ext === 'number'
+                      const drawErr = isDrawInvalid(match.id)
+                      const date    = new Date(match.date)
+
+                      return (
+                        <div key={match.id} style={{
+                          background: '#fff', borderRadius: 14, marginBottom: 8,
+                          border: drawErr ? '1.5px solid #ef4444' : done ? '1.5px solid #0c1e52' : '1px solid #e8eaf2',
+                          padding: '10px 12px',
+                          opacity: !phaseOpen && !done ? 0.6 : 1,
+                        }}>
+                          <p style={{ fontSize: 10, color: '#94a3b8', marginBottom: 6, fontWeight: 500 }}>
+                            {date.toLocaleDateString('fr-FR', { weekday: 'short', day: 'numeric', month: 'short' })}
+                            {' · '}{date.toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' })}
+                          </p>
+                          <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+                            <span style={{ flex: 1, fontSize: 13, fontWeight: 700, color: '#0f172a', display: 'flex', alignItems: 'center', justifyContent: 'flex-end', gap: 5, minWidth: 0 }}>
+                              <span style={{ textAlign: 'right', lineHeight: 1.3 }}>{match.domicile}</span>
+                              {getFlagUrl(match.domicile) && <img src={getFlagUrl(match.domicile)} style={{ width: 20, height: 'auto', borderRadius: 2, flexShrink: 0 }} alt="" />}
+                            </span>
+
+                            {phaseOpen ? (
+                              <div style={{ display: 'flex', alignItems: 'center', gap: 8, position: 'relative', paddingBottom: drawErr ? 16 : 0 }}>
+                                <input type="number" inputMode="numeric" min="0" max="20"
+                                  value={typeof dom === 'number' ? dom : ''}
+                                  onChange={e => setScore(match.id, 'domicile', e.target.value)}
+                                  placeholder="–"
+                                  style={{ width: 52, height: 50, textAlign: 'center', fontSize: 22, fontWeight: 900, borderRadius: 10, flexShrink: 0, border: drawErr ? '2px solid #ef4444' : typeof dom === 'number' ? '2px solid #0c1e52' : '2px solid #e2e8f0', outline: 'none', color: drawErr ? '#ef4444' : '#0c1e52' }}
+                                />
+                                <span style={{ fontSize: 18, color: '#cbd5e1', fontWeight: 700, flexShrink: 0 }}>–</span>
+                                <input type="number" inputMode="numeric" min="0" max="20"
+                                  value={typeof ext === 'number' ? ext : ''}
+                                  onChange={e => setScore(match.id, 'exterieur', e.target.value)}
+                                  placeholder="–"
+                                  style={{ width: 52, height: 50, textAlign: 'center', fontSize: 22, fontWeight: 900, borderRadius: 10, flexShrink: 0, border: drawErr ? '2px solid #ef4444' : typeof ext === 'number' ? '2px solid #0c1e52' : '2px solid #e2e8f0', outline: 'none', color: drawErr ? '#ef4444' : '#0c1e52' }}
+                                />
+                                {drawErr && (
+                                  <span style={{ position: 'absolute', fontSize: 10, color: '#ef4444', fontWeight: 700, bottom: 0, left: '50%', transform: 'translateX(-50%)', whiteSpace: 'nowrap' }}>
+                                    Pas de nul en élim. !
+                                  </span>
+                                )}
+                              </div>
+                            ) : (
+                              <span style={{ background: done ? '#0c1e52' : '#e2e8f0', color: done ? '#fff' : '#94a3b8', fontWeight: 800, fontSize: 15, padding: '7px 16px', borderRadius: 10, flexShrink: 0 }}>
+                                {done ? `${dom} – ${ext}` : '? – ?'}
+                              </span>
+                            )}
+
+                            <span style={{ flex: 1, fontSize: 13, fontWeight: 700, color: '#0f172a', display: 'flex', alignItems: 'center', gap: 5, minWidth: 0 }}>
+                              {getFlagUrl(match.exterieur) && <img src={getFlagUrl(match.exterieur)} style={{ width: 20, height: 'auto', borderRadius: 2, flexShrink: 0 }} alt="" />}
+                              <span style={{ lineHeight: 1.3 }}>{match.exterieur}</span>
+                            </span>
+                          </div>
+                        </div>
+                      )
+                    })}
+                  </div>
+
+                  {/* Bouton save inline si phase ouverte */}
+                  {phaseOpen && (
+                    <div style={{ padding: '0 12px 14px' }}>
+                      <button onClick={handleSubmit} disabled={saving || pInvalid > 0}
+                        style={{
+                          width: '100%', padding: 14, borderRadius: 12, fontSize: 14, fontWeight: 800,
+                          background: saving || pInvalid > 0 ? '#ef4444' : pFilled === pTotal ? 'linear-gradient(135deg, #16a34a, #15803d)' : pFilled > 0 ? 'linear-gradient(135deg, #d97706, #b45309)' : '#e2e8f0',
+                          color: (saving || pInvalid > 0 || pFilled > 0) ? '#fff' : '#94a3b8',
+                          border: 'none', cursor: saving || pInvalid > 0 ? 'not-allowed' : 'pointer',
+                        }}>
+                        {saving ? 'Enregistrement…'
+                          : pInvalid > 0 ? `❌ ${pInvalid} nul${pInvalid > 1 ? 's' : ''} interdit${pInvalid > 1 ? 's' : ''} en élim.`
+                          : pFilled === pTotal ? `✅ Sauvegarder mes ${pTotal} pronos`
+                          : pFilled > 0 ? `💾 Sauvegarder (${pFilled}/${pTotal} remplis)`
+                          : `Remplis au moins un score`}
+                      </button>
+                    </div>
+                  )}
+                </div>
+              )}
             </div>
           )
         })}
       </div>
-
-      {/* Barre de validation sticky en bas */}
-      {isOpen && (
-        <div style={{
-          position: 'fixed', bottom: 0, left: 0, right: 0,
-          background: '#fff', borderTop: '1px solid #e2e8f0',
-          padding: '14px 20px', zIndex: 20,
-          boxShadow: '0 -4px 20px rgba(0,0,0,0.08)',
-        }}>
-          <button
-            onClick={handleSubmit}
-            disabled={saving || invalidDraws > 0}
-            style={{
-              width: '100%', maxWidth: 560, display: 'block', margin: '0 auto',
-              padding: 16, borderRadius: 14, fontSize: 15, fontWeight: 800,
-              background: saving || invalidDraws > 0
-                ? '#ef4444'
-                : filledCount === totalCount
-                  ? 'linear-gradient(135deg, #16a34a, #15803d)'
-                  : filledCount > 0
-                    ? 'linear-gradient(135deg, #d97706, #b45309)'
-                    : '#e2e8f0',
-              color: (saving || invalidDraws > 0 || filledCount > 0) ? '#fff' : '#94a3b8',
-              border: 'none',
-              cursor: saving || invalidDraws > 0 ? 'not-allowed' : 'pointer',
-              transition: 'background 0.2s',
-            }}
-          >
-            {saving
-              ? 'Enregistrement…'
-              : invalidDraws > 0
-                ? `❌ ${invalidDraws} match${invalidDraws > 1 ? 's' : ''} nul${invalidDraws > 1 ? 's' : ''} interdit${invalidDraws > 1 ? 's' : ''} en élim.`
-                : filledCount === totalCount
-                  ? `✅ Sauvegarder mes ${totalCount} pronos`
-                  : filledCount > 0
-                    ? `💾 Sauvegarder (${filledCount}/${totalCount} remplis)`
-                    : `Remplis au moins un score`}
-          </button>
-        </div>
-      )}
 
       {/* Toast */}
       {toast && (
         <div style={{
-          position: 'fixed', bottom: isOpen ? 90 : 28,
+          position: 'fixed', bottom: 28,
           left: '50%', transform: 'translateX(-50%)',
           background: toast.ok ? '#0c1e52' : '#ef4444',
           color: '#fff', padding: '14px 22px', borderRadius: 14,
