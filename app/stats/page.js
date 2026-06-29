@@ -150,7 +150,7 @@ export default function Stats() {
               <span style={{ fontSize: 10, letterSpacing: '0.2em', textTransform: 'uppercase', color: '#94a3b8', fontWeight: 600 }}>Classements CDM</span>
               <div style={{ flex: 1, height: 1, background: '#e2e8f0' }} />
             </div>
-            <div style={{ display: 'grid', gridTemplateColumns: scorers.filter(s => s.assists > 0).length >= 3 ? '1fr 1fr' : '1fr', gap: 16 }}>
+            <div style={{ display: 'grid', gridTemplateColumns: '1fr', gap: 16 }}>
               {/* Top buteurs */}
               <div style={{ ...CARD }}>
                 <p style={{ fontWeight: 800, fontSize: 17, color: '#0f172a', marginBottom: 2 }}>⚽ Meilleurs buteurs</p>
@@ -172,27 +172,6 @@ export default function Stats() {
                   ))}
                 </div>
               </div>
-
-              {/* Top passeurs — affiché uniquement si données dispo */}
-              {scorers.filter(s => s.assists > 0).length >= 3 && (
-                <div style={{ ...CARD }}>
-                  <p style={{ fontWeight: 800, fontSize: 17, color: '#0f172a', marginBottom: 2 }}>🎯 Meilleurs passeurs</p>
-                  <p style={{ fontSize: 12, color: '#94a3b8', marginBottom: 20 }}>Passes décisives depuis le début du tournoi</p>
-                  <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
-                    {[...scorers].sort((a, b) => b.assists - a.assists).filter(s => s.assists > 0).slice(0, 10).map((s, i) => (
-                      <div key={s.nom} style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-                        <span style={{ fontSize: 12, fontWeight: 800, color: i === 0 ? '#f0b429' : i === 1 ? '#94a3b8' : i === 2 ? '#d97706' : '#cbd5e1', width: 20, textAlign: 'center', flexShrink: 0 }}>{i + 1}</span>
-                        {s.crest && <img src={s.crest} style={{ width: 20, height: 20, objectFit: 'contain', flexShrink: 0 }} alt="" />}
-                        <div style={{ flex: 1, minWidth: 0 }}>
-                          <p style={{ fontSize: 13, fontWeight: 700, color: '#0f172a', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{s.nom}</p>
-                          <p style={{ fontSize: 11, color: '#94a3b8' }}>{s.equipe} · {s.matchs} match{s.matchs > 1 ? 's' : ''}</p>
-                        </div>
-                        <span style={{ fontSize: 18, fontWeight: 900, color: '#0f172a', flexShrink: 0 }}>{s.assists}</span>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              )}
             </div>
           </div>
         )}
