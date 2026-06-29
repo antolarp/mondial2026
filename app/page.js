@@ -69,6 +69,37 @@ export default function Home() {
     <>
       <AutoRefresh interval={60000} />
       <ConfettiLeader leader={classement[0]?.nom ?? ''} />
+
+      {/* Bandeau classement défilant sticky */}
+      <div style={{ position: 'fixed', bottom: 0, left: 0, right: 0, zIndex: 50, background: 'rgba(12, 30, 82, 0.6)', backdropFilter: 'blur(8px)', overflow: 'hidden', whiteSpace: 'nowrap', padding: '10px 0', boxShadow: '0 -4px 20px rgba(0,0,0,0.2)', borderTop: '1px solid rgba(90, 127, 192, 0.4)' }}>
+        <style>{`
+          @keyframes ticker-lespotes {
+            0%   { transform: translateX(100vw); }
+            100% { transform: translateX(-100%); }
+          }
+          .ticker-lespotes {
+            display: inline-block;
+            animation: ticker-lespotes 22s linear infinite;
+            font-size: 14px;
+            font-weight: 700;
+            color: #fff;
+            letter-spacing: 0.04em;
+          }
+        `}</style>
+        <span className="ticker-lespotes">
+          {[...classement, ...classement].map((j, i) => {
+            const rank = i % classement.length
+            const medals = ['🥇', '🥈', '🥉']
+            const prefix = rank === 0 ? '🏆 CLASSEMENT · ' : ''
+            return (
+              <span key={i}>
+                {prefix}{medals[rank] ?? `${rank + 1}.`} {j.nom} — {j.points} pts{' · '}
+              </span>
+            )
+          })}
+        </span>
+      </div>
+
       <div style={{
         background: 'linear-gradient(135deg, #0c1e52 0%, #16357a 55%, #0c2c60 100%)',
         paddingBottom: 0,
