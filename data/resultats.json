@@ -294,5 +294,9 @@
   "M76": {
     "domicile": 2,
     "exterieur": 1
+  },
+  "M74": {
+    "domicile": 1,
+    "exterieur": 2
   }
 }
