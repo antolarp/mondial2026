@@ -226,7 +226,7 @@ function AccordionHeader({ title, count, open, onToggle, accent = '#3b82f6' }) {
 }
 
 export default function GroupesClient({ groupes, matchsR32, matchsR16, resultats }) {
-  const [groupsOpen, setGroupsOpen] = useState(true)
+  const [groupsOpen, setGroupsOpen] = useState(false)
   const [r32Open, setR32Open] = useState(false)
 
   const matchsMap = {}
