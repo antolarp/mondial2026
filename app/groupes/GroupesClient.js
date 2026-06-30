@@ -152,50 +152,48 @@ function TableauGroupe({ lettre, equipes }) {
   const couleur = GROUP_COLORS[lettre] || '#3498db'
   const matchsJoues = equipes.some(e => e.mj > 0)
   return (
-    <div style={{ background: '#fff', borderRadius: 12, border: '1px solid #e8eaf2', boxShadow: '0 2px 8px rgba(0,0,0,0.05)', overflow: 'hidden' }}>
-      <div style={{ background: `linear-gradient(135deg, ${couleur}dd, ${couleur}99)`, padding: '10px 16px', display: 'flex', alignItems: 'center', gap: 8 }}>
-        <div style={{ width: 28, height: 28, background: 'rgba(255,255,255,0.2)', borderRadius: 7, display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 900, fontSize: 15, color: '#fff' }}>{lettre}</div>
-        <span style={{ color: '#fff', fontWeight: 700, fontSize: 13 }}>Groupe {lettre}</span>
-        {!matchsJoues && <span style={{ marginLeft: 'auto', fontSize: 10, color: 'rgba(255,255,255,0.7)', fontStyle: 'italic' }}>pas commencé</span>}
+    <div style={{ background: '#fff', borderRadius: 10, border: '1px solid #e8eaf2', overflow: 'hidden' }}>
+      <div style={{ background: `linear-gradient(135deg, ${couleur}dd, ${couleur}99)`, padding: '7px 12px', display: 'flex', alignItems: 'center', gap: 6 }}>
+        <div style={{ width: 22, height: 22, background: 'rgba(255,255,255,0.2)', borderRadius: 6, display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 900, fontSize: 12, color: '#fff' }}>{lettre}</div>
+        <span style={{ color: '#fff', fontWeight: 700, fontSize: 12 }}>Groupe {lettre}</span>
+        {!matchsJoues && <span style={{ marginLeft: 'auto', fontSize: 9, color: 'rgba(255,255,255,0.7)', fontStyle: 'italic' }}>pas commencé</span>}
       </div>
-      <div style={{ overflowX: 'auto' }}>
-        <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: 12 }}>
-          <thead>
-            <tr style={{ borderBottom: '2px solid #f0f2f8' }}>
-              {['#','Équipe','MJ','V','N','D','BP','BC','Diff','Pts'].map((h, i) => (
-                <th key={h} className={i >= 2 && i <= 7 ? 'col-hide' : ''} style={{ padding: '6px', textAlign: i <= 1 ? 'left' : 'center', color: '#94a3b8', fontWeight: 600, fontSize: 10 }}>{h}</th>
-              ))}
-            </tr>
-          </thead>
-          <tbody>
-            {equipes.map((eq, i) => {
-              const qualifie = i < 2
-              const troisieme = i === 2
-              return (
-                <tr key={eq.nom} style={{ borderBottom: i < equipes.length - 1 ? '1px solid #f4f6fb' : 'none', background: qualifie ? `${couleur}08` : troisieme ? '#fffbf0' : '#fff', borderLeft: qualifie ? `3px solid ${couleur}` : troisieme ? '3px solid #f0b429' : '3px solid transparent' }}>
-                  <td style={{ padding: '8px 10px', color: qualifie ? couleur : '#94a3b8', fontWeight: 700, fontSize: 11 }}>{i + 1}</td>
-                  <td style={{ padding: '8px 10px' }}>
-                    <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
-                      <Flag equipe={eq.nom} />
-                      <span style={{ fontWeight: qualifie ? 700 : 500, color: '#0f172a', fontSize: 12 }}>{eq.nom}</span>
-                      {qualifie && <span style={{ fontSize: 9, color: couleur, fontWeight: 700, background: `${couleur}15`, padding: '1px 5px', borderRadius: 8 }}>Q</span>}
-                      {troisieme && eq.mj > 0 && <span style={{ fontSize: 9, color: '#f0b429', fontWeight: 700, background: '#fef9e7', padding: '1px 5px', borderRadius: 8 }}>?</span>}
-                    </div>
-                  </td>
-                  <td className="col-hide" style={{ padding: '8px 6px', textAlign: 'center', color: '#64748b' }}>{eq.mj}</td>
-                  <td className="col-hide" style={{ padding: '8px 6px', textAlign: 'center', color: '#22c55e', fontWeight: eq.v > 0 ? 700 : 400 }}>{eq.v}</td>
-                  <td className="col-hide" style={{ padding: '8px 6px', textAlign: 'center', color: '#94a3b8' }}>{eq.n}</td>
-                  <td className="col-hide" style={{ padding: '8px 6px', textAlign: 'center', color: '#ef4444', fontWeight: eq.d > 0 ? 700 : 400 }}>{eq.d}</td>
-                  <td className="col-hide" style={{ padding: '8px 6px', textAlign: 'center', color: '#64748b' }}>{eq.bp}</td>
-                  <td className="col-hide" style={{ padding: '8px 6px', textAlign: 'center', color: '#64748b' }}>{eq.bc}</td>
-                  <td style={{ padding: '8px 6px', textAlign: 'center', color: eq.diff > 0 ? '#22c55e' : eq.diff < 0 ? '#ef4444' : '#94a3b8', fontWeight: 600 }}>{eq.diff > 0 ? `+${eq.diff}` : eq.diff}</td>
-                  <td style={{ padding: '8px 10px', textAlign: 'center', fontWeight: 900, fontSize: 14, color: qualifie ? couleur : '#0f172a' }}>{eq.pts}</td>
-                </tr>
-              )
-            })}
-          </tbody>
-        </table>
-      </div>
+      <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: 11 }}>
+        <thead>
+          <tr style={{ borderBottom: '1px solid #f0f2f8' }}>
+            {['#','Équipe','MJ','V','N','D','BP','BC','Diff','Pts'].map((h, i) => (
+              <th key={h} className={i >= 2 && i <= 7 ? 'col-hide' : ''} style={{ padding: '4px 5px', textAlign: i <= 1 ? 'left' : 'center', color: '#94a3b8', fontWeight: 600, fontSize: 9 }}>{h}</th>
+            ))}
+          </tr>
+        </thead>
+        <tbody>
+          {equipes.map((eq, i) => {
+            const qualifie = i < 2
+            const troisieme = i === 2
+            return (
+              <tr key={eq.nom} style={{ borderBottom: i < equipes.length - 1 ? '1px solid #f4f6fb' : 'none', background: qualifie ? `${couleur}08` : troisieme ? '#fffbf0' : '#fff', borderLeft: qualifie ? `3px solid ${couleur}` : troisieme ? '3px solid #f0b429' : '3px solid transparent' }}>
+                <td style={{ padding: '5px 6px', color: qualifie ? couleur : '#94a3b8', fontWeight: 700, fontSize: 10 }}>{i + 1}</td>
+                <td style={{ padding: '5px 6px' }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: 5 }}>
+                    <Flag equipe={eq.nom} size={16} />
+                    <span style={{ fontWeight: qualifie ? 700 : 500, color: '#0f172a', fontSize: 11 }}>{eq.nom}</span>
+                    {qualifie && <span style={{ fontSize: 8, color: couleur, fontWeight: 700, background: `${couleur}15`, padding: '1px 4px', borderRadius: 6 }}>Q</span>}
+                    {troisieme && eq.mj > 0 && <span style={{ fontSize: 8, color: '#f0b429', fontWeight: 700, background: '#fef9e7', padding: '1px 4px', borderRadius: 6 }}>?</span>}
+                  </div>
+                </td>
+                <td className="col-hide" style={{ padding: '5px 4px', textAlign: 'center', color: '#64748b' }}>{eq.mj}</td>
+                <td className="col-hide" style={{ padding: '5px 4px', textAlign: 'center', color: '#22c55e', fontWeight: eq.v > 0 ? 700 : 400 }}>{eq.v}</td>
+                <td className="col-hide" style={{ padding: '5px 4px', textAlign: 'center', color: '#94a3b8' }}>{eq.n}</td>
+                <td className="col-hide" style={{ padding: '5px 4px', textAlign: 'center', color: '#ef4444', fontWeight: eq.d > 0 ? 700 : 400 }}>{eq.d}</td>
+                <td className="col-hide" style={{ padding: '5px 4px', textAlign: 'center', color: '#64748b' }}>{eq.bp}</td>
+                <td className="col-hide" style={{ padding: '5px 4px', textAlign: 'center', color: '#64748b' }}>{eq.bc}</td>
+                <td style={{ padding: '5px 4px', textAlign: 'center', color: eq.diff > 0 ? '#22c55e' : eq.diff < 0 ? '#ef4444' : '#94a3b8', fontWeight: 600 }}>{eq.diff > 0 ? `+${eq.diff}` : eq.diff}</td>
+                <td style={{ padding: '5px 8px', textAlign: 'center', fontWeight: 900, fontSize: 12, color: qualifie ? couleur : '#0f172a' }}>{eq.pts}</td>
+              </tr>
+            )
+          })}
+        </tbody>
+      </table>
     </div>
   )
 }
@@ -275,7 +273,7 @@ export default function GroupesClient({ groupes, matchsR32, matchsR16, resultats
         />
         {groupsOpen && (
           <div style={{ border: '1.5px solid #3498db50', borderTop: 'none', borderRadius: '0 0 12px 12px', padding: 16, background: '#fdfdff' }}>
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(420px, 1fr))', gap: 14 }}>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(260px, 1fr))', gap: 10 }}>
               {lettres.map(lettre => (
                 <TableauGroupe key={lettre} lettre={lettre} equipes={groupes[lettre]} />
               ))}
