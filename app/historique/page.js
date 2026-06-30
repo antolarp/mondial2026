@@ -6,7 +6,7 @@ const COMPETITIONS = [
     titre: 'Euro',
     annee: '2024',
     pays: 'Allemagne',
-    emoji: '⭐',
+    logo: '/Logo_UEFA_Euro_2024.svg',
     couleur: '#0c1e52',
     podium: [
       { place: 1, noms: ['Alix'], medaille: '#f0b429' },
@@ -19,7 +19,7 @@ const COMPETITIONS = [
     titre: 'Coupe du Monde',
     annee: '2022',
     pays: 'Qatar',
-    emoji: '🏆',
+    logo: '/2022_FIFA_World_Cup.svg.webp',
     couleur: '#7c3aed',
     podium: [
       { place: 1, noms: ['Hugo'], medaille: '#f0b429' },
@@ -32,7 +32,7 @@ const COMPETITIONS = [
     titre: 'Euro',
     annee: '2021',
     pays: 'Europe',
-    emoji: '⭐',
+    logo: '/UEFA_Euro_2020_logo.png.webp',
     couleur: '#0c1e52',
     podium: [
       { place: 1, noms: ['Aurélie'], medaille: '#f0b429' },
@@ -45,7 +45,7 @@ const COMPETITIONS = [
     titre: 'Coupe du Monde',
     annee: '2018',
     pays: 'Russie',
-    emoji: '🏆',
+    logo: '/2018.webp',
     couleur: '#c0392b',
     podium: [
       { place: 1, noms: ['Antonin'], medaille: '#f0b429' },
@@ -58,7 +58,7 @@ const COMPETITIONS = [
     titre: 'Coupe du Monde',
     annee: '2014',
     pays: 'Brésil',
-    emoji: '🏆',
+    logo: '/WC-2014-Brasil.svg',
     couleur: '#065f46',
     podium: [
       { place: 1, noms: ['Tristan'], medaille: '#f0b429' },
@@ -178,7 +178,7 @@ export default function Historique() {
                 justifyContent: 'space-between',
               }}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: 14 }}>
-                  <span style={{ fontSize: 36 }}>{comp.emoji}</span>
+                  <img src={comp.logo} alt={comp.titre} style={{ width: 56, height: 56, objectFit: 'contain', flexShrink: 0 }} />
                   <div>
                     <p style={{ color: 'rgba(255,255,255,0.65)', fontSize: 11, letterSpacing: '0.2em', textTransform: 'uppercase', fontWeight: 600, marginBottom: 2 }}>
                       {comp.pays}
