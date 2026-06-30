@@ -75,9 +75,9 @@ export default function Countdown({ match, pronos }) {
             </div>
             {/* Légende */}
             <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: 5 }}>
-              <span style={{ fontSize: 10, color: '#93c5fd', fontWeight: 700 }}>{match.domicile.split(' ').pop()} {pctDom}%</span>
+              <span style={{ fontSize: 10, color: '#93c5fd', fontWeight: 700, maxWidth: '40%', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{match.domicile} {pctDom}%</span>
               {pctNul > 0 && <span style={{ fontSize: 10, color: 'rgba(255,255,255,0.4)', fontWeight: 600 }}>Nul {pctNul}%</span>}
-              <span style={{ fontSize: 10, color: '#fda4af', fontWeight: 700 }}>{pctExt}% {match.exterieur.split(' ').pop()}</span>
+              <span style={{ fontSize: 10, color: '#fda4af', fontWeight: 700, maxWidth: '40%', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', textAlign: 'right' }}>{pctExt}% {match.exterieur}</span>
             </div>
           </div>
         )
