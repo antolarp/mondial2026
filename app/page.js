@@ -116,7 +116,31 @@ export default function Home() {
       <div style={{
         background: 'linear-gradient(135deg, #0c1e52 0%, #16357a 55%, #0c2c60 100%)',
         paddingBottom: 0,
+        position: 'relative',
+        overflow: 'hidden',
       }}>
+        {/* Lignes de terrain */}
+        <svg aria-hidden="true" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', pointerEvents: 'none' }} viewBox="0 0 1200 320" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+          {/* Ligne médiane verticale */}
+          <line x1="600" y1="-20" x2="600" y2="340" stroke="white" strokeWidth="1.5" strokeOpacity="0.10" />
+          {/* Cercle central */}
+          <circle cx="600" cy="160" r="100" fill="none" stroke="white" strokeWidth="1.5" strokeOpacity="0.10" />
+          {/* Point central */}
+          <circle cx="600" cy="160" r="3" fill="white" fillOpacity="0.12" />
+          {/* Arc de but gauche */}
+          <rect x="-2" y="80" width="90" height="160" fill="none" stroke="white" strokeWidth="1.5" strokeOpacity="0.10" />
+          <rect x="-2" y="115" width="42" height="90" fill="none" stroke="white" strokeWidth="1.5" strokeOpacity="0.10" />
+          <circle cx="60" cy="160" r="55" fill="none" stroke="white" strokeWidth="1.5" strokeOpacity="0.10" strokeDasharray="172 1000" strokeDashoffset="-86" />
+          {/* Arc de but droit */}
+          <rect x="1114" y="80" width="90" height="160" fill="none" stroke="white" strokeWidth="1.5" strokeOpacity="0.10" />
+          <rect x="1162" y="115" width="42" height="90" fill="none" stroke="white" strokeWidth="1.5" strokeOpacity="0.10" />
+          <circle cx="1140" cy="160" r="55" fill="none" stroke="white" strokeWidth="1.5" strokeOpacity="0.10" strokeDasharray="172 1000" strokeDashoffset="-430" />
+          {/* Coins — quarts de cercle */}
+          <path d="M0,0 Q18,0 18,18" fill="none" stroke="white" strokeWidth="1.5" strokeOpacity="0.10" />
+          <path d="M1200,0 Q1182,0 1182,18" fill="none" stroke="white" strokeWidth="1.5" strokeOpacity="0.10" />
+          <path d="M0,320 Q18,320 18,302" fill="none" stroke="white" strokeWidth="1.5" strokeOpacity="0.10" />
+          <path d="M1200,320 Q1182,320 1182,302" fill="none" stroke="white" strokeWidth="1.5" strokeOpacity="0.10" />
+        </svg>
         <div className="page-wrap" style={{ ...WRAP, paddingTop: 52, paddingBottom: 0 }}>
           <p style={{ color: '#5a7fc0', fontSize: 11, letterSpacing: '0.25em', textTransform: 'uppercase', marginBottom: 14, fontWeight: 600 }}>
             USA · Canada · Mexique · Juin–Juillet 2026
