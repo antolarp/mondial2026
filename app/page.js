@@ -119,34 +119,33 @@ export default function Home() {
         position: 'relative',
         overflow: 'hidden',
       }}>
-        {/* Lignes de terrain */}
+        {/* Lignes de terrain – vue de haut, échelle ~11px/m, centre à (600,160) */}
         <svg aria-hidden="true" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', pointerEvents: 'none' }} viewBox="0 0 1200 320" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
-          {/* Bordure du terrain */}
-          <rect x="20" y="14" width="1160" height="292" fill="none" stroke="white" strokeWidth="1.5" strokeOpacity="0.09" />
+          {/* Lignes de but (bords gauche/droit du terrain) */}
+          <line x1="26"   y1="-250" x2="26"   y2="570" stroke="white" strokeWidth="1.5" strokeOpacity="0.11" />
+          <line x1="1174" y1="-250" x2="1174" y2="570" stroke="white" strokeWidth="1.5" strokeOpacity="0.11" />
           {/* Ligne médiane */}
-          <line x1="600" y1="14" x2="600" y2="306" stroke="white" strokeWidth="1.5" strokeOpacity="0.09" />
-          {/* Cercle central — décalé à gauche pour ne pas couvrir la carte countdown */}
-          <circle cx="290" cy="160" r="95" fill="none" stroke="white" strokeWidth="1.5" strokeOpacity="0.09" />
-          <circle cx="290" cy="160" r="3" fill="white" fillOpacity="0.10" />
-          {/* Point central réel au milieu */}
-          <circle cx="600" cy="160" r="3" fill="white" fillOpacity="0.10" />
-          {/* Surface de réparation gauche */}
-          <rect x="20" y="79" width="130" height="162" fill="none" stroke="white" strokeWidth="1.5" strokeOpacity="0.09" />
-          {/* Petite surface gauche */}
-          <rect x="20" y="117" width="52" height="86" fill="none" stroke="white" strokeWidth="1.5" strokeOpacity="0.09" />
-          {/* Arc penalty gauche */}
-          <path d="M150,117 A62,62 0 0,1 150,203" fill="none" stroke="white" strokeWidth="1.5" strokeOpacity="0.09" />
+          <line x1="600" y1="-250" x2="600" y2="570" stroke="white" strokeWidth="1.5" strokeOpacity="0.11" />
+          {/* Cercle central */}
+          <circle cx="600" cy="160" r="100" fill="none" stroke="white" strokeWidth="1.5" strokeOpacity="0.11" />
+          {/* Point central */}
+          <circle cx="600" cy="160" r="3.5" fill="white" fillOpacity="0.13" />
+          {/* Surface de réparation gauche (16.5m × 40.32m ≈ 180px × 441px) */}
+          <rect x="26" y="-60" width="180" height="440" fill="none" stroke="white" strokeWidth="1.5" strokeOpacity="0.11" />
+          {/* Petite surface gauche (5.5m × 18.32m ≈ 60px × 200px) */}
+          <rect x="26" y="60" width="60" height="200" fill="none" stroke="white" strokeWidth="1.5" strokeOpacity="0.11" />
+          {/* Point de penalty gauche */}
+          <circle cx="146" cy="160" r="3.5" fill="white" fillOpacity="0.13" />
+          {/* Arc de penalty gauche (partie hors surface) */}
+          <path d="M206,80 A100,100 0 0,1 206,240" fill="none" stroke="white" strokeWidth="1.5" strokeOpacity="0.11" />
           {/* Surface de réparation droite */}
-          <rect x="1050" y="79" width="130" height="162" fill="none" stroke="white" strokeWidth="1.5" strokeOpacity="0.09" />
+          <rect x="994" y="-60" width="180" height="440" fill="none" stroke="white" strokeWidth="1.5" strokeOpacity="0.11" />
           {/* Petite surface droite */}
-          <rect x="1128" y="117" width="52" height="86" fill="none" stroke="white" strokeWidth="1.5" strokeOpacity="0.09" />
-          {/* Arc penalty droit */}
-          <path d="M1050,117 A62,62 0 0,0 1050,203" fill="none" stroke="white" strokeWidth="1.5" strokeOpacity="0.09" />
-          {/* Coins */}
-          <path d="M20,14 Q34,14 34,28" fill="none" stroke="white" strokeWidth="1.5" strokeOpacity="0.09" />
-          <path d="M1180,14 Q1166,14 1166,28" fill="none" stroke="white" strokeWidth="1.5" strokeOpacity="0.09" />
-          <path d="M20,306 Q34,306 34,292" fill="none" stroke="white" strokeWidth="1.5" strokeOpacity="0.09" />
-          <path d="M1180,306 Q1166,306 1166,292" fill="none" stroke="white" strokeWidth="1.5" strokeOpacity="0.09" />
+          <rect x="1114" y="60" width="60" height="200" fill="none" stroke="white" strokeWidth="1.5" strokeOpacity="0.11" />
+          {/* Point de penalty droit */}
+          <circle cx="1054" cy="160" r="3.5" fill="white" fillOpacity="0.13" />
+          {/* Arc de penalty droit */}
+          <path d="M994,80 A100,100 0 0,0 994,240" fill="none" stroke="white" strokeWidth="1.5" strokeOpacity="0.11" />
         </svg>
         <div className="page-wrap" style={{ ...WRAP, paddingTop: 52, paddingBottom: 0 }}>
           <p style={{ color: '#5a7fc0', fontSize: 11, letterSpacing: '0.25em', textTransform: 'uppercase', marginBottom: 14, fontWeight: 600 }}>
