@@ -1,6 +1,7 @@
 'use client'
+import { useState, useEffect, useRef } from 'react'
 import {
-  AreaChart, Area, BarChart, Bar, XAxis, YAxis,
+  AreaChart, Area, LineChart, Line, BarChart, Bar, XAxis, YAxis,
   Tooltip, ResponsiveContainer, CartesianGrid, Cell, Legend,
   LabelList, PieChart, Pie,
 } from 'recharts'
@@ -19,6 +20,74 @@ const TOOLTIP = {
   labelStyle: { color: '#94a3b8', fontSize: 11, fontWeight: 600, letterSpacing: '0.05em', marginBottom: 4 },
   itemStyle: { color: '#0f172a', fontWeight: 600 },
   cursor: { fill: 'rgba(0,0,0,0.03)' },
+}
+
+// ── ÉVOLUTION CLASSEMENT (animé au scroll) ───────────────────────────────────
+export function RankEvolutionChart({ data, joueurs }) {
+  const [visibleIdx, setVisibleIdx] = useState(0)
+  const [started, setStarted] = useState(false)
+  const ref = useRef(null)
+
+  useEffect(() => {
+    if (!ref.current || data.length === 0) return
+    const observer = new IntersectionObserver(([entry]) => {
+      if (entry.isIntersecting) { setStarted(true); observer.disconnect() }
+    }, { threshold: 0.25 })
+    observer.observe(ref.current)
+    return () => observer.disconnect()
+  }, [data.length])
+
+  useEffect(() => {
+    if (!started || visibleIdx >= data.length) return
+    const ms = data.length > 60 ? 25 : data.length > 30 ? 40 : 60
+    const t = setTimeout(() => setVisibleIdx(i => i + 1), ms)
+    return () => clearTimeout(t)
+  }, [started, visibleIdx, data.length])
+
+  const n = joueurs.length
+  const slice = data.slice(0, visibleIdx + 1)
+
+  const rankLabel = v => v === 1 ? '1er' : `${v}e`
+
+  return (
+    <div ref={ref} style={{ minHeight: 300 }}>
+      <ResponsiveContainer width="100%" height={300}>
+        <LineChart data={slice} margin={{ top: 10, right: 10, left: -10, bottom: 0 }}>
+          <CartesianGrid stroke="#f1f5f9" vertical={false} />
+          <XAxis dataKey="match" stroke="none" tick={{ fill: '#94a3b8', fontSize: 11 }} axisLine={false} tickLine={false} />
+          <YAxis
+            reversed
+            domain={[1, n]}
+            ticks={Array.from({ length: n }, (_, i) => i + 1)}
+            allowDecimals={false}
+            stroke="none"
+            tick={{ fill: '#94a3b8', fontSize: 11 }}
+            axisLine={false}
+            tickLine={false}
+            tickFormatter={rankLabel}
+          />
+          <Tooltip
+            {...TOOLTIP}
+            formatter={(v, name) => [rankLabel(v), name]}
+            labelFormatter={l => `Match ${l}`}
+          />
+          <Legend wrapperStyle={{ fontSize: 12, paddingTop: 16 }} iconType="circle" iconSize={8} />
+          {joueurs.map((nom, i) => (
+            <Line
+              key={nom}
+              type="monotone"
+              dataKey={nom}
+              stroke={PLAYER_COLORS[i % PLAYER_COLORS.length]}
+              strokeWidth={2.5}
+              dot={false}
+              activeDot={{ r: 5, strokeWidth: 0, fill: PLAYER_COLORS[i % PLAYER_COLORS.length] }}
+              isAnimationActive={false}
+            />
+          ))}
+        </LineChart>
+      </ResponsiveContainer>
+    </div>
+  )
 }
 
 // ── ÉVOLUTION ────────────────────────────────────────────────────────────────

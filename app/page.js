@@ -2,9 +2,9 @@ export const dynamic = 'force-dynamic'
 
 import Link from 'next/link'
 import { chargerJoueurs, chargerMatchs, chargerResultats, calculerClassement } from '../lib/scoring'
-import { calculerEvolution, calculerPourcentages, calculerSeries } from '../lib/stats'
+import { calculerEvolution, calculerEvolutionClassement, calculerPourcentages, calculerSeries } from '../lib/stats'
 import { computePronoPhases } from '../lib/phases'
-import { EvolutionChart } from '../components/Charts'
+import { EvolutionChart, RankEvolutionChart } from '../components/Charts'
 import { PLAYER_COLORS } from '../lib/colors'
 import Countdown from '../components/Countdown'
 import AutoRefresh from '../components/AutoRefresh'
@@ -53,6 +53,7 @@ export default function Home() {
     : null
 
   const evolution = calculerEvolution(joueurs, matchs, resultats)
+  const evolutionClassement = calculerEvolutionClassement(joueurs, matchs, resultats)
   const pourcentages = calculerPourcentages(joueurs, resultats)
   const series = calculerSeries(joueurs, matchs, resultats)
   const nomsJoueurs = joueurs.map(j => j.nom)
@@ -444,6 +445,14 @@ export default function Home() {
           <div style={{ marginTop: 48 }}>
             <div style={{ background: '#fff', borderRadius: 20, padding: '28px 24px', boxShadow: '0 1px 4px rgba(0,0,0,0.05)', border: '1px solid #e8eaf2', marginBottom: 16 }}>
               <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', marginBottom: 20 }}>
+                <div>
+                  <p style={{ fontWeight: 800, fontSize: 17, color: '#0f172a', marginBottom: 2 }}>Évolution du classement</p>
+                  <p style={{ fontSize: 12, color: '#94a3b8' }}>Position après chaque match · animé à l'affichage</p>
+                </div>
+              </div>
+              <RankEvolutionChart data={evolutionClassement} joueurs={nomsJoueurs} />
+
+              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginTop: 32, marginBottom: 16 }}>
                 <div>
                   <p style={{ fontWeight: 800, fontSize: 17, color: '#0f172a', marginBottom: 2 }}>Évolution des points</p>
                   <p style={{ fontSize: 12, color: '#94a3b8' }}>Points cumulés après chaque match</p>
