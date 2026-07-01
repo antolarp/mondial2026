@@ -121,25 +121,32 @@ export default function Home() {
       }}>
         {/* Lignes de terrain */}
         <svg aria-hidden="true" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', pointerEvents: 'none' }} viewBox="0 0 1200 320" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
-          {/* Ligne médiane verticale */}
-          <line x1="600" y1="-20" x2="600" y2="340" stroke="white" strokeWidth="1.5" strokeOpacity="0.10" />
-          {/* Cercle central */}
-          <circle cx="600" cy="160" r="100" fill="none" stroke="white" strokeWidth="1.5" strokeOpacity="0.10" />
-          {/* Point central */}
-          <circle cx="600" cy="160" r="3" fill="white" fillOpacity="0.12" />
-          {/* Arc de but gauche */}
-          <rect x="-2" y="80" width="90" height="160" fill="none" stroke="white" strokeWidth="1.5" strokeOpacity="0.10" />
-          <rect x="-2" y="115" width="42" height="90" fill="none" stroke="white" strokeWidth="1.5" strokeOpacity="0.10" />
-          <circle cx="60" cy="160" r="55" fill="none" stroke="white" strokeWidth="1.5" strokeOpacity="0.10" strokeDasharray="172 1000" strokeDashoffset="-86" />
-          {/* Arc de but droit */}
-          <rect x="1114" y="80" width="90" height="160" fill="none" stroke="white" strokeWidth="1.5" strokeOpacity="0.10" />
-          <rect x="1162" y="115" width="42" height="90" fill="none" stroke="white" strokeWidth="1.5" strokeOpacity="0.10" />
-          <circle cx="1140" cy="160" r="55" fill="none" stroke="white" strokeWidth="1.5" strokeOpacity="0.10" strokeDasharray="172 1000" strokeDashoffset="-430" />
-          {/* Coins — quarts de cercle */}
-          <path d="M0,0 Q18,0 18,18" fill="none" stroke="white" strokeWidth="1.5" strokeOpacity="0.10" />
-          <path d="M1200,0 Q1182,0 1182,18" fill="none" stroke="white" strokeWidth="1.5" strokeOpacity="0.10" />
-          <path d="M0,320 Q18,320 18,302" fill="none" stroke="white" strokeWidth="1.5" strokeOpacity="0.10" />
-          <path d="M1200,320 Q1182,320 1182,302" fill="none" stroke="white" strokeWidth="1.5" strokeOpacity="0.10" />
+          {/* Bordure du terrain */}
+          <rect x="20" y="14" width="1160" height="292" fill="none" stroke="white" strokeWidth="1.5" strokeOpacity="0.09" />
+          {/* Ligne médiane */}
+          <line x1="600" y1="14" x2="600" y2="306" stroke="white" strokeWidth="1.5" strokeOpacity="0.09" />
+          {/* Cercle central — décalé à gauche pour ne pas couvrir la carte countdown */}
+          <circle cx="290" cy="160" r="95" fill="none" stroke="white" strokeWidth="1.5" strokeOpacity="0.09" />
+          <circle cx="290" cy="160" r="3" fill="white" fillOpacity="0.10" />
+          {/* Point central réel au milieu */}
+          <circle cx="600" cy="160" r="3" fill="white" fillOpacity="0.10" />
+          {/* Surface de réparation gauche */}
+          <rect x="20" y="79" width="130" height="162" fill="none" stroke="white" strokeWidth="1.5" strokeOpacity="0.09" />
+          {/* Petite surface gauche */}
+          <rect x="20" y="117" width="52" height="86" fill="none" stroke="white" strokeWidth="1.5" strokeOpacity="0.09" />
+          {/* Arc penalty gauche */}
+          <path d="M150,117 A62,62 0 0,1 150,203" fill="none" stroke="white" strokeWidth="1.5" strokeOpacity="0.09" />
+          {/* Surface de réparation droite */}
+          <rect x="1050" y="79" width="130" height="162" fill="none" stroke="white" strokeWidth="1.5" strokeOpacity="0.09" />
+          {/* Petite surface droite */}
+          <rect x="1128" y="117" width="52" height="86" fill="none" stroke="white" strokeWidth="1.5" strokeOpacity="0.09" />
+          {/* Arc penalty droit */}
+          <path d="M1050,117 A62,62 0 0,0 1050,203" fill="none" stroke="white" strokeWidth="1.5" strokeOpacity="0.09" />
+          {/* Coins */}
+          <path d="M20,14 Q34,14 34,28" fill="none" stroke="white" strokeWidth="1.5" strokeOpacity="0.09" />
+          <path d="M1180,14 Q1166,14 1166,28" fill="none" stroke="white" strokeWidth="1.5" strokeOpacity="0.09" />
+          <path d="M20,306 Q34,306 34,292" fill="none" stroke="white" strokeWidth="1.5" strokeOpacity="0.09" />
+          <path d="M1180,306 Q1166,306 1166,292" fill="none" stroke="white" strokeWidth="1.5" strokeOpacity="0.09" />
         </svg>
         <div className="page-wrap" style={{ ...WRAP, paddingTop: 52, paddingBottom: 0 }}>
           <p style={{ color: '#5a7fc0', fontSize: 11, letterSpacing: '0.25em', textTransform: 'uppercase', marginBottom: 14, fontWeight: 600 }}>
