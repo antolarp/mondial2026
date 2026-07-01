@@ -39,7 +39,7 @@ export function RankEvolutionChart({ data, joueurs }) {
 
   useEffect(() => {
     if (!started || visibleIdx >= data.length) return
-    const ms = data.length > 60 ? 25 : data.length > 30 ? 40 : 60
+    const ms = data.length > 60 ? 80 : data.length > 30 ? 110 : 150
     const t = setTimeout(() => setVisibleIdx(i => i + 1), ms)
     return () => clearTimeout(t)
   }, [started, visibleIdx, data.length])
