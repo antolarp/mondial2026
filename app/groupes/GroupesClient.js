@@ -24,16 +24,16 @@ const GROUP_COLORS = {
 
 // Bracket: paires de seizièmes → huitième
 const BRACKET_LEFT = [
-  { r32a: 'M74', r32b: 'M77' },
-  { r32a: 'M73', r32b: 'M75' },
-  { r32a: 'M83', r32b: 'M84' },
-  { r32a: 'M81', r32b: 'M82' },
+  { r32a: 'M74', r32b: 'M77', r16: 'M89' },
+  { r32a: 'M73', r32b: 'M75', r16: 'M90' },
+  { r32a: 'M83', r32b: 'M84', r16: 'M91' },
+  { r32a: 'M81', r32b: 'M82', r16: 'M92' },
 ]
 const BRACKET_RIGHT = [
-  { r32a: 'M76', r32b: 'M78' },
-  { r32a: 'M79', r32b: 'M80' },
-  { r32a: 'M86', r32b: 'M88' },
-  { r32a: 'M85', r32b: 'M87' },
+  { r32a: 'M76', r32b: 'M78', r16: 'M93' },
+  { r32a: 'M79', r32b: 'M80', r16: 'M94' },
+  { r32a: 'M86', r32b: 'M88', r16: 'M95' },
+  { r32a: 'M85', r32b: 'M87', r16: 'M96' },
 ]
 
 function Flag({ equipe, size = 18 }) {
@@ -83,6 +83,13 @@ function TeamRow({ equipe, score, isWinner, hasResult }) {
   )
 }
 
+function fmtDate(dateStr) {
+  if (!dateStr) return ''
+  const d = new Date(dateStr)
+  return d.toLocaleDateString('fr-FR', { weekday: 'short', day: 'numeric', month: 'short' })
+    + ' ' + d.toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' })
+}
+
 function R32Card({ matchId, matchsMap, resultats }) {
   const m = matchsMap[matchId]
   if (!m) return null
@@ -92,8 +99,9 @@ function R32Card({ matchId, matchsMap, resultats }) {
     <div style={{
       background: '#fff', border: '1px solid #e2e8f0', borderRadius: 8, overflow: 'hidden', minWidth: 0,
     }}>
-      <div style={{ background: '#f1f5f9', padding: '2px 8px', fontSize: 9, color: '#94a3b8', fontWeight: 700, letterSpacing: '0.08em' }}>
-        {matchId}
+      <div style={{ background: '#f1f5f9', padding: '2px 8px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 6 }}>
+        <span style={{ fontSize: 9, color: '#94a3b8', fontWeight: 700, letterSpacing: '0.08em' }}>{matchId}</span>
+        <span style={{ fontSize: 9, color: '#64748b', fontWeight: 500 }}>{fmtDate(m.date)}</span>
       </div>
       <TeamRow equipe={m.domicile} score={r?.domicile} isWinner={winner === m.domicile} hasResult={!!r} />
       <div style={{ height: 1, background: '#f1f5f9' }} />
@@ -102,7 +110,7 @@ function R32Card({ matchId, matchsMap, resultats }) {
   )
 }
 
-function R16Card({ winnerA, winnerB }) {
+function R16Card({ winnerA, winnerB, r16Match }) {
   const both = winnerA && winnerB
   return (
     <div style={{
@@ -110,8 +118,9 @@ function R16Card({ winnerA, winnerB }) {
       border: `1.5px solid ${both ? '#93c5fd' : '#e2e8f0'}`,
       borderRadius: 8, overflow: 'hidden', minWidth: 0,
     }}>
-      <div style={{ background: both ? '#3b82f6' : '#94a3b8', padding: '2px 8px', fontSize: 9, color: '#fff', fontWeight: 700, letterSpacing: '0.08em' }}>
-        8ème
+      <div style={{ background: both ? '#3b82f6' : '#94a3b8', padding: '2px 8px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 6 }}>
+        <span style={{ fontSize: 9, color: '#fff', fontWeight: 700, letterSpacing: '0.08em' }}>8ème</span>
+        {r16Match?.date && <span style={{ fontSize: 9, color: 'rgba(255,255,255,0.8)', fontWeight: 500 }}>{fmtDate(r16Match.date)}</span>}
       </div>
       <TeamRow equipe={winnerA} isWinner={false} hasResult={false} />
       <div style={{ height: 1, background: both ? '#bfdbfe' : '#f1f5f9' }} />
@@ -123,6 +132,7 @@ function R16Card({ winnerA, winnerB }) {
 function BracketPair({ pair, matchsMap, resultats, mirror = false }) {
   const wA = getWinner(pair.r32a, matchsMap, resultats)
   const wB = getWinner(pair.r32b, matchsMap, resultats)
+  const r16Match = pair.r16 ? matchsMap[pair.r16] : null
 
   const r32Col = (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 4, flex: 1, minWidth: 0 }}>
@@ -137,7 +147,7 @@ function BracketPair({ pair, matchsMap, resultats, mirror = false }) {
   )
   const r16Col = (
     <div style={{ flex: 1, minWidth: 0, alignSelf: 'center' }}>
-      <R16Card winnerA={wA} winnerB={wB} />
+      <R16Card winnerA={wA} winnerB={wB} r16Match={r16Match} />
     </div>
   )
 
@@ -339,8 +349,9 @@ export default function GroupesClient({ groupes, matchsR32, matchsR16, resultats
               const winner = r ? (r.domicile > r.exterieur ? m.domicile : m.exterieur) : null
               return (
                 <div key={m.id} style={{ background: '#fff', border: '1px solid #e2e8f0', borderRadius: 10, overflow: 'hidden' }}>
-                  <div style={{ background: '#3b82f6', padding: '4px 10px', fontSize: 10, color: '#fff', fontWeight: 700, letterSpacing: '0.1em' }}>
-                    {m.id} · 8ème de finale
+                  <div style={{ background: '#3b82f6', padding: '4px 10px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 6 }}>
+                    <span style={{ fontSize: 10, color: '#fff', fontWeight: 700, letterSpacing: '0.1em' }}>{m.id} · 8ème de finale</span>
+                    {m.date && <span style={{ fontSize: 9, color: 'rgba(255,255,255,0.85)', fontWeight: 500 }}>{fmtDate(m.date)}</span>}
                   </div>
                   <TeamRow equipe={m.domicile} score={r?.domicile} isWinner={winner === m.domicile} hasResult={!!r} />
                   <div style={{ height: 1, background: '#f1f5f9' }} />
