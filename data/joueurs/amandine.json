@@ -355,16 +355,28 @@
       "domicile": 0
     },
     "M89": {
-      "exterieur": 2,
-      "domicile": 0
+      "domicile": 0,
+      "exterieur": 3
     },
     "M90": {
-      "exterieur": 1,
-      "domicile": 0
+      "domicile": 0,
+      "exterieur": 2
     },
     "M91": {
       "domicile": 3,
       "exterieur": 2
+    },
+    "M92": {
+      "exterieur": 2,
+      "domicile": 1
+    },
+    "M93": {
+      "exterieur": 2,
+      "domicile": 1
+    },
+    "M94": {
+      "exterieur": 2,
+      "domicile": 0
     }
   }
 }
