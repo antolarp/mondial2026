@@ -342,5 +342,9 @@
   "M88": {
     "domicile": 1,
     "exterieur": 2
+  },
+  "M86": {
+    "domicile": 1,
+    "exterieur": 0
   }
 }
