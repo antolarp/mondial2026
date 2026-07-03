@@ -245,7 +245,7 @@ export default function Home() {
                   {phaseAlerte.label} — {label}
                 </p>
                 <p style={{ fontSize: 12, color: txtSub, margin: 0 }}>
-                  Fermeture le {new Date(phaseAlerte.deadlineISO).toLocaleDateString('fr-FR', { weekday: 'long', day: 'numeric', month: 'long' })} à 23h59
+                  Fermeture le {new Date(phaseAlerte.deadlineISO).toLocaleDateString('fr-FR', { weekday: 'long', day: 'numeric', month: 'long' })} à {new Date(phaseAlerte.deadlineISO).toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit', timeZone: 'Europe/Paris' })}
                 </p>
                 {/* Compteurs par joueur */}
                 <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6, marginTop: 8 }}>
