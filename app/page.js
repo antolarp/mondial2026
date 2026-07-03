@@ -9,6 +9,7 @@ import { PLAYER_COLORS } from '../lib/colors'
 import Countdown from '../components/Countdown'
 import AutoRefresh from '../components/AutoRefresh'
 import ConfettiLeader from '../components/ConfettiLeader'
+import { CountUp, Typewriter } from '../components/Animations'
 
 function calculerChangements(joueurs, matchs, resultats, classementActuel) {
   const matchsJoues = matchs.filter(m => resultats[m.id]).sort((a, b) => new Date(b.date) - new Date(a.date))
@@ -155,8 +156,8 @@ export default function Home() {
           <div style={{ display: 'flex', alignItems: 'flex-end', justifyContent: 'space-between', flexWrap: 'wrap', gap: 24 }}>
             <div>
               <h1 style={{ fontSize: 64, fontWeight: 900, color: '#fff', lineHeight: 0.9, letterSpacing: '-2px', margin: 0 }}>
-                PRONOS<br />
-                <span style={{ color: '#f0b429' }}>MONDIAL</span>
+                <Typewriter text="PRONOS" speed={70} delay={200} /><br />
+                <span style={{ color: '#f0b429' }}><Typewriter text="MONDIAL" speed={70} delay={780} /></span>
               </h1>
               <p style={{ color: '#8aaad8', marginTop: 16, fontSize: 15 }}>
                 {joueurs.length} joueurs · {matchsJoues} match{matchsJoues > 1 ? 's' : ''} joué{matchsJoues > 1 ? 's' : ''} sur {matchs.length}
@@ -187,7 +188,7 @@ export default function Home() {
                   </div>
                   <div>
                     <p style={{ color: '#fff', fontWeight: 800, fontSize: 22, lineHeight: 1 }}>{classement[0].nom}</p>
-                    <p style={{ color: '#f0b429', fontWeight: 700, fontSize: 15, marginTop: 3 }}>{classement[0].points} pts</p>
+                    <p style={{ color: '#f0b429', fontWeight: 700, fontSize: 15, marginTop: 3 }}><CountUp value={classement[0].points} /> pts</p>
                   </div>
                 </div>
               </div>
@@ -320,6 +321,16 @@ export default function Home() {
               const rankStyle = RANK_STYLES[i] ?? { color: '#cbd5e1', bg: '#fff', border: '1px solid #e8eaf2' }
               const progress = Math.round((joueur.points / (maxPoints || 1)) * 100)
               const isTop3 = i < 3
+              const posChange = posChanges[joueur.nom] ?? 0
+              const slideDelay = i * 55
+              const slideAnim = `slideInCard 0.4s ease ${slideDelay}ms both`
+              const cardAnim = i === 0
+                ? `${slideAnim}, leaderPulse 3s ease-in-out ${slideDelay + 500}ms infinite`
+                : posChange > 0
+                ? `${slideAnim}, glowRise 1.4s ease ${slideDelay + 450}ms both`
+                : posChange < 0
+                ? `${slideAnim}, glowFall 1.4s ease ${slideDelay + 450}ms both`
+                : slideAnim
 
               return (
                 <div key={joueur.nom} style={{
@@ -333,7 +344,7 @@ export default function Home() {
                   position: 'relative',
                   overflow: 'hidden',
                   transition: 'transform 0.15s, box-shadow 0.15s',
-                  animation: i === 0 ? 'leaderPulse 3s ease-in-out infinite' : undefined,
+                  animation: cardAnim,
                 }}>
                   {/* Shimmer sweep on leader card */}
                   {i === 0 && (
@@ -429,7 +440,7 @@ export default function Home() {
 
                     {/* Points */}
                     <div className="player-pts-col" style={{ textAlign: 'right', flexShrink: 0, marginRight: 48 }}>
-                      <span className="pts-value" style={{ fontSize: 40, fontWeight: 900, color: '#0f172a', lineHeight: 1 }}>{joueur.points}</span>
+                      <CountUp value={joueur.points} className="pts-value" style={{ fontSize: 40, fontWeight: 900, color: '#0f172a', lineHeight: 1 }} />
                       <p style={{ fontSize: 11, color: '#94a3b8', marginTop: 2 }}>points</p>
                     </div>
 

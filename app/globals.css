@@ -12,6 +12,32 @@
   }
 }
 
+/* ── ANIMATIONS GÉNÉRALES ── */
+@keyframes cursorBlink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+.tw-cursor { animation: cursorBlink 0.7s step-end infinite; }
+
+@keyframes slideInCard {
+  from { opacity: 0; transform: translateX(28px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+@keyframes glowRise {
+  0%   { box-shadow: 0 4px 24px rgba(0,0,0,0.08); }
+  40%  { box-shadow: 0 4px 24px rgba(0,0,0,0.08), 0 0 22px 5px rgba(22,163,74,0.28); }
+  100% { box-shadow: 0 4px 24px rgba(0,0,0,0.08); }
+}
+@keyframes glowFall {
+  0%   { box-shadow: 0 4px 24px rgba(0,0,0,0.08); }
+  40%  { box-shadow: 0 4px 24px rgba(0,0,0,0.08), 0 0 16px 3px rgba(239,68,68,0.22); }
+  100% { box-shadow: 0 4px 24px rgba(0,0,0,0.08); }
+}
+@keyframes pulseExact {
+  0%, 100% { box-shadow: 0 1px 3px rgba(0,0,0,0.04); }
+  50% { box-shadow: 0 1px 3px rgba(0,0,0,0.04), 0 0 14px 3px rgba(22,163,74,0.28); }
+}
+
 /* ── ANIMATIONS LEADER ── */
 @keyframes leaderPulse {
   0%, 100% { box-shadow: 0 4px 24px rgba(0,0,0,0.08), 0 0 0 0 rgba(240,180,41,0); }

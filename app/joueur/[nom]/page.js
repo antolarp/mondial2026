@@ -3,6 +3,7 @@ import { computePronoPhases } from '../../../lib/phases'
 import { notFound } from 'next/navigation'
 import { PLAYER_COLORS } from '../../../lib/colors'
 import Link from 'next/link'
+import { CountUp, SplitFlap } from '../../../components/Animations'
 
 const WRAP = { maxWidth: 1100, margin: '0 auto', padding: '0 24px' }
 
@@ -64,14 +65,16 @@ export default function PageJoueur({ params }) {
           {/* Stats strip */}
           <div style={{ display: 'flex', gap: 32, marginTop: 28 }}>
             {[
-              { label: 'Points', value: stats.points, color: '#fff' },
-              { label: 'Exacts', value: stats.exacts, color: '#4ade80' },
-              { label: 'Bons', value: stats.bons, color: '#f0b429' },
-              { label: 'Réussite', value: `${pct}%`, color: '#a5c4f5' },
+              { label: 'Points', value: stats.points, color: '#fff', numeric: true },
+              { label: 'Exacts', value: stats.exacts, color: '#4ade80', numeric: true },
+              { label: 'Bons', value: stats.bons, color: '#f0b429', numeric: true },
+              { label: 'Réussite', value: pct, suffix: '%', color: '#a5c4f5', numeric: true },
             ].map(s => (
               <div key={s.label}>
                 <p style={{ color: '#5a7fc0', fontSize: 10, letterSpacing: '0.15em', textTransform: 'uppercase', marginBottom: 4, fontWeight: 600 }}>{s.label}</p>
-                <p style={{ fontSize: 28, fontWeight: 900, color: s.color, lineHeight: 1 }}>{s.value}</p>
+                <p style={{ fontSize: 28, fontWeight: 900, color: s.color, lineHeight: 1 }}>
+                  <CountUp value={s.value} />{s.suffix ?? ''}
+                </p>
               </div>
             ))}
           </div>
@@ -118,7 +121,7 @@ export default function PageJoueur({ params }) {
         )}
 
         <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
-          {matchsAvecProno.map(match => {
+          {matchsAvecProno.map((match, mi) => {
             const prono = joueur.pronos[match.id]
             const res = resultats[match.id]
             const pts = res ? calculerPoints(prono, res) : null
@@ -133,6 +136,7 @@ export default function PageJoueur({ params }) {
                 boxShadow: '0 1px 3px rgba(0,0,0,0.04)',
                 padding: '14px 20px',
                 display: 'flex', alignItems: 'center', gap: 20,
+                animation: pts === 3 ? `pulseExact 1.8s ease-in-out ${mi * 80 + 600}ms 2` : undefined,
               }}>
                 <span style={{ fontSize: 11, color: '#cbd5e1', width: 72, flexShrink: 0 }}>
                   {date.toLocaleDateString('fr-FR', { day: 'numeric', month: 'short' })}
@@ -153,9 +157,11 @@ export default function PageJoueur({ params }) {
                   {res && (
                     <div style={{ textAlign: 'right' }}>
                       <p style={{ fontSize: 11, color: '#94a3b8', marginBottom: 2 }}>Score</p>
-                      <p style={{ fontSize: 15, fontWeight: 700, color: '#0f172a', fontVariantNumeric: 'tabular-nums' }}>
-                        {res.domicile}–{res.exterieur}
-                      </p>
+                      <SplitFlap
+                        value={`${res.domicile}–${res.exterieur}`}
+                        baseDelay={mi * 80}
+                        style={{ fontSize: 15, fontWeight: 700, color: '#0f172a' }}
+                      />
                     </div>
                   )}
                   <div style={{ width: 36, textAlign: 'right' }}>
