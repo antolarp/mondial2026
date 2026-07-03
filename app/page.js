@@ -333,7 +333,17 @@ export default function Home() {
                   position: 'relative',
                   overflow: 'hidden',
                   transition: 'transform 0.15s, box-shadow 0.15s',
+                  animation: i === 0 ? 'leaderPulse 3s ease-in-out infinite' : undefined,
                 }}>
+                  {/* Shimmer sweep on leader card */}
+                  {i === 0 && (
+                    <div aria-hidden="true" style={{
+                      position: 'absolute', inset: 0, borderRadius: 18, pointerEvents: 'none', zIndex: 0,
+                      background: 'linear-gradient(105deg, transparent 35%, rgba(255,255,255,0.45) 50%, transparent 65%)',
+                      backgroundSize: '400px 100%',
+                      animation: 'leaderShimmer 3.5s linear infinite',
+                    }} />
+                  )}
                   {/* Giant rank watermark */}
                   <span className="rank-watermark" style={{
                     position: 'absolute', right: 20, top: '50%', transform: 'translateY(-50%)',
@@ -347,12 +357,16 @@ export default function Home() {
                   <div style={{ position: 'relative', display: 'flex', alignItems: 'center', gap: 16 }}>
                     {/* Avatar + flèche évolution */}
                     <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 3, flexShrink: 0 }}>
+                      {i === 0 && (
+                        <span aria-hidden="true" style={{ fontSize: 18, lineHeight: 1, display: 'block', animation: 'crownBounce 2s ease-in-out infinite' }}>👑</span>
+                      )}
                       <div style={{
                         width: 46, height: 46, borderRadius: 14,
                         background: `linear-gradient(135deg, ${color}, ${color}bb)`,
                         display: 'flex', alignItems: 'center', justifyContent: 'center',
                         fontSize: 20, fontWeight: 800, color: '#fff',
-                        boxShadow: `0 4px 12px ${color}44`,
+                        boxShadow: i === 0 ? `0 4px 20px ${color}77, 0 0 0 3px ${color}33` : `0 4px 12px ${color}44`,
+                        animation: i === 0 ? 'leaderAvatarPulse 2.5s ease-in-out infinite' : undefined,
                       }}>
                         {joueur.nom[0]}
                       </div>
@@ -375,6 +389,8 @@ export default function Home() {
                           <span style={{
                             fontSize: 10, fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase',
                             background: rankStyle.bg, color: rankStyle.color, padding: '2px 8px', borderRadius: 20,
+                            display: 'inline-block',
+                            animation: i === 0 ? 'leaderBadgePop 2.2s ease-in-out infinite' : undefined,
                           }}>
                             {i === 0 ? '🥇 1er' : i === 1 ? '🥈 2e' : '🥉 3e'}
                           </span>
@@ -393,9 +409,13 @@ export default function Home() {
                       <div style={{ background: '#f1f5f9', height: 5, borderRadius: 4, width: '100%', maxWidth: 280 }}>
                         <div style={{
                           height: 5, borderRadius: 4,
-                          background: `linear-gradient(90deg, ${color}, ${color}bb)`,
+                          background: i === 0
+                            ? `linear-gradient(90deg, ${color} 0%, ${color}cc 35%, rgba(255,255,255,0.7) 50%, ${color}cc 65%, ${color} 100%)`
+                            : `linear-gradient(90deg, ${color}, ${color}bb)`,
+                          backgroundSize: i === 0 ? '200% 100%' : undefined,
                           width: `${progress}%`,
                           transition: 'width 0.6s ease',
+                          animation: i === 0 ? 'progressShimmer 2s linear infinite' : undefined,
                         }} />
                       </div>
                       <div style={{ display: 'flex', gap: 12, marginTop: 8 }}>
