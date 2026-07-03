@@ -46,13 +46,28 @@ function MatchCard({ match, res, pronosOpen, joueurs, points }) {
           joueurs.map(joueur => {
             const prono = joueur.pronos[match.id]
             const pts   = points?.[joueur.nom]?.[match.id] ?? null
+            const exact = pts === 3
             return (
               <div key={joueur.nom} style={{ textAlign: 'center', minWidth: 34 }}>
-                <p style={{ fontSize: 9, color: '#cbd5e1', marginBottom: 1 }}>{joueur.nom.slice(0, 3)}</p>
-                <p style={{ fontSize: 11, fontWeight: 600, color: '#64748b', fontVariantNumeric: 'tabular-nums' }}>
+                <p style={{ fontSize: 9, color: exact ? '#16a34a' : '#cbd5e1', marginBottom: 1, fontWeight: exact ? 700 : 400 }}>
+                  {joueur.nom.slice(0, 3)}
+                </p>
+                <p style={{
+                  fontSize: 11, fontWeight: exact ? 800 : 600,
+                  color: exact ? '#16a34a' : '#64748b',
+                  fontVariantNumeric: 'tabular-nums',
+                  background: exact ? '#dcfce7' : 'transparent',
+                  borderRadius: exact ? 5 : 0,
+                  padding: exact ? '1px 4px' : 0,
+                  display: 'inline-block',
+                }}>
                   {prono ? `${prono.domicile}-${prono.exterieur}` : '—'}
                 </p>
-                {pts === 3 && <p style={{ fontSize: 9, fontWeight: 700, color: '#16a34a' }}>+3</p>}
+                {exact && (
+                  <p style={{ fontSize: 10, fontWeight: 800, color: '#16a34a', animation: 'exactPop 0.4s ease both', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 1 }}>
+                    🎯+3
+                  </p>
+                )}
                 {pts === 2 && <p style={{ fontSize: 9, fontWeight: 700, color: '#b8922a' }}>+2</p>}
                 {pts === 0 && <p style={{ fontSize: 9, fontWeight: 700, color: '#e2e8f0' }}>0</p>}
               </div>
