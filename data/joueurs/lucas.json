@@ -373,6 +373,18 @@
     "M94": {
       "domicile": 2,
       "exterieur": 1
+    },
+    "M93": {
+      "exterieur": 2,
+      "domicile": 1
+    },
+    "M95": {
+      "domicile": 2,
+      "exterieur": 0
+    },
+    "M96": {
+      "exterieur": 2,
+      "domicile": 1
     }
   }
 }
