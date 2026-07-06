@@ -1,4 +1,5 @@
 import './globals.css'
+import PageTransition from '../components/PageTransition'
 
 export const metadata = {
   title: 'Pronos · Mondial 2026',
@@ -54,7 +55,7 @@ export default function RootLayout({ children }) {
             </nav>
           </div>
         </header>
-        {children}
+        <PageTransition>{children}</PageTransition>
       </body>
     </html>
   )

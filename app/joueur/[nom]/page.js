@@ -3,7 +3,7 @@ import { computePronoPhases } from '../../../lib/phases'
 import { notFound } from 'next/navigation'
 import { PLAYER_COLORS } from '../../../lib/colors'
 import Link from 'next/link'
-import { CountUp, SplitFlap } from '../../../components/Animations'
+import { CountUp, SplitFlap, ConfettiJoueur } from '../../../components/Animations'
 
 const WRAP = { maxWidth: 1100, margin: '0 auto', padding: '0 24px' }
 
@@ -35,6 +35,7 @@ export default function PageJoueur({ params }) {
 
   return (
     <>
+      <ConfettiJoueur rang={rang} />
       {/* HERO */}
       <div style={{ background: `linear-gradient(135deg, #0c1e52 0%, ${color}44 100%)`, paddingBottom: 0 }}>
         <div style={{ ...WRAP, paddingTop: 40 }}>
@@ -128,6 +129,12 @@ export default function PageJoueur({ params }) {
             const date = new Date(match.date)
             const leftColor = pts === 3 ? '#16a34a' : pts === 2 ? '#b8922a' : pts === 0 ? '#e2e8f0' : 'transparent'
 
+            const rowAnim = pts === 3
+              ? `pulseExact 1.8s ease-in-out ${mi * 80 + 600}ms 2`
+              : pts === 0 && res
+              ? `shake 0.45s ease ${mi * 40 + 200}ms both`
+              : undefined
+
             return (
               <div key={match.id} style={{
                 background: '#fff', borderRadius: 14,
@@ -136,7 +143,7 @@ export default function PageJoueur({ params }) {
                 boxShadow: '0 1px 3px rgba(0,0,0,0.04)',
                 padding: '14px 20px',
                 display: 'flex', alignItems: 'center', gap: 20,
-                animation: pts === 3 ? `pulseExact 1.8s ease-in-out ${mi * 80 + 600}ms 2` : undefined,
+                animation: rowAnim,
               }}>
                 <span style={{ fontSize: 11, color: '#cbd5e1', width: 72, flexShrink: 0 }}>
                   {date.toLocaleDateString('fr-FR', { day: 'numeric', month: 'short' })}

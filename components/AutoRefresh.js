@@ -10,6 +10,7 @@ export default function AutoRefresh({ interval = 60000 }) {
     const id = setInterval(() => {
       router.refresh()
       setLastRefresh(new Date())
+      window.dispatchEvent(new CustomEvent('mondial-refresh'))
     }, interval)
     return () => clearInterval(id)
   }, [router, interval])

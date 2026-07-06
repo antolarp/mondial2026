@@ -24,7 +24,7 @@ function MatchCard({ match, res, pronosOpen, joueurs, points }) {
             {getFlagUrl(match.domicile) && <img src={getFlagUrl(match.domicile)} style={{ width: 20, height: 'auto', borderRadius: 2, flexShrink: 0 }} alt="" />}
           </span>
           {res ? (
-            <span style={{ background: '#0c1e52', color: '#fff', fontWeight: 800, fontSize: 13, padding: '5px 11px', borderRadius: 9, fontVariantNumeric: 'tabular-nums', letterSpacing: '0.05em', flexShrink: 0 }}>
+            <span style={{ background: '#0c1e52', color: '#fff', fontWeight: 800, fontSize: 13, padding: '5px 11px', borderRadius: 9, fontVariantNumeric: 'tabular-nums', letterSpacing: '0.05em', flexShrink: 0, animation: 'scoreReveal 0.45s cubic-bezier(0.34,1.56,0.64,1) both' }}>
               {res.domicile} – {res.exterieur}
             </span>
           ) : (

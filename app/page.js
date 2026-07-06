@@ -9,7 +9,7 @@ import { PLAYER_COLORS } from '../lib/colors'
 import Countdown from '../components/Countdown'
 import AutoRefresh from '../components/AutoRefresh'
 import ConfettiLeader from '../components/ConfettiLeader'
-import { CountUp, Typewriter } from '../components/Animations'
+import { CountUp, Typewriter, TiltCard } from '../components/Animations'
 
 function calculerChangements(joueurs, matchs, resultats, classementActuel) {
   const matchsJoues = matchs.filter(m => resultats[m.id]).sort((a, b) => new Date(b.date) - new Date(a.date))
@@ -327,28 +327,50 @@ export default function Home() {
               const posChange = posChanges[joueur.nom] ?? 0
               const slideDelay = i * 55
               const slideAnim = `slideInCard 0.4s ease ${slideDelay}ms both`
-              const cardAnim = i === 0
-                ? `${slideAnim}, leaderPulse 3s ease-in-out ${slideDelay + 500}ms infinite`
+              const glowAnim = i === 0
+                ? `leaderPulse 3s ease-in-out ${slideDelay + 500}ms infinite`
                 : posChange > 0
-                ? `${slideAnim}, glowRise 1.4s ease ${slideDelay + 450}ms both`
+                ? `glowRise 1.4s ease ${slideDelay + 450}ms both`
                 : posChange < 0
-                ? `${slideAnim}, glowFall 1.4s ease ${slideDelay + 450}ms both`
-                : slideAnim
+                ? `glowFall 1.4s ease ${slideDelay + 450}ms both`
+                : undefined
+
+              const cardBack = (
+                <div style={{ textAlign: 'center', width: '100%' }}>
+                  <p style={{ fontSize: 11, color: '#94a3b8', letterSpacing: '0.15em', textTransform: 'uppercase', marginBottom: 10, fontWeight: 600 }}>{joueur.nom}</p>
+                  <p style={{ fontSize: 36, fontWeight: 900, color: '#0f172a', lineHeight: 1 }}>{joueur.points}<span style={{ fontSize: 14, color: '#94a3b8', fontWeight: 500 }}> pts</span></p>
+                  <div style={{ display: 'flex', gap: 20, marginTop: 14, justifyContent: 'center' }}>
+                    <div style={{ textAlign: 'center' }}>
+                      <p style={{ fontSize: 22, fontWeight: 900, color: '#16a34a', lineHeight: 1 }}>{joueur.exacts}</p>
+                      <p style={{ fontSize: 9, color: '#94a3b8', textTransform: 'uppercase', letterSpacing: '0.1em', marginTop: 3 }}>Exacts</p>
+                    </div>
+                    <div style={{ textAlign: 'center' }}>
+                      <p style={{ fontSize: 22, fontWeight: 900, color: '#b8922a', lineHeight: 1 }}>{joueur.bons}</p>
+                      <p style={{ fontSize: 9, color: '#94a3b8', textTransform: 'uppercase', letterSpacing: '0.1em', marginTop: 3 }}>Bons</p>
+                    </div>
+                    <div style={{ textAlign: 'center' }}>
+                      <p style={{ fontSize: 22, fontWeight: 900, color: '#5a7fc0', lineHeight: 1 }}>{pct}%</p>
+                      <p style={{ fontSize: 9, color: '#94a3b8', textTransform: 'uppercase', letterSpacing: '0.1em', marginTop: 3 }}>Réussite</p>
+                    </div>
+                  </div>
+                  {serie >= 2 && <p style={{ marginTop: 12, fontSize: 13 }}>🔥 {serie} en série</p>}
+                </div>
+              )
 
               return (
-                <div key={joueur.nom} style={{
-                  background: '#fff',
-                  border: isTop3 ? rankStyle.border : '1px solid #e8eaf2',
-                  borderRadius: 18,
-                  padding: '20px 24px',
-                  boxShadow: isTop3
-                    ? '0 4px 24px rgba(0,0,0,0.08)'
-                    : '0 1px 4px rgba(0,0,0,0.04)',
-                  position: 'relative',
-                  overflow: 'hidden',
-                  transition: 'transform 0.15s, box-shadow 0.15s',
-                  animation: cardAnim,
-                }}>
+                <div key={joueur.nom} style={{ animation: slideAnim }}>
+                <TiltCard
+                  glowAnim={glowAnim}
+                  cardStyle={{
+                    background: '#fff',
+                    border: isTop3 ? rankStyle.border : '1px solid #e8eaf2',
+                    borderRadius: 18,
+                    padding: '20px 24px',
+                    boxShadow: isTop3 ? '0 4px 24px rgba(0,0,0,0.08)' : '0 1px 4px rgba(0,0,0,0.04)',
+                    position: 'relative',
+                  }}
+                  back={cardBack}
+                >
                   {/* Shimmer sweep on leader card */}
                   {i === 0 && (
                     <div aria-hidden="true" style={{
@@ -414,8 +436,10 @@ export default function Home() {
                             fontSize: 10, fontWeight: 700, background: '#fff7ed',
                             color: '#ea580c', padding: '2px 8px', borderRadius: 20,
                             border: '1px solid #fed7aa',
+                            display: 'inline-flex', alignItems: 'center', gap: 3,
                           }}>
-                            🔥 {serie} en série
+                            <span style={{ display: 'inline-block', animation: 'fireWave 0.9s ease-in-out infinite' }}>🔥</span>
+                            {serie} en série
                           </span>
                         )}
                       </div>
@@ -458,6 +482,7 @@ export default function Home() {
                       →
                     </Link>
                   </div>
+                </TiltCard>
                 </div>
               )
             })}
