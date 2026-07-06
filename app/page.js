@@ -335,28 +335,6 @@ export default function Home() {
                 ? `glowFall 1.4s ease ${slideDelay + 450}ms both`
                 : undefined
 
-              const cardBack = (
-                <div style={{ textAlign: 'center', width: '100%' }}>
-                  <p style={{ fontSize: 11, color: '#94a3b8', letterSpacing: '0.15em', textTransform: 'uppercase', marginBottom: 10, fontWeight: 600 }}>{joueur.nom}</p>
-                  <p style={{ fontSize: 36, fontWeight: 900, color: '#0f172a', lineHeight: 1 }}>{joueur.points}<span style={{ fontSize: 14, color: '#94a3b8', fontWeight: 500 }}> pts</span></p>
-                  <div style={{ display: 'flex', gap: 20, marginTop: 14, justifyContent: 'center' }}>
-                    <div style={{ textAlign: 'center' }}>
-                      <p style={{ fontSize: 22, fontWeight: 900, color: '#16a34a', lineHeight: 1 }}>{joueur.exacts}</p>
-                      <p style={{ fontSize: 9, color: '#94a3b8', textTransform: 'uppercase', letterSpacing: '0.1em', marginTop: 3 }}>Exacts</p>
-                    </div>
-                    <div style={{ textAlign: 'center' }}>
-                      <p style={{ fontSize: 22, fontWeight: 900, color: '#b8922a', lineHeight: 1 }}>{joueur.bons}</p>
-                      <p style={{ fontSize: 9, color: '#94a3b8', textTransform: 'uppercase', letterSpacing: '0.1em', marginTop: 3 }}>Bons</p>
-                    </div>
-                    <div style={{ textAlign: 'center' }}>
-                      <p style={{ fontSize: 22, fontWeight: 900, color: '#5a7fc0', lineHeight: 1 }}>{pct}%</p>
-                      <p style={{ fontSize: 9, color: '#94a3b8', textTransform: 'uppercase', letterSpacing: '0.1em', marginTop: 3 }}>Réussite</p>
-                    </div>
-                  </div>
-                  {serie >= 2 && <p style={{ marginTop: 12, fontSize: 13 }}>🔥 {serie} en série</p>}
-                </div>
-              )
-
               return (
                 <div key={joueur.nom} style={{ animation: slideAnim }}>
                 <TiltCard
@@ -369,7 +347,6 @@ export default function Home() {
                     boxShadow: isTop3 ? '0 4px 24px rgba(0,0,0,0.08)' : '0 1px 4px rgba(0,0,0,0.04)',
                     position: 'relative',
                   }}
-                  back={cardBack}
                 >
                   {/* Shimmer sweep on leader card */}
                   {i === 0 && (
