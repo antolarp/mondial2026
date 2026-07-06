@@ -67,8 +67,11 @@ export default function Home() {
     .filter(m => !resultats[m.id])
     .sort((a, b) => new Date(a.date) - new Date(b.date))[0] ?? null
 
-  // Stats pronos du prochain match
-  const pronosProchain = prochainMatch ? (() => {
+  // Stats pronos du prochain match — masquées si la phase est encore ouverte
+  const phaseProchain = prochainMatch
+    ? pronoPhases.find(p => p.matchs.some(m => m.id === prochainMatch.id))
+    : null
+  const pronosProchain = prochainMatch && !phaseProchain?.isOpen ? (() => {
     let dom = 0, ext = 0, nul = 0
     for (const j of joueurs) {
       const p = j.pronos[prochainMatch.id]
