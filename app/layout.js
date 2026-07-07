@@ -1,5 +1,6 @@
 import './globals.css'
 import PageTransition from '../components/PageTransition'
+import { KonamiEgg } from '../components/Animations'
 
 export const metadata = {
   title: 'Pronos · Mondial 2026',
@@ -55,6 +56,7 @@ export default function RootLayout({ children }) {
             </nav>
           </div>
         </header>
+        <KonamiEgg />
         <PageTransition>{children}</PageTransition>
       </body>
     </html>

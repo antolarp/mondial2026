@@ -3,7 +3,7 @@ import { computePronoPhases } from '../../../lib/phases'
 import { notFound } from 'next/navigation'
 import { PLAYER_COLORS } from '../../../lib/colors'
 import Link from 'next/link'
-import { CountUp, SplitFlap, ConfettiJoueur } from '../../../components/Animations'
+import { CountUp, SplitFlap, ConfettiJoueur, GoalOverlay } from '../../../components/Animations'
 
 const WRAP = { maxWidth: 1100, margin: '0 auto', padding: '0 24px' }
 
@@ -36,6 +36,7 @@ export default function PageJoueur({ params }) {
   return (
     <>
       <ConfettiJoueur rang={rang} />
+      <GoalOverlay exacts={stats.exacts} />
       {/* HERO */}
       <div style={{ background: `linear-gradient(135deg, #0c1e52 0%, ${color}44 100%)`, paddingBottom: 0 }}>
         <div style={{ ...WRAP, paddingTop: 40 }}>
