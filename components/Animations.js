@@ -134,20 +134,22 @@ export function SlotCounter({ value, delay = 0, style, className }) {
 
 // ── GOAL OVERLAY ──────────────────────────────────────────────────────────────
 export function GoalOverlay({ exacts }) {
-  const [phase, setPhase] = useState('hidden')
+  const ref = useRef(null)
 
   useEffect(() => {
     if (!exacts || exacts <= 0) return
-    setPhase('in')
-    const t1 = setTimeout(() => setPhase('out'), 1300)
-    const t2 = setTimeout(() => setPhase('hidden'), 1900)
+    const el = ref.current
+    if (!el) return
+    el.style.display = 'flex'
+    el.style.animation = 'goalIn 0.45s cubic-bezier(0.34,1.56,0.64,1) both'
+    const t1 = setTimeout(() => { el.style.animation = 'goalOut 0.6s ease both' }, 1300)
+    const t2 = setTimeout(() => { el.style.display = 'none' }, 1950)
     return () => { clearTimeout(t1); clearTimeout(t2) }
   }, [])
 
-  if (phase === 'hidden') return null
   return (
-    <div style={{ position: 'fixed', inset: 0, zIndex: 998, display: 'flex', alignItems: 'center', justifyContent: 'center', pointerEvents: 'none' }}>
-      <div style={{ animation: phase === 'in' ? 'goalIn 0.45s cubic-bezier(0.34,1.56,0.64,1) both' : 'goalOut 0.6s ease both', textAlign: 'center' }}>
+    <div ref={ref} style={{ display: 'none', position: 'fixed', inset: 0, zIndex: 998, alignItems: 'center', justifyContent: 'center', pointerEvents: 'none' }}>
+      <div style={{ textAlign: 'center' }}>
         <p style={{ fontSize: 36, marginBottom: 4, lineHeight: 1 }}>⚽</p>
         <p style={{ fontSize: 96, fontWeight: 900, color: '#16a34a', lineHeight: 1, textShadow: '0 0 60px #16a34a77, 0 4px 24px rgba(0,0,0,0.3)', letterSpacing: '-3px' }}>GOAL !</p>
       </div>
