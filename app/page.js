@@ -9,7 +9,7 @@ import { PLAYER_COLORS } from '../lib/colors'
 import Countdown from '../components/Countdown'
 import AutoRefresh from '../components/AutoRefresh'
 import ConfettiLeader from '../components/ConfettiLeader'
-import { CountUp, Typewriter, TiltCard, SlotCounter, StadiumShake } from '../components/Animations'
+import { CountUp, Typewriter, TiltCard } from '../components/Animations'
 
 function calculerChangements(joueurs, matchs, resultats, classementActuel) {
   const matchsJoues = matchs.filter(m => resultats[m.id]).sort((a, b) => new Date(b.date) - new Date(a.date))
@@ -87,7 +87,6 @@ export default function Home() {
     <>
       <AutoRefresh interval={60000} />
       <ConfettiLeader leader={classement[0]?.nom ?? ''} />
-      <StadiumShake active={matchsJoues > 0} />
 
       {/* Bandeau classement défilant sticky */}
       <div style={{ position: 'fixed', bottom: 0, left: 0, right: 0, zIndex: 50, background: 'rgba(12, 30, 82, 0.6)', backdropFilter: 'blur(8px)', overflow: 'hidden', whiteSpace: 'nowrap', padding: '10px 0', boxShadow: '0 -4px 20px rgba(0,0,0,0.2)', borderTop: '1px solid rgba(90, 127, 192, 0.4)' }}>
@@ -445,7 +444,7 @@ export default function Home() {
 
                     {/* Points */}
                     <div className="player-pts-col" style={{ textAlign: 'right', flexShrink: 0, marginRight: 48 }}>
-                      <SlotCounter value={joueur.points} delay={i * 120} className="pts-value" style={{ fontSize: 40, fontWeight: 900, color: '#0f172a', lineHeight: 1 }} />
+                      <CountUp value={joueur.points} className="pts-value" style={{ fontSize: 40, fontWeight: 900, color: '#0f172a', lineHeight: 1 }} />
                       <p style={{ fontSize: 11, color: '#94a3b8', marginTop: 2 }}>points</p>
                     </div>
 
