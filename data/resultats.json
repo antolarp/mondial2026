@@ -388,7 +388,7 @@
     "exterieur": 0
   },
   "M98": {
-    "domicile": 1,
-    "exterieur": 0
+    "domicile": 2,
+    "exterieur": 1
   }
 }
