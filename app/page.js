@@ -61,13 +61,14 @@ export default function Home() {
   const maxPoints = classement[0]?.points || 1
   const meilleurPct = [...pourcentages].sort((a, b) => b.pourcentage - a.pourcentage)[0]
   const posChanges = calculerChangements(joueurs, matchs, resultats, classement)
+  const leaders = classement.filter(j => classement[0] && j.points === classement[0].points)
 
   // Prochain match sans résultat
   const prochainMatch = matchs
     .filter(m => !resultats[m.id])
     .sort((a, b) => new Date(a.date) - new Date(b.date))[0] ?? null
 
-  // Stats pronos du prochain match — masquées si la phase est encore ouverte
+  // Masquer les pronos si la phase du prochain match est encore ouverte
   const phaseProchain = prochainMatch
     ? pronoPhases.find(p => p.matchs.some(m => m.id === prochainMatch.id))
     : null
@@ -86,37 +87,7 @@ export default function Home() {
   return (
     <>
       <AutoRefresh interval={60000} />
-      <ConfettiLeader leader={classement[0]?.nom ?? ''} />
-
-      {/* Bandeau classement défilant sticky */}
-      <div style={{ position: 'fixed', bottom: 0, left: 0, right: 0, zIndex: 50, background: 'rgba(12, 30, 82, 0.6)', backdropFilter: 'blur(8px)', overflow: 'hidden', whiteSpace: 'nowrap', padding: '10px 0', boxShadow: '0 -4px 20px rgba(0,0,0,0.2)', borderTop: '1px solid rgba(90, 127, 192, 0.4)' }}>
-        <style>{`
-          @keyframes ticker-lespotes {
-            0%   { transform: translateX(100vw); }
-            100% { transform: translateX(-100%); }
-          }
-          .ticker-lespotes {
-            display: inline-block;
-            animation: ticker-lespotes 22s linear infinite;
-            font-size: 14px;
-            font-weight: 700;
-            color: #fff;
-            letter-spacing: 0.04em;
-          }
-        `}</style>
-        <span className="ticker-lespotes">
-          {[...classement, ...classement].map((j, i) => {
-            const rank = i % classement.length
-            const medals = ['🥇', '🥈', '🥉']
-            const prefix = rank === 0 ? '🏆 CLASSEMENT · ' : ''
-            return (
-              <span key={i}>
-                {prefix}{medals[rank] ?? `${rank + 1}.`} {j.nom} — {j.points} pts{' · '}
-              </span>
-            )
-          })}
-        </span>
-      </div>
+      <ConfettiLeader leader={leaders.map(l => l.nom).join(',')} />
 
       <div style={{
         background: 'linear-gradient(135deg, #0c1e52 0%, #16357a 55%, #0c2c60 100%)',
@@ -124,32 +95,19 @@ export default function Home() {
         position: 'relative',
         overflow: 'hidden',
       }}>
-        {/* Lignes de terrain – vue de haut, échelle ~11px/m, centre à (600,160) */}
         <svg aria-hidden="true" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', pointerEvents: 'none' }} viewBox="0 0 1200 320" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
-          {/* Lignes de but (bords gauche/droit du terrain) */}
           <line x1="26"   y1="-250" x2="26"   y2="570" stroke="white" strokeWidth="1.5" strokeOpacity="0.11" />
           <line x1="1174" y1="-250" x2="1174" y2="570" stroke="white" strokeWidth="1.5" strokeOpacity="0.11" />
-          {/* Ligne médiane */}
           <line x1="600" y1="-250" x2="600" y2="570" stroke="white" strokeWidth="1.5" strokeOpacity="0.11" />
-          {/* Cercle central */}
           <circle cx="600" cy="160" r="100" fill="none" stroke="white" strokeWidth="1.5" strokeOpacity="0.11" />
-          {/* Point central */}
           <circle cx="600" cy="160" r="3.5" fill="white" fillOpacity="0.13" />
-          {/* Surface de réparation gauche (16.5m × 40.32m ≈ 180px × 441px) */}
           <rect x="26" y="-60" width="180" height="440" fill="none" stroke="white" strokeWidth="1.5" strokeOpacity="0.11" />
-          {/* Petite surface gauche (5.5m × 18.32m ≈ 60px × 200px) */}
           <rect x="26" y="60" width="60" height="200" fill="none" stroke="white" strokeWidth="1.5" strokeOpacity="0.11" />
-          {/* Point de penalty gauche */}
           <circle cx="146" cy="160" r="3.5" fill="white" fillOpacity="0.13" />
-          {/* Arc de penalty gauche (partie hors surface) */}
           <path d="M206,80 A100,100 0 0,1 206,240" fill="none" stroke="white" strokeWidth="1.5" strokeOpacity="0.11" />
-          {/* Surface de réparation droite */}
           <rect x="994" y="-60" width="180" height="440" fill="none" stroke="white" strokeWidth="1.5" strokeOpacity="0.11" />
-          {/* Petite surface droite */}
           <rect x="1114" y="60" width="60" height="200" fill="none" stroke="white" strokeWidth="1.5" strokeOpacity="0.11" />
-          {/* Point de penalty droit */}
           <circle cx="1054" cy="160" r="3.5" fill="white" fillOpacity="0.13" />
-          {/* Arc de penalty droit */}
           <path d="M994,80 A100,100 0 0,0 994,240" fill="none" stroke="white" strokeWidth="1.5" strokeOpacity="0.11" />
         </svg>
         <div className="page-wrap" style={{ ...WRAP, paddingTop: 52, paddingBottom: 0 }}>
@@ -170,7 +128,7 @@ export default function Home() {
             {prochainMatch && <Countdown match={prochainMatch} pronos={pronosProchain} />}
 
             {/* Leader card in hero */}
-            {classement[0] && (
+            {leaders.length > 0 && (
               <div style={{
                 background: 'rgba(255,255,255,0.07)',
                 border: '1px solid rgba(255,255,255,0.12)',
@@ -179,20 +137,24 @@ export default function Home() {
                 backdropFilter: 'blur(8px)',
                 marginBottom: 0,
               }}>
-                <p style={{ color: '#5a7fc0', fontSize: 10, letterSpacing: '0.2em', textTransform: 'uppercase', marginBottom: 8, fontWeight: 600 }}>En tête</p>
-                <div style={{ display: 'flex', alignItems: 'center', gap: 14 }}>
-                  <div style={{
-                    width: 48, height: 48, borderRadius: 14,
-                    background: PLAYER_COLORS[nomsJoueurs.indexOf(classement[0].nom) % PLAYER_COLORS.length],
-                    display: 'flex', alignItems: 'center', justifyContent: 'center',
-                    fontSize: 22, fontWeight: 900, color: '#fff',
-                  }}>
-                    {classement[0].nom[0]}
-                  </div>
-                  <div>
-                    <p style={{ color: '#fff', fontWeight: 800, fontSize: 22, lineHeight: 1 }}>{classement[0].nom}</p>
-                    <p style={{ color: '#f0b429', fontWeight: 700, fontSize: 15, marginTop: 3 }}><CountUp value={classement[0].points} /> pts</p>
-                  </div>
+                <p style={{ color: '#5a7fc0', fontSize: 10, letterSpacing: '0.2em', textTransform: 'uppercase', marginBottom: 8, fontWeight: 600 }}>En tête{leaders.length > 1 ? ' · Égalité' : ''}</p>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
+                  {leaders.map(leader => (
+                    <div key={leader.nom} style={{ display: 'flex', alignItems: 'center', gap: 14 }}>
+                      <div style={{
+                        width: 48, height: 48, borderRadius: 14,
+                        background: PLAYER_COLORS[nomsJoueurs.indexOf(leader.nom) % PLAYER_COLORS.length],
+                        display: 'flex', alignItems: 'center', justifyContent: 'center',
+                        fontSize: 22, fontWeight: 900, color: '#fff',
+                      }}>
+                        {leader.nom[0]}
+                      </div>
+                      <div>
+                        <p style={{ color: '#fff', fontWeight: 800, fontSize: 22, lineHeight: 1 }}>{leader.nom}</p>
+                        <p style={{ color: '#f0b429', fontWeight: 700, fontSize: 15, marginTop: 3 }}><CountUp value={leader.points} /> pts</p>
+                      </div>
+                    </div>
+                  ))}
                 </div>
               </div>
             )}
@@ -321,13 +283,15 @@ export default function Home() {
               const pct = pourcentages.find(p => p.nom === joueur.nom)?.pourcentage ?? 0
               const serie = series.find(s => s.nom === joueur.nom)?.serie ?? 0
               const color = PLAYER_COLORS[nomsJoueurs.indexOf(joueur.nom) % PLAYER_COLORS.length]
-              const rankStyle = RANK_STYLES[i] ?? { color: '#cbd5e1', bg: '#fff', border: '1px solid #e8eaf2' }
+              const rang = classement.filter(j => j.points > joueur.points).length + 1
+              const isLeader = rang === 1
+              const isTop3 = rang <= 3
+              const rankStyle = RANK_STYLES[rang - 1] ?? { color: '#cbd5e1', bg: '#fff', border: '1px solid #e8eaf2' }
               const progress = Math.round((joueur.points / (maxPoints || 1)) * 100)
-              const isTop3 = i < 3
               const posChange = posChanges[joueur.nom] ?? 0
               const slideDelay = i * 55
               const slideAnim = `slideInCard 0.4s ease ${slideDelay}ms both`
-              const glowAnim = i === 0
+              const glowAnim = isLeader
                 ? `leaderPulse 3s ease-in-out ${slideDelay + 500}ms infinite`
                 : posChange > 0
                 ? `glowRise 1.4s ease ${slideDelay + 450}ms both`
@@ -349,7 +313,7 @@ export default function Home() {
                   }}
                 >
                   {/* Shimmer sweep on leader card */}
-                  {i === 0 && (
+                  {isLeader && (
                     <div aria-hidden="true" style={{
                       position: 'absolute', inset: 0, borderRadius: 18, pointerEvents: 'none', zIndex: 0,
                       background: 'linear-gradient(105deg, transparent 35%, rgba(255,255,255,0.45) 50%, transparent 65%)',
@@ -361,16 +325,16 @@ export default function Home() {
                   <span className="rank-watermark" style={{
                     position: 'absolute', right: 20, top: '50%', transform: 'translateY(-50%)',
                     fontSize: 96, fontWeight: 900, lineHeight: 1,
-                    color: i === 0 ? '#fef3c7' : i === 1 ? '#f1f5f9' : i === 2 ? '#fdf6f0' : '#f8fafc',
+                    color: rang === 1 ? '#fef3c7' : rang === 2 ? '#f1f5f9' : rang === 3 ? '#fdf6f0' : '#f8fafc',
                     userSelect: 'none', pointerEvents: 'none',
                   }}>
-                    {String(i + 1).padStart(2, '0')}
+                    {String(rang).padStart(2, '0')}
                   </span>
 
                   <div style={{ position: 'relative', display: 'flex', alignItems: 'center', gap: 16 }}>
                     {/* Avatar + flèche évolution */}
                     <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 3, flexShrink: 0 }}>
-                      {i === 0 && (
+                      {isLeader && (
                         <span aria-hidden="true" style={{ fontSize: 18, lineHeight: 1, display: 'block', animation: 'crownBounce 2s ease-in-out infinite' }}>👑</span>
                       )}
                       <div style={{
@@ -378,8 +342,8 @@ export default function Home() {
                         background: `linear-gradient(135deg, ${color}, ${color}bb)`,
                         display: 'flex', alignItems: 'center', justifyContent: 'center',
                         fontSize: 20, fontWeight: 800, color: '#fff',
-                        boxShadow: i === 0 ? `0 4px 20px ${color}77, 0 0 0 3px ${color}33` : `0 4px 12px ${color}44`,
-                        animation: i === 0 ? 'leaderAvatarPulse 2.5s ease-in-out infinite' : undefined,
+                        boxShadow: isLeader ? `0 4px 20px ${color}77, 0 0 0 3px ${color}33` : `0 4px 12px ${color}44`,
+                        animation: isLeader ? 'leaderAvatarPulse 2.5s ease-in-out infinite' : undefined,
                       }}>
                         {joueur.nom[0]}
                       </div>
@@ -403,9 +367,9 @@ export default function Home() {
                             fontSize: 10, fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase',
                             background: rankStyle.bg, color: rankStyle.color, padding: '2px 8px', borderRadius: 20,
                             display: 'inline-block',
-                            animation: i === 0 ? 'leaderBadgePop 2.2s ease-in-out infinite' : undefined,
+                            animation: isLeader ? 'leaderBadgePop 2.2s ease-in-out infinite' : undefined,
                           }}>
-                            {i === 0 ? '🥇 1er' : i === 1 ? '🥈 2e' : '🥉 3e'}
+                            {rang === 1 ? '🥇 1er' : rang === 2 ? '🥈 2e' : '🥉 3e'}
                           </span>
                         )}
                         {serie >= 2 && (
@@ -424,13 +388,13 @@ export default function Home() {
                       <div style={{ background: '#f1f5f9', height: 5, borderRadius: 4, width: '100%', maxWidth: 280 }}>
                         <div style={{
                           height: 5, borderRadius: 4,
-                          background: i === 0
+                          background: isLeader
                             ? `linear-gradient(90deg, ${color} 0%, ${color}cc 35%, rgba(255,255,255,0.7) 50%, ${color}cc 65%, ${color} 100%)`
                             : `linear-gradient(90deg, ${color}, ${color}bb)`,
-                          backgroundSize: i === 0 ? '200% 100%' : undefined,
+                          backgroundSize: isLeader ? '200% 100%' : undefined,
                           width: `${progress}%`,
                           transition: 'width 0.6s ease',
-                          animation: i === 0 ? 'progressShimmer 2s linear infinite' : undefined,
+                          animation: isLeader ? 'progressShimmer 2s linear infinite' : undefined,
                         }} />
                       </div>
                       <div style={{ display: 'flex', gap: 12, marginTop: 8 }}>
@@ -488,7 +452,7 @@ export default function Home() {
               </div>
               <RankEvolutionChart data={evolutionClassement} joueurs={nomsJoueurs} />
 
-              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginTop: 32, marginBottom: 16 }}>
+              <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', marginTop: 32, marginBottom: 20 }}>
                 <div>
                   <p style={{ fontWeight: 800, fontSize: 17, color: '#0f172a', marginBottom: 2 }}>Évolution des points</p>
                   <p style={{ fontSize: 12, color: '#94a3b8' }}>Points cumulés après chaque match</p>
