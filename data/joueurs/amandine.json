@@ -409,6 +409,10 @@
     "M102": {
       "exterieur": 2,
       "domicile": 1
+    },
+    "M104": {
+      "domicile": 2,
+      "exterieur": 3
     }
   }
 }
