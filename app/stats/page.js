@@ -166,7 +166,6 @@ export default function Stats() {
                       </div>
                       <div style={{ display: 'flex', alignItems: 'center', gap: 6, flexShrink: 0 }}>
                         <span style={{ fontSize: 18, fontWeight: 900, color: '#0f172a' }}>{s.buts}</span>
-                        {s.penaltys > 0 && <span style={{ fontSize: 10, color: '#94a3b8' }}>({s.penaltys}p)</span>}
                       </div>
                     </div>
                   ))}
