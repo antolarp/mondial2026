@@ -2,6 +2,19 @@ const WRAP = { maxWidth: 900, margin: '0 auto', padding: '0 24px' }
 
 const COMPETITIONS = [
   {
+    id: 'cdm2026',
+    titre: 'Coupe du Monde',
+    annee: '2026',
+    pays: 'Canada · Mexique · USA',
+    logo: '/2026_FIFA_World_Cup.svg.png',
+    couleur: '#b91c1c',
+    podium: [
+      { place: 1, noms: ['Antonin'], medaille: '#f0b429' },
+      { place: 2, noms: ['Aurélie'], medaille: '#94a3b8' },
+      { place: 3, noms: ['Lucas'], medaille: '#d97706' },
+    ],
+  },
+  {
     id: 'euro2024',
     titre: 'Euro',
     annee: '2024',
