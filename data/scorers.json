@@ -3,7 +3,7 @@
     "nom": "Kylian Mbappé",
     "equipe": "France",
     "crest": "https://crests.football-data.org/773.svg",
-    "buts": 8,
+    "buts": 10,
     "assists": 1,
     "penaltys": 1,
     "matchs": 7
@@ -13,9 +13,9 @@
     "equipe": "Argentine",
     "crest": "https://crests.football-data.org/762.png",
     "buts": 8,
-    "assists": 1,
+    "assists": 2,
     "penaltys": 0,
-    "matchs": 6
+    "matchs": 7
   },
   {
     "nom": "Erling Haaland",
@@ -30,10 +30,10 @@
     "nom": "Jude Bellingham",
     "equipe": "Angleterre",
     "crest": "https://crests.football-data.org/770.svg",
-    "buts": 6,
+    "buts": 7,
     "assists": 1,
     "penaltys": 0,
-    "matchs": 6
+    "matchs": 7
   },
   {
     "nom": "Harry Kane",
@@ -42,14 +42,14 @@
     "buts": 6,
     "assists": 0,
     "penaltys": 1,
-    "matchs": 6
+    "matchs": 7
   },
   {
     "nom": "Ousmane Dembélé",
     "equipe": "France",
     "crest": "https://crests.football-data.org/773.svg",
-    "buts": 5,
-    "assists": 1,
+    "buts": 6,
+    "assists": 2,
     "penaltys": 0,
     "matchs": 7
   },
@@ -228,10 +228,10 @@
     "nom": "Lautaro Martínez",
     "equipe": "Argentine",
     "crest": "https://crests.football-data.org/762.png",
-    "buts": 2,
+    "buts": 3,
     "assists": 0,
     "penaltys": 0,
-    "matchs": 6
+    "matchs": 7
   },
   {
     "nom": "Bradley Barcola",
